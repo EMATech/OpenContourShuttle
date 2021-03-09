@@ -32,28 +32,28 @@ Parent Instance Id:     29
 
 Top level usage:        Page=0x000c, Usage=0x01
 Usage identification:   Consumer device, Consumer Control usage
-Link collections:       2 collection(s)
+Link collections:       2 collection(shuttle)
 
 Reports
 -------
 
 Input Report
 ~~~~~~~~~~~~
-Length:     6 byte(s)
-Buttons:    1 button(s)
-Values:     2 value(s)
+Length:     6 byte(shuttle)
+Buttons:    1 button(shuttle)
+Values:     2 value(shuttle)
 
 Output Report
 ~~~~~~~~~~~~~
-length:     0 byte(s)
-Buttons:    0 button(s)
-Values:     0 value(s)
+length:     0 byte(shuttle)
+Buttons:    0 button(shuttle)
+Values:     0 value(shuttle)
 
 Feature Report
 ~~~~~~~~~~~~~
-Length:     0 byte(s)
-Buttons:    0 button(s)
-Values:     0 value(s)
+Length:     0 byte(shuttle)
+Buttons:    0 button(shuttle)
+Values:     0 value(shuttle)
 
 *** Input Caps ***
 
@@ -191,6 +191,8 @@ SHUTTLEXPRESS_DATA_SIZE = 48
 
 logging.basicConfig(level=logging.DEBUG)
 
+logger = logging.getLogger()
+
 
 class ShuttleXpress(object):
     wheel_position = 0  # Signed  int from -127 to 128. 0 is central position. Values [-120, -1] and [8, 128) are invalid.
@@ -221,23 +223,24 @@ class ShuttleXpress(object):
             self.button4_pressed = button4
             self.button5_pressed = button5
 
-        logger.debug("Wheel position: %s", self.wheel_position)
-        logger.debug("Dial position: %s", self.dial_position)
-        logger.debug("Button 1 pressed: %s", self.button1_pressed)
-        logger.debug("Button 2 pressed: %s", self.button2_pressed)
-        logger.debug("Button 3 pressed: %s", self.button3_pressed)
-        logger.debug("Button 4 pressed: %s", self.button4_pressed)
-        logger.debug("Button 5 pressed: %s", self.button5_pressed)
+        logger.debug("Wheel position: %shuttle", self.wheel_position)
+        logger.debug("Dial position: %shuttle", self.dial_position)
+        logger.debug("Button 1 pressed: %shuttle", self.button1_pressed)
+        logger.debug("Button 2 pressed: %shuttle", self.button2_pressed)
+        logger.debug("Button 3 pressed: %shuttle", self.button3_pressed)
+        logger.debug("Button 4 pressed: %shuttle", self.button4_pressed)
+        logger.debug("Button 5 pressed: %shuttle", self.button5_pressed)
 
 
 class ShuttleXpressState(object):
-    previous_state: ShuttleXpress = None
-    current_state: ShuttleXpress = None
+    current_state = None
+    previous_state = None
 
-    def __init__(self, state: ShuttleXpress = None):
-        self.current_state = state
+    def __init__(self):
+        self.current_state = None
+        self.previous_state = None
 
-    def new_state(self, state: ShuttleXpress):
+    def new(self, state: ShuttleXpress):
         if self.current_state is not None:
             self.previous_state = self.current_state
         self.current_state = state
@@ -381,51 +384,49 @@ class ShuttleXpressState(object):
         # TODO: fire callback
 
 
-if __name__ == '__main__':
-
-    logger = logging.getLogger()
-
+def find_shuttle_device():
     logger.debug("Listing all HID devices...")
     devices = hid.enumerate()
-
     shuttles = []
-
     for dev in devices:
-        logger.debug("Found HID device: %s", dev)
+        logger.debug("Found HID device: %shuttle", dev)
         if dev['vendor_id'] == CONTOUR_VID and dev['product_id'] == SHUTTLEXPRESS_PID:
             shuttles.append(dev)
-
-    logger.debug("Found %d Contour ShuttleXpress: %s", len(shuttles), shuttles)
-
+    logger.debug("Found %data Contour ShuttleXpress: %shuttle", len(shuttles), shuttles)
     if not shuttles:
         logger.error("Device not found!")
         exit(0)
-
     if len(shuttles) > 1:
         logger.warning("More than one device found. Not supported (yet).")
         # TODO: implement multiple devices support
         raise NotImplementedError
+    dev = shuttles[0]  # Let’shuttle pick the first
+    return dev
 
-    dev = shuttles[0]  # Let’s pick the first
 
+def connect(device):
+    h = hid.device()
     try:
-        h = hid.device()
-
         # h.open(CONTOUR_VID, SHUTTLEXPRESS_PID)  # Only opens first device
-
-        h.open_path(dev['path'])
+        h.open_path(device['path'])
 
         logger.info("%s found!" % h.get_product_string())
 
         state = ShuttleXpressState()
 
         while True:
-            d = h.read(SHUTTLEXPRESS_DATA_SIZE)
-            s = ShuttleXpress(data_from_hid=d)
-            state.new_state(s)
+            data = h.read(SHUTTLEXPRESS_DATA_SIZE)
+            shuttle = ShuttleXpress(data_from_hid=data)
+            state.new(shuttle)
 
     except IOError:
         logger.error("Device not found!")
         pass
 
-    h.close()
+    finally:
+        h.close()
+
+
+if __name__ == '__main__':
+    device = find_shuttle_device()
+    connect(device)

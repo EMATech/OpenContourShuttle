@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>GUI</class>
+    <widget class="QMainWindow" name="GUI">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>600</width>
+                <height>643</height>
+            </rect>
+        </property>
+        <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+            </sizepolicy>
+        </property>
+        <property name="windowTitle">
+            <string>GUI</string>
+        </property>
+        <widget class="QWidget" name="centralwidget">
+            <property name="enabled">
+                <bool>true</bool>
+            </property>
+            <property name="contextMenuPolicy">
+                <enum>Qt::DefaultContextMenu</enum>
+            </property>
+            <property name="autoFillBackground">
+                <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">background: url(images/ShuttleXpress_Black.png);
+                    background-repeat:no-repeat;
+                </string>
+            </property>
+            <widget class="QDial" name="dial">
+                <property name="geometry">
+                    <rect>
+                        <x>190</x>
+                        <y>170</y>
+                        <width>230</width>
+                        <height>230</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background-color: black;</string>
+                </property>
+                <property name="maximum">
+                    <number>255</number>
+                </property>
+                <property name="sliderPosition">
+                    <number>128</number>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_pos1">
+                <property name="geometry">
+                    <rect>
+                        <x>340</x>
+                        <y>155</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_neg3">
+                <property name="geometry">
+                    <rect>
+                        <x>182</x>
+                        <y>215</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_pos7">
+                <property name="geometry">
+                    <rect>
+                        <x>384</x>
+                        <y>382</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_neg4">
+                <property name="geometry">
+                    <rect>
+                        <x>166</x>
+                        <y>257</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string>-</string>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_neg6">
+                <property name="geometry">
+                    <rect>
+                        <x>181</x>
+                        <y>345</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_neg5">
+                <property name="geometry">
+                    <rect>
+                        <x>166</x>
+                        <y>300</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_neg1">
+                <property name="geometry">
+                    <rect>
+                        <x>251</x>
+                        <y>155</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_pos2">
+                <property name="geometry">
+                    <rect>
+                        <x>380</x>
+                        <y>178</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_pos6">
+                <property name="geometry">
+                    <rect>
+                        <x>413</x>
+                        <y>345</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QPushButton" name="button_1">
+                <property name="geometry">
+                    <rect>
+                        <x>60</x>
+                        <y>270</y>
+                        <width>75</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string>Button 1</string>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_pos4">
+                <property name="geometry">
+                    <rect>
+                        <x>428</x>
+                        <y>257</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_pos5">
+                <property name="geometry">
+                    <rect>
+                        <x>427</x>
+                        <y>300</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_neg2">
+                <property name="geometry">
+                    <rect>
+                        <x>210</x>
+                        <y>178</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_cent0">
+                <property name="geometry">
+                    <rect>
+                        <x>297</x>
+                        <y>147</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+                <property name="checked">
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_pos3">
+                <property name="geometry">
+                    <rect>
+                        <x>413</x>
+                        <y>215</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QRadioButton" name="wheel_neg7">
+                <property name="geometry">
+                    <rect>
+                        <x>210</x>
+                        <y>382</y>
+                        <width>16</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">color: white;</string>
+                </property>
+                <property name="text">
+                    <string/>
+                </property>
+            </widget>
+            <widget class="QPushButton" name="button_2">
+                <property name="geometry">
+                    <rect>
+                        <x>130</x>
+                        <y>120</y>
+                        <width>75</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string>Button 2</string>
+                </property>
+            </widget>
+            <widget class="QPushButton" name="button_4">
+                <property name="geometry">
+                    <rect>
+                        <x>400</x>
+                        <y>120</y>
+                        <width>75</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string>Button 4</string>
+                </property>
+            </widget>
+            <widget class="QPushButton" name="button_5">
+                <property name="geometry">
+                    <rect>
+                        <x>470</x>
+                        <y>270</y>
+                        <width>75</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string>Button 5</string>
+                </property>
+            </widget>
+            <widget class="QPushButton" name="button_3">
+                <property name="geometry">
+                    <rect>
+                        <x>270</x>
+                        <y>70</y>
+                        <width>75</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <property name="styleSheet">
+                    <string notr="true">background: #000000ff;
+                        color: white;
+                    </string>
+                </property>
+                <property name="text">
+                    <string>Button 3</string>
+                </property>
+            </widget>
+        </widget>
+        <widget class="QStatusBar" name="statusbar"/>
+        <widget class="QMenuBar" name="menubar">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>600</width>
+                    <height>22</height>
+                </rect>
+            </property>
+        </widget>
+    </widget>
+    <tabstops>
+        <tabstop>button_1</tabstop>
+        <tabstop>button_2</tabstop>
+        <tabstop>button_3</tabstop>
+        <tabstop>button_4</tabstop>
+        <tabstop>button_5</tabstop>
+        <tabstop>wheel_neg7</tabstop>
+        <tabstop>wheel_neg6</tabstop>
+        <tabstop>wheel_neg5</tabstop>
+        <tabstop>wheel_neg4</tabstop>
+        <tabstop>wheel_neg3</tabstop>
+        <tabstop>wheel_neg2</tabstop>
+        <tabstop>wheel_neg1</tabstop>
+        <tabstop>wheel_cent0</tabstop>
+        <tabstop>wheel_pos1</tabstop>
+        <tabstop>wheel_pos2</tabstop>
+        <tabstop>wheel_pos3</tabstop>
+        <tabstop>wheel_pos4</tabstop>
+        <tabstop>wheel_pos5</tabstop>
+        <tabstop>wheel_pos6</tabstop>
+        <tabstop>wheel_pos7</tabstop>
+        <tabstop>dial</tabstop>
+    </tabstops>
+    <resources/>
+    <connections/>
+</ui>

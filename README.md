@@ -1,7 +1,7 @@
 Contour ShuttleXpress
 =====================
 
-An attempt at writing an userland driver in Python.
+An attempt at writing a userland driver in Python.
 
 Features
 --------
@@ -32,38 +32,44 @@ Features
     - [ ] click
     - [ ] wheel
 
+- [ ] send MIDI?
+
+- [ ] call APIs?
+
 - [ ] launch applications
     - ?
 
-- [ ] per application profile    
+- [ ] per application profile
     - [ ] detect running application
-       - [ ] Microsoft Windows
-         - [ ] win32ui
-       - [ ] Mac OS X
-       - [ ] GNU/Linux
+        - [ ] Microsoft Windows
+            - [ ] win32ui
+        - [ ] Mac OS X
+        - [ ] GNU/Linux
     - [ ] switch profile using buttons
-    
+
 - [ ] macros
 
 - [ ] comments
-  
+
 - [ ] parse [official driver configurations](https://contourdesign.fr/support/windows-shuttle-settings/)
 
-- [ ] Configurator (GUI)
-  - [ ] Qt?
-  - [ ] Display state/debug
-  - [ ] Load existing configurations
-  - [ ] Generate configurations
-    
+- [WIP] Configurator (GUI)
+    - [x] Qt
+    - [ ] Display state/debug
+    - [ ] Load existing configurations
+    - [ ] Generate configurations
+
+- [ ] Plugins?
+
 - [ ] Platforms support
-  - [ ] Microsoft Windows
-    - [ ] Run as a [windows service](http://thepythoncorner.com/dev/how-to-create-a-windows-service-in-python/) ?
-    - [ ] Configurator in control panel?
-    - [ ] (optional) Tray icon shortcut to configurator
-  - [ ] Mac OS X
-  - [ ] GNU/Linux
-  - [ ] Android?
-  - [ ] iOS/iPadOS?
+    - [ ] Microsoft Windows
+        - [ ] Run as a [windows service](http://thepythoncorner.com/dev/how-to-create-a-windows-service-in-python/) ?
+        - [ ] Configurator in control panel?
+        - [ ] (optional) Tray icon shortcut to configurator
+    - [ ] Mac OS X
+    - [ ] GNU/Linux
+    - [ ] Android?
+    - [ ] iOS/iPadOS?
 
 Development log
 ---------------
@@ -101,3 +107,11 @@ Crossplatform (Microsoft Windows, Mac OS X, GNU/Linux)
 
 Success on Microsoft Windows without prior driver installation!
 Hope it’s the same on other platforms.
+
+### Building a GUI
+
+#### PySide6 (QT6)
+
+Prototype UI done
+
+![GUI prototype](GUI prototype.png)

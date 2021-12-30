@@ -181,32 +181,65 @@ B5_on_press = [0, 0, xx, 0, 0, 1]
 Multiple button presses:
 simply add the 5th field values (Bitfield)
 """
+import copy
 import logging
 
 import hid
 
-CONTOUR_VID = 0x0b33
-SHUTTLEXPRESS_PID = 0x0020
-SHUTTLEXPRESS_DATA_SIZE = 48
+SHUTTLEPROV2_PID = 0x0030  # TODO: add support?
 
 logging.basicConfig(level=logging.DEBUG)
 
 logger = logging.getLogger()
 
 
-class ShuttleXpress(object):
-    wheel_position = 0  # Signed  int from -127 to 128. 0 is central position. Values [-120, -1] and [8, 128) are invalid.
-    dial_position = 0  # Unsigned int (Counter to 255)
-    button1_pressed = False
-    button2_pressed = False
-    button3_pressed = False
-    button4_pressed = False
-    button5_pressed = False
+class ShuttleXpressConnection(object):
+    DATA_SIZE = 48
 
-    def __init__(self, wheel_pos=0, dial_pos=0, button1=False, button2=False, button3=False, button4=False,
-                 button5=False, data_from_hid=None):
+    def __init__(self, desc: dict):
+        self.desc = desc
+        self.device = hid.device()
+        self.shuttle = ShuttleXpress()
+        self.state = ShuttleXpressState(self.shuttle)
+
+    def connect(self):
+        try:
+            # h.open(CONTOUR_VID, SHUTTLEXPRESS_PID)  # Only opens first shuttle
+            self.device.open_path(self.desc['path'])
+
+            logger.info("%s found!" % self.device.get_product_string())
+
+            while True:
+                data = self.device.read(self.DATA_SIZE)
+                self.shuttle.update(data_from_hid=data)
+                self.state.update(self.shuttle)
+
+        except IOError:
+            logger.error("Connection not found!")
+            pass
+
+        finally:
+            self.device.close()
+
+
+class ShuttleXpress(object):
+    USB_VID = 0x0b33
+    USB_PID = 0x0020
+
+    def __init__(self):
+        self.wheel_position = 0  # Signed  int from -127 to 128. 0 is central position. Values [-120, -1] and [8, 128) are invalid.
+        self.dial_position = 0  # Unsigned int (Counter to 255)
+        self.button1_pressed = False
+        self.button2_pressed = False
+        self.button3_pressed = False
+        self.button4_pressed = False
+        self.button5_pressed = False
+
+    def update(self, wheel_pos=0, dial_pos=0, button1=False, button2=False, button3=False, button4=False,
+               button5=False, data_from_hid=None):
 
         if data_from_hid is not None:
+            logger.debug("Data from HID: %r", data_from_hid)
             self.wheel_position = int.from_bytes(data_from_hid[0].to_bytes(1, 'big'), 'big', signed=True)
             self.dial_position = data_from_hid[1]
             self.button1_pressed = bool(data_from_hid[3] & (1 << 4))
@@ -223,29 +256,27 @@ class ShuttleXpress(object):
             self.button4_pressed = button4
             self.button5_pressed = button5
 
-        logger.debug("Wheel position: %shuttle", self.wheel_position)
-        logger.debug("Dial position: %shuttle", self.dial_position)
-        logger.debug("Button 1 pressed: %shuttle", self.button1_pressed)
-        logger.debug("Button 2 pressed: %shuttle", self.button2_pressed)
-        logger.debug("Button 3 pressed: %shuttle", self.button3_pressed)
-        logger.debug("Button 4 pressed: %shuttle", self.button4_pressed)
-        logger.debug("Button 5 pressed: %shuttle", self.button5_pressed)
+        logger.debug("Wheel position: %s", self.wheel_position)
+        logger.debug("Dial position: %s", self.dial_position)
+        logger.debug("Button 1 pressed: %s", self.button1_pressed)
+        logger.debug("Button 2 pressed: %s", self.button2_pressed)
+        logger.debug("Button 3 pressed: %s", self.button3_pressed)
+        logger.debug("Button 4 pressed: %s", self.button4_pressed)
+        logger.debug("Button 5 pressed: %s", self.button5_pressed)
 
 
 class ShuttleXpressState(object):
-    current_state = None
-    previous_state = None
+    current_state = ShuttleXpress
+    previous_state = ShuttleXpress
 
-    def __init__(self):
-        self.current_state = None
+    def __init__(self, state: ShuttleXpress):
+        self.current_state = copy.copy(state)
         self.previous_state = None
 
-    def new(self, state: ShuttleXpress):
-        if self.current_state is not None:
-            self.previous_state = self.current_state
-        self.current_state = state
-        if self.previous_state is not None:
-            self._state_changed()
+    def update(self, state: ShuttleXpress):
+        self.previous_state = self.current_state
+        self.current_state = copy.copy(state)
+        self._state_changed()
 
     def _state_changed(self):
         logger.debug("State changed!")
@@ -289,8 +320,9 @@ class ShuttleXpressState(object):
     def _dial_state_changed(self):
         logger.debug("Dial state changed!")
         # TODO: fire callback
-        if self.current_state.dial_position > self.previous_state.dial_position \
-                or self.current_state.dial_position == 0 and self.previous_state.dial_position == 255:
+        if (self.current_state.dial_position > self.previous_state.dial_position) \
+                or (self.current_state.dial_position == 0 and self.previous_state.dial_position == 255) \
+                and not (self.current_state.dial_position == 255 and self.previous_state.dial_position == 0):
             self._dial_up()
         else:
             self._dial_down()
@@ -384,49 +416,27 @@ class ShuttleXpressState(object):
         # TODO: fire callback
 
 
-def find_shuttle_device():
+def find_shuttle_devices():
     logger.debug("Listing all HID devices...")
-    devices = hid.enumerate()
-    shuttles = []
-    for dev in devices:
-        logger.debug("Found HID device: %shuttle", dev)
-        if dev['vendor_id'] == CONTOUR_VID and dev['product_id'] == SHUTTLEXPRESS_PID:
-            shuttles.append(dev)
-    logger.debug("Found %data Contour ShuttleXpress: %shuttle", len(shuttles), shuttles)
-    if not shuttles:
-        logger.error("Device not found!")
-        exit(0)
-    if len(shuttles) > 1:
-        logger.warning("More than one device found. Not supported (yet).")
-        # TODO: implement multiple devices support
-        raise NotImplementedError
-    dev = shuttles[0]  # Let’shuttle pick the first
-    return dev
-
-
-def connect(device):
-    h = hid.device()
-    try:
-        # h.open(CONTOUR_VID, SHUTTLEXPRESS_PID)  # Only opens first device
-        h.open_path(device['path'])
-
-        logger.info("%s found!" % h.get_product_string())
-
-        state = ShuttleXpressState()
-
-        while True:
-            data = h.read(SHUTTLEXPRESS_DATA_SIZE)
-            shuttle = ShuttleXpress(data_from_hid=data)
-            state.new(shuttle)
-
-    except IOError:
-        logger.error("Device not found!")
-        pass
-
-    finally:
-        h.close()
+    devices_desc = hid.enumerate()
+    shuttle_hid_devices_desc = []
+    for dev_desc in devices_desc:
+        logger.debug("Found HID device: %s", dev_desc)
+        if dev_desc['vendor_id'] == ShuttleXpress.USB_VID and dev_desc['product_id'] == ShuttleXpress.USB_PID:
+            shuttle_hid_devices_desc.append(dev_desc)
+    logger.debug("Found %data Contour ShuttleXpress HID: %s", len(shuttle_hid_devices_desc), shuttle_hid_devices_desc)
+    return shuttle_hid_devices_desc
 
 
 if __name__ == '__main__':
-    device = find_shuttle_device()
-    connect(device)
+    shuttle_devices_desc = find_shuttle_devices()
+    if not shuttle_devices_desc:
+        logger.error("No Shuttle HID device found!")
+        exit(0)
+    if len(shuttle_devices_desc) > 1:
+        logger.warning("More than one Shuttle HID found. Not supported (yet).")
+        # TODO: implement multiple Shuttle HIDs support?
+        raise NotImplementedError
+    shuttle_dev_desc = shuttle_devices_desc[0]  # Let’s pick the first
+    conn = ShuttleXpressConnection(shuttle_dev_desc)
+    conn.connect()

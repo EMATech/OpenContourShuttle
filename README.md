@@ -114,4 +114,4 @@ Hope it’s the same on other platforms.
 
 Prototype UI done
 
-![GUI prototype](GUI prototype.png)
+![GUI prototype](GUIprototype.png)

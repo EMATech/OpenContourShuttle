@@ -1,26 +1,55 @@
-Contour ShuttleXpress
+Contour ConcreteShuttleXpress
 =====================
 
 An attempt at writing a userland driver in Python.
 
+
 Features
 --------
 
-- [x] Find and open device (USB HID)
+- [ ] Platforms support
+    - [ ] [WIP]Microsoft Windows
+        - [ ] Run as a [windows service](http://thepythoncorner.com/dev/how-to-create-a-windows-service-in-python/) ?
+        - [ ] Configurator in control panel?
+        - [ ] (optional) Tray icon shortcut to configurator
+    - [ ] Mac OS X
+    - [ ] GNU/Linux
+    - [ ] Android?
+    - [ ] iOS/iPadOS?
+
+- [x] Find and open device (USB HID via hidapi)
 
 - [x] Decode raw values
     - [x] State management
-    - [WIP] State change hooks/callbacks
-        - [ ] Buttons [1-5]:
-          - [ ] on_press()
-          - [ ] on_release()
-        - [ ] Wheel:
-          - [ ] on_position() [-7, 7]
-          - [ ] on_turn_up()
-          - [ ] on_turn_down()
-        - [ ] Dial:
-          - [ ] on_turn_up()
-          - [ ] on_turn_down()
+    -
+- [x] Observer pattern event hooks
+
+- [ ] parse [official driver configurations](https://contourdesign.fr/support/windows-shuttle-settings/)
+
+- [WIP] Configurator (GUI)
+    - [x] Qt
+    - [ ] Load existing configurations
+    - [ ] Generate configurations
+    - [ ] Generate configurations
+
+### Events
+
+- [x] State change events
+    - [x] Buttons [1-5]:
+        - [x] on_press()
+        - [x] on_release()
+    - [x] Wheel:
+        - [x] on_position() [-7, 7]
+        - [x] on_turn_up()
+        - [x] on_turn_down()
+    - [x] Dial:
+        - [x] on_turn_up()
+        - [x] on_turn_down()
+
+### Reactors
+
+- [ ] GUI
+    - [ ] Display state/debug
 
 - [ ] send keyboard strokes and/or modifiers
     - [ ] SendKeys?
@@ -32,7 +61,7 @@ Features
     - [ ] click
     - [ ] wheel
 
-- [ ] send MIDI?
+- [ ] send MIDI!
 
 - [ ] call APIs?
 
@@ -51,30 +80,20 @@ Features
 
 - [ ] comments
 
-- [ ] parse [official driver configurations](https://contourdesign.fr/support/windows-shuttle-settings/)
-
-- [WIP] Configurator (GUI)
-    - [x] Qt
-    - [ ] Display state/debug
-    - [ ] Load existing configurations
-    - [ ] Generate configurations
-
 - [ ] Plugins?
 
-- [ ] Platforms support
-    - [ ] Microsoft Windows
-        - [ ] Run as a [windows service](http://thepythoncorner.com/dev/how-to-create-a-windows-service-in-python/) ?
-        - [ ] Configurator in control panel?
-        - [ ] (optional) Tray icon shortcut to configurator
-    - [ ] Mac OS X
-    - [ ] GNU/Linux
-    - [ ] Android?
-    - [ ] iOS/iPadOS?
+Similar projects
+----------------
+
+### [shuttlemidi](https://github.com/dg1psi/shuttlemidi)
+
+Sends MIDI from the Shuttle Contour to SDR Console (Go, hidapi, loopmidi Apache-2.0)
+
 
 Development log
 ---------------
 
-###  Finding the right library for Microsoft Windows
+### Finding the right library for Microsoft Windows
 
 #### Attempt 1
 

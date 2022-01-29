@@ -22,15 +22,14 @@ Features
 
 - [x] Decode raw values
     - [x] State management
-    -
-- [x] Observer pattern event hooks
+    - [x] Observer pattern event hooks
 
 - [ ] parse [official driver configurations](https://contourdesign.fr/support/windows-shuttle-settings/)
 
 - [WIP] Configurator (GUI)
     - [x] Qt
+    - [x] Feedback
     - [ ] Load existing configurations
-    - [ ] Generate configurations
     - [ ] Generate configurations
 
 ### Events
@@ -51,6 +50,8 @@ Features
 
 - [x] GUI
     - [x] Display state/debug
+
+- [ ] Plugins based?
 
 - [ ] send keyboard strokes and/or modifiers
     - [ ] SendKeys?
@@ -80,8 +81,6 @@ Features
 - [ ] macros
 
 - [ ] comments
-
-- [ ] Plugins?
 
 Similar projects
 ----------------

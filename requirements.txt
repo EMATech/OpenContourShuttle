@@ -1,2 +1,3 @@
 hidapi
 PySide6
+qt-material

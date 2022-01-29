@@ -155,11 +155,10 @@ Raw data_from_hid
 Wheel
 ~~~~~
 
+- Encoder: 15 position with center rest  and 7 positions on each side
 - Position: byte 1 (2nd)
 - Length: 1 byte
 - Range: 8-bit signed integer (-128 to 127)
-
-(7 positions + and 7 positions minus, center rest)
 
     pos_center =  [0, 0, xx, 0, 0, 0]
     pos_minus_7 = [0, 249, xx, 0, 0, 0]
@@ -180,6 +179,7 @@ Wheel
 Dial
 ~~~~
 
+- Encoder: 10 ticks per full rotation
 - Position: byte 2 (3rd)
 - Length: 1 byte
 - Range: 8-bit unsigned integer  (0-255)

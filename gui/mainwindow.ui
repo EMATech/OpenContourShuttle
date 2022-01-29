@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>MainWindow</class>
-    <widget class="QMainWindow" name="MainWindow">
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>600</width>
-                <height>643</height>
-            </rect>
-        </property>
-        <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -19,13 +22,46 @@
   <property name="minimumSize">
    <size>
     <width>600</width>
-    <height>643</height>
+    <height>600</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>GUI</string>
+  <property name="maximumSize">
+   <size>
+    <width>600</width>
+    <height>600</height>
+   </size>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <property name="baseSize">
+   <size>
+    <width>600</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+    <kerning>true</kerning>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Contour ShuttleXpress</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="main_widget">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -36,36 +72,57 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">background: url(images/ShuttleXpress_Black.png);
-     background-repeat:no-repeat;
+    <string notr="true">QWidget#main_widget {background: url(images/ShuttleXpress_Black.png);
+     background-repeat:no-repeat;}
     </string>
    </property>
    <widget class="QDial" name="dial">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>170</y>
-      <width>230</width>
-      <height>230</height>
+      <x>197</x>
+      <y>178</y>
+      <width>216</width>
+      <height>216</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: black;</string>
     </property>
     <property name="maximum">
-     <number>255</number>
+     <number>9</number>
+    </property>
+    <property name="pageStep">
+     <number>9</number>
     </property>
     <property name="sliderPosition">
-     <number>128</number>
+     <number>2</number>
+    </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
+    </property>
+    <property name="invertedControls">
+     <bool>false</bool>
+    </property>
+    <property name="wrapping">
+     <bool>true</bool>
+    </property>
+    <property name="notchTarget">
+     <double>3.700000000000000</double>
+    </property>
+    <property name="notchesVisible">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="wheel_pos1">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>155</y>
-      <width>16</width>
-      <height>20</height>
+      <x>332</x>
+      <y>151</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -78,10 +135,10 @@
    <widget class="QRadioButton" name="wheel_neg3">
     <property name="geometry">
      <rect>
-      <x>182</x>
-      <y>215</y>
-      <width>16</width>
-      <height>20</height>
+      <x>174</x>
+      <y>211</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -94,10 +151,10 @@
    <widget class="QRadioButton" name="wheel_pos7">
     <property name="geometry">
      <rect>
-      <x>384</x>
-      <y>382</y>
-      <width>16</width>
-      <height>20</height>
+      <x>376</x>
+      <y>378</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -112,10 +169,10 @@
    <widget class="QRadioButton" name="wheel_neg4">
     <property name="geometry">
      <rect>
-      <x>166</x>
-      <y>257</y>
-      <width>16</width>
-      <height>20</height>
+      <x>158</x>
+      <y>253</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -130,10 +187,10 @@
    <widget class="QRadioButton" name="wheel_neg6">
     <property name="geometry">
      <rect>
-      <x>181</x>
-      <y>345</y>
-      <width>16</width>
-      <height>20</height>
+      <x>173</x>
+      <y>341</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -146,10 +203,10 @@
    <widget class="QRadioButton" name="wheel_neg5">
     <property name="geometry">
      <rect>
-      <x>166</x>
-      <y>300</y>
-      <width>16</width>
-      <height>20</height>
+      <x>158</x>
+      <y>296</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -162,10 +219,10 @@
    <widget class="QRadioButton" name="wheel_neg1">
     <property name="geometry">
      <rect>
-      <x>251</x>
-      <y>155</y>
-      <width>16</width>
-      <height>20</height>
+      <x>243</x>
+      <y>151</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -180,10 +237,10 @@
    <widget class="QRadioButton" name="wheel_pos2">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>178</y>
-      <width>16</width>
-      <height>20</height>
+      <x>372</x>
+      <y>174</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -198,10 +255,10 @@
    <widget class="QRadioButton" name="wheel_pos6">
     <property name="geometry">
      <rect>
-      <x>413</x>
-      <y>345</y>
-      <width>16</width>
-      <height>20</height>
+      <x>405</x>
+      <y>341</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -216,11 +273,16 @@
    <widget class="QCheckBox" name="button_1">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>270</y>
-      <width>75</width>
+      <x>80</x>
+      <y>266</y>
+      <width>24</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background: #000000ff;
@@ -228,16 +290,16 @@
      </string>
     </property>
     <property name="text">
-     <string>Button 1</string>
+     <string/>
     </property>
    </widget>
    <widget class="QRadioButton" name="wheel_pos4">
     <property name="geometry">
      <rect>
-      <x>428</x>
-      <y>257</y>
-      <width>16</width>
-      <height>20</height>
+      <x>420</x>
+      <y>253</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -252,10 +314,10 @@
    <widget class="QRadioButton" name="wheel_pos5">
     <property name="geometry">
      <rect>
-      <x>427</x>
-      <y>300</y>
-      <width>16</width>
-      <height>20</height>
+      <x>419</x>
+      <y>296</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -270,10 +332,10 @@
    <widget class="QRadioButton" name="wheel_neg2">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>178</y>
-      <width>16</width>
-      <height>20</height>
+      <x>202</x>
+      <y>174</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -288,10 +350,10 @@
    <widget class="QRadioButton" name="wheel_cent0">
     <property name="geometry">
      <rect>
-      <x>297</x>
-      <y>147</y>
-      <width>16</width>
-      <height>20</height>
+      <x>289</x>
+      <y>143</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -309,10 +371,10 @@
    <widget class="QRadioButton" name="wheel_pos3">
     <property name="geometry">
      <rect>
-      <x>413</x>
-      <y>215</y>
-      <width>16</width>
-      <height>20</height>
+      <x>405</x>
+      <y>211</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -327,10 +389,10 @@
    <widget class="QRadioButton" name="wheel_neg7">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>382</y>
-      <width>16</width>
-      <height>20</height>
+      <x>202</x>
+      <y>378</y>
+      <width>24</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -343,11 +405,16 @@
    <widget class="QCheckBox" name="button_2">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>120</y>
-      <width>75</width>
+      <x>156</x>
+      <y>122</y>
+      <width>24</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background: #000000ff;
@@ -355,17 +422,28 @@
      </string>
     </property>
     <property name="text">
-     <string>Button 2</string>
+     <string/>
     </property>
    </widget>
    <widget class="QCheckBox" name="button_4">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>120</y>
-      <width>75</width>
+      <x>430</x>
+      <y>122</y>
+      <width>24</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
     </property>
     <property name="styleSheet">
      <string notr="true">background: #000000ff;
@@ -373,17 +451,25 @@
      </string>
     </property>
     <property name="text">
-     <string>Button 4</string>
+     <string/>
     </property>
    </widget>
    <widget class="QCheckBox" name="button_5">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>270</y>
-      <width>75</width>
+      <x>498</x>
+      <y>266</y>
+      <width>24</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">background: #000000ff;
@@ -391,17 +477,22 @@
      </string>
     </property>
     <property name="text">
-     <string>Button 5</string>
+     <string/>
     </property>
    </widget>
    <widget class="QCheckBox" name="button_3">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>70</y>
-      <width>75</width>
+      <x>290</x>
+      <y>72</y>
+      <width>24</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background: #000000ff;
@@ -409,21 +500,122 @@
      </string>
     </property>
     <property name="text">
-     <string>Button 3</string>
+     <string/>
+    </property>
+    <property name="tristate">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="about_button">
+    <property name="geometry">
+     <rect>
+      <x>576</x>
+      <y>0</y>
+      <width>24</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>WhatsThisCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>?</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>600</width>
-     <height>22</height>
-    </rect>
+  <widget class="QDockWidget" name="about_widget">
+   <property name="enabled">
+    <bool>true</bool>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>580</width>
+     <height>574</height>
+    </size>
+   </property>
+   <property name="floating">
+    <bool>false</bool>
+   </property>
+   <property name="features">
+    <set>QDockWidget::DockWidgetClosable</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::RightDockWidgetArea</set>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="about_widget_contents">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <widget class="QTextEdit" name="about_text">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>560</width>
+       <height>550</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::WheelFocus</enum>
+     </property>
+     <property name="acceptDrops">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="undoRedoEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="acceptRichText">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
   </widget>
+  <action name="action_Quit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+  </action>
+  <zorder>about_widget</zorder>
  </widget>
  <tabstops>
   <tabstop>button_1</tabstop>

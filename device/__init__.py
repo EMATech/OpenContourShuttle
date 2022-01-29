@@ -1,16 +1,34 @@
+# SPDX-FileCopyrightText: 2021-2022 Raphaël Doursenaud <rdoursenaud@free.fr>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 """
-HID report
-----------
+`Contour ShuttleXpress`
+================================================================================
 
-HID device (vID=0x0b33, pID=0x0020,v=0x0201); Contour Design; ShuttleXpress, Path: \\?\hid#vid_0b33&pid_0020#a&2c3e917c&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030
+A multiplatform userland driver, configuration editor event management & generator for Contour ShuttleXpress.
 
-  Path:      \\?\hid#vid_0b33&pid_0020#a&2c3e917c&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+Contour, ShuttleXpress and ShuttlePro are trademarks of
+Contour Innovations LLC in the United States.
 
-  Instance:  HID\VID_0B33&PID_0020\A&2C3E917C&0&0000
+These are not active trademarks in the European Union and France where I reside.
 
-  Port (ID): 29
+* Author(s): Raphaël Doursenaud <rdoursenaud@free.fr>
 
-  Port (str):USB\VID_0B33&PID_0020\9&10B4E550&0&3
+Implementation Notes
+--------------------
+
+    HID report
+    ----------
+
+    HID device (vID=0x0b33, pID=0x0020,v=0x0201); Contour Design; ShuttleXpress, Path: \\?\hid#vid_0b33&pid_0020#a&2c3e917c&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030
+
+      Path:      \\?\hid#vid_0b33&pid_0020#a&2c3e917c&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+
+      Instance:  HID\VID_0B33&PID_0020\A&2C3E917C&0&0000
+
+      Port (ID): 29
+
+      Port (str):USB\VID_0B33&PID_0020\9&10B4E550&0&3
 
 HID device documentation report
 ===============================
@@ -18,189 +36,209 @@ HID device documentation report
 Top Level Details
 -----------------
 
-Manufacturer String:    Contour Design
-Product Sting:          ShuttleXpress
-Serial Number:
+    Manufacturer String:    Contour Design
+    Product Sting:          ShuttleXpress
+    Serial Number:
 
-Vendor ID:              0x0b33
-Product ID:             0x0020
-Version number:         0x0201
+    Vendor ID:              0x0b33
+    Product ID:             0x0020
+    Version number:         0x0201
 
-Device Path:            \\?\hid#vid_0b33&pid_0020#a&2c3e917c&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
-Device Instance Id:     HID\VID_0B33&PID_0020\A&2C3E917C&0&0000
-Parent Instance Id:     29
+    Device Path:            \\?\hid#vid_0b33&pid_0020#a&2c3e917c&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+    Device Instance Id:     HID\VID_0B33&PID_0020\A&2C3E917C&0&0000
+    Parent Instance Id:     29
 
-Top level usage:        Page=0x000c, Usage=0x01
-Usage identification:   Consumer device, Consumer Control usage
-Link collections:       2 collection(shuttle)
+    Top level usage:        Page=0x000c, Usage=0x01
+    Usage identification:   Consumer device, Consumer Control usage
+    Link collections:       2 collection(shuttle)
 
 Reports
 -------
 
-Input Report
-~~~~~~~~~~~~
-Length:     6 byte(shuttle)
-Buttons:    1 button(shuttle)
-Values:     2 value(shuttle)
+    Input Report
+    ~~~~~~~~~~~~
+    Length:     6 byte(shuttle)
+    Buttons:    1 button(shuttle)
+    Values:     2 value(shuttle)
 
-Output Report
-~~~~~~~~~~~~~
-length:     0 byte(shuttle)
-Buttons:    0 button(shuttle)
-Values:     0 value(shuttle)
+    Output Report
+    ~~~~~~~~~~~~~
+    length:     0 byte(shuttle)
+    Buttons:    0 button(shuttle)
+    Values:     0 value(shuttle)
 
-Feature Report
-~~~~~~~~~~~~~
-Length:     0 byte(shuttle)
-Buttons:    0 button(shuttle)
-Values:     0 value(shuttle)
+    Feature Report
+    ~~~~~~~~~~~~~
+    Length:     0 byte(shuttle)
+    Buttons:    0 button(shuttle)
+    Values:     0 value(shuttle)
 
-*** Input Caps ***
+    *** Input Caps ***
 
-    Usage Range 1~13 (0x1~0xd), Page 0x9 (Button)
-        bit_field: 2
-        data_index_max: 14
-        data_index_min: 2
-        designator_max: 0
-        designator_min: 0
-        is_absolute: 1
-        is_alias: 0
-        is_button: True
-        is_designator_range: 0
-        is_range: 1
-        is_string_range: 0
-        is_value: False
-        link_collection: 1
-        link_usage: 0 (0x0)
-        link_usage_page: 12 (0xc)
-        report_id: 0
-        string_max: 0
-        string_min: 0
+        Usage Range 1~13 (0x1~0xd), Page 0x9 (Button)
+            bit_field: 2
+            data_index_max: 14
+            data_index_min: 2
+            designator_max: 0
+            designator_min: 0
+            is_absolute: 1
+            is_alias: 0
+            is_button: True
+            is_designator_range: 0
+            is_range: 1
+            is_string_range: 0
+            is_value: False
+            link_collection: 1
+            link_usage: 0 (0x0)
+            link_usage_page: 12 (0xc)
+            report_id: 0
+            string_max: 0
+            string_min: 0
 
-    Usage 56 (0x38), Page 0x1
-    (Generic Desktop device, Wheel usage)
-        bit_field: 6
-        bit_size: 8
-        data_index: 0
-        designator_index: 0
-        has_null: 0
-        is_absolute: 0
-        is_alias: 0
-        is_button: False
-        is_designator_range: 0
-        is_range: 0
-        is_string_range: 0
-        is_value: True
-        link_collection: 1
-        link_usage: 0 (0x0)
-        link_usage_page: 12 (0xc)
-        logical_max: 127
-        logical_min: -128
-        physical_max: 0
-        physical_min: 0
-        report_count: 1
-        report_id: 0
-        string_index: 0
-        units: 0
-        units_exp: 0
+        Usage 56 (0x38), Page 0x1
+        (Generic Desktop device, Wheel usage)
+            bit_field: 6
+            bit_size: 8
+            data_index: 0
+            designator_index: 0
+            has_null: 0
+            is_absolute: 0
+            is_alias: 0
+            is_button: False
+            is_designator_range: 0
+            is_range: 0
+            is_string_range: 0
+            is_value: True
+            link_collection: 1
+            link_usage: 0 (0x0)
+            link_usage_page: 12 (0xc)
+            logical_max: 127
+            logical_min: -128
+            physical_max: 0
+            physical_min: 0
+            report_count: 1
+            report_id: 0
+            string_index: 0
+            units: 0
+            units_exp: 0
 
-    Usage 55 (0x37), Page 0x1
-    (Generic Desktop device, Dial usage)
-        bit_field: 46
-        bit_size: 8
-        data_index: 1
-        designator_index: 0
-        has_null: 0
-        is_absolute: 0
-        is_alias: 0
-        is_button: False
-        is_designator_range: 0
-        is_range: 0
-        is_string_range: 0
-        is_value: True
-        link_collection: 1
-        link_usage: 0 (0x0)
-        link_usage_page: 12 (0xc)
-        logical_max: 255
-        logical_min: 0
-        physical_max: 0
-        physical_min: 0
-        report_count: 1
-        report_id: 0
-        string_index: 0
-        units: 0
-        units_exp: 0
-
-
+        Usage 55 (0x37), Page 0x1
+        (Generic Desktop device, Dial usage)
+            bit_field: 46
+            bit_size: 8
+            data_index: 1
+            designator_index: 0
+            has_null: 0
+            is_absolute: 0
+            is_alias: 0
+            is_button: False
+            is_designator_range: 0
+            is_range: 0
+            is_string_range: 0
+            is_value: True
+            link_collection: 1
+            link_usage: 0 (0x0)
+            link_usage_page: 12 (0xc)
+            logical_max: 255
+            logical_min: 0
+            physical_max: 0
+            physical_min: 0
+            report_count: 1
+            report_id: 0
+            string_index: 0
+            units: 0
+            units_exp: 0
 
 Raw data_from_hid
---------
+-----------------
 
-### Wheel
+Wheel
+~~~~~
 
-1st byte (1 byte, range signed integer -128 to 127)
+- Position: byte 1 (2nd)
+- Length: 1 byte
+- Range: 8-bit signed integer (-128 to 127)
 
 (7 positions + and 7 positions minus, center rest)
 
-pos_center =  [0, 0, xx, 0, 0, 0]
-pos_minus_7 = [0, 249, xx, 0, 0, 0]
-pos_minus_6 = [0, 250, xx, 0, 0, 0]
-pos_minus_5 = [0, 251, xx, 0, 0, 0]
-pos_minus_4 = [0, 252, xx, 0, 0, 0]
-pos_minus_3 = [0, 253, xx, 0, 0, 0]
-pos_minus_2 = [0, 254, xx, 0, 0, 0]
-pos_minus_1 = [0, 255, xx, 0, 0, 0]
-pos_plus_1 = [0, 1, xx, 0, 0, 0]
-pos_plus_2 = [0, 2, xx, 0, 0, 0]
-pos_plus_3 = [0, 3, xx, 0, 0, 0]
-pos_plus_4 = [0, 4, xx, 0, 0, 0]
-pos_plus_5 = [0, 5, xx, 0, 0, 0]
-pos_plus_6 = [0, 6, xx, 0, 0, 0]
-pos_plus_7 = [0, 7, xx, 0, 0, 0]
+    pos_center =  [0, 0, xx, 0, 0, 0]
+    pos_minus_7 = [0, 249, xx, 0, 0, 0]
+    pos_minus_6 = [0, 250, xx, 0, 0, 0]
+    pos_minus_5 = [0, 251, xx, 0, 0, 0]
+    pos_minus_4 = [0, 252, xx, 0, 0, 0]
+    pos_minus_3 = [0, 253, xx, 0, 0, 0]
+    pos_minus_2 = [0, 254, xx, 0, 0, 0]
+    pos_minus_1 = [0, 255, xx, 0, 0, 0]
+    pos_plus_1 = [0, 1, xx, 0, 0, 0]
+    pos_plus_2 = [0, 2, xx, 0, 0, 0]
+    pos_plus_3 = [0, 3, xx, 0, 0, 0]
+    pos_plus_4 = [0, 4, xx, 0, 0, 0]
+    pos_plus_5 = [0, 5, xx, 0, 0, 0]
+    pos_plus_6 = [0, 6, xx, 0, 0, 0]
+    pos_plus_7 = [0, 7, xx, 0, 0, 0]
 
+Dial
+~~~~
 
-### Dial
+- Position: byte 2 (3rd)
+- Length: 1 byte
+- Range: 8-bit unsigned integer  (0-255)
 
-2nd byte (1 byte, range int 0-255)
-Counts positive when rotated clockwise and negative the other way around on xx [0-255]
+Counts positive when rotated clockwise and negative the other way around on xx [0-255].
+The value wraps around.
 
-### Buttons
+Buttons
+~~~~~~~
 
-Bitfields on 4th and 5th bytes (2 bytes, 1 == pressed)
+- Position: byte 4-5
+- Length: 2 bytes
+- Values: bitfield (0 is released, 1 is pressed)
 
-      B3
- B2        B4
-B1          B5
+          B3
+     B2        B4
+    B1          B5
 
-B1_on_press = [0, 0, xx, 0, 16, 0]
-B2_on_press = [0, 0, xx, 0, 32, 0]
-B3_on_press = [0, 0, xx, 0, 64, 0]
-B4_on_press = [0, 0, xx, 0, 128, 0]
-B5_on_press = [0, 0, xx, 0, 0, 1]
+    B1_on_press = [0, 0, xx, 0, 16, 0]
+    B2_on_press = [0, 0, xx, 0, 32, 0]
+    B3_on_press = [0, 0, xx, 0, 64, 0]
+    B4_on_press = [0, 0, xx, 0, 128, 0]
+    B5_on_press = [0, 0, xx, 0, 0, 1]
 
-Multiple button presses:
-simply add the 5th field values (Bitfield)
+**Multiple button presses**
+
+Simply add the bitfield values.
+
+Unused bytes
+~~~~~~~~~~~~
+
+Byte 0 and 3 appear unused.
+
+My guess is the 3rd byte is used on the Pro model.
 """
+
 from __future__ import annotations
 
 import logging
 from abc import ABC, abstractmethod
-# from numpy import int8, uint8
 from typing import List, Union
 
 import hid
 
-# from device.control import Control
-# from mouse import MouseControl
+__version__ = "0.0.0-auto.0"
+__repo__ = "https://github.com/EMATech/ContourShuttleXpress.git"
 
 logging.basicConfig(level=logging.DEBUG)
 
 logger = logging.getLogger()
 
 
+class DeviceNotFoundError(IOError):
+    pass
+
+
 class Wheel:
-    _pos: Union[None, int]  # FIXME: use int8?
-    centered = True
+    _pos: Union[None, int]
+    centered: bool = True
 
     @property
     def pos(self) -> int:
@@ -209,9 +247,10 @@ class Wheel:
 
     @pos.setter
     def pos(self, pos: int) -> None:
-        # Signed int from -127 to 128.
-        if not -127 <= pos <= 128:
-            raise ValueError(f"Value {pos} is not between -127 and 128")
+        if pos not in range(-7, 8):  # Filter only valid positions
+            raise ValueError(f"Value {pos} was not expected. "
+                             f"Please file a bug report: "
+                             f"https://github.com/EMATech/ContourShuttleXpress/issues")
 
         # 0 is central position.
         self.centered = False
@@ -225,7 +264,7 @@ class Wheel:
 
 
 class Dial:
-    _pos: Union[None, int]  # FIXME: use uint8?
+    _pos: Union[None, int]
 
     @property
     def pos(self) -> int:
@@ -234,9 +273,7 @@ class Dial:
 
     @pos.setter
     def pos(self, pos: int) -> None:
-        # Unsigned int (Wrapping counter from 0 to 255)
-        if not 0 <= pos <= 255:
-            # FIXME: autowrap with a warning?
+        if not 0 <= pos <= 255:  # Filter only valid values
             raise ValueError
 
         self._pos = pos
@@ -255,7 +292,7 @@ class Button:
 
     @num.setter
     def num(self, num: int) -> None:
-        if not 1 <= num <= 5:
+        if not 1 <= num <= 5:  # Filter only valid values. TODO: change for Pro?
             raise ValueError
 
     def __init__(self, num: int) -> None:
@@ -293,7 +330,7 @@ class RotaryEvent(Event):
 
     @value.setter
     def value(self, val: int) -> None:
-        direction = True if val >= 0 else False
+        direction: bool = True if val >= 0 else False
         self.name = f"{type(self.element).__name__} up" if direction \
             else f"{type(self.element).__name__} down"
         self._delta = val
@@ -356,10 +393,10 @@ class ShuttleXpressObserver(ABC):
 
 
 class ShuttleXpress(ShuttleXpressSubject):
-    USB_VID = 0x0b33  # Contour Design, Inc.
-    USB_PID = 0x0020  # ShuttleXpress
-    SHUTTLEPROV2_PID = 0x0030  # TODO: add support?
-    DATA_SIZE = 48
+    USB_VID: int = 0x0b33  # Contour Design, Inc.
+    USB_PID_XPRESS: int = 0x0020  # ShuttleXpress
+    USB_PID_PROV2: int = 0x0030  # ShuttlePRo v2 TODO: add support?
+    HID_DATA_SIZE: int = 48
 
     # USB HID Device
     usb_descriptor: dict
@@ -375,8 +412,8 @@ class ShuttleXpress(ShuttleXpressSubject):
     _button4: Button
     _button5: Button
 
+    # Event observation
     _observers: List[ShuttleXpressObserver] = []
-
     events: List[Event] = []
 
     @property
@@ -385,8 +422,8 @@ class ShuttleXpress(ShuttleXpressSubject):
 
     @wheel.setter
     def wheel(self, new_pos: int) -> None:
-        delta = None
-        logger.debug(f"{self.__class__.__name__}: New wheel position: {new_pos}")
+        delta: Union[None, int] = None
+        logger.debug(f"{self.__class__.__name__}: Wheel position: {new_pos}")
         if self._wheel.pos is not None:
             if self._wheel.pos != new_pos:
                 delta = new_pos - self._wheel.pos
@@ -401,11 +438,16 @@ class ShuttleXpress(ShuttleXpressSubject):
 
     @dial.setter
     def dial(self, new_pos: int) -> None:
-        delta = None
-        logger.debug(f"{self.__class__.__name__}: New dial position: {new_pos}")
+        delta: Union[None, int] = None
+        logger.debug(f"{self.__class__.__name__}: Dial position: {new_pos}")
         if self._dial.pos is not None:
             if self._dial.pos != new_pos:
                 delta = new_pos - self._dial.pos
+                # Handle special cases when wrapping
+                if delta == -255:
+                    delta = 1
+                elif delta == 255:
+                    delta = -1
                 logger.debug(f"{self.__class__.__name__}: Dial position changed by {delta}")
         self._dial.pos = new_pos
         if delta:
@@ -469,11 +511,12 @@ class ShuttleXpress(ShuttleXpressSubject):
     @staticmethod
     def find() -> List[dict]:
         logger.debug(f"{ShuttleXpress.__class__.__name__}: Listing all HID devices...")
-        devices_desc = hid.enumerate()
-        shuttle_hid_devices_desc = []
+        devices_desc: List[dict] = hid.enumerate()
+        shuttle_hid_devices_desc: List[dict] = []
         for dev_desc in devices_desc:
             logger.debug(f"{ShuttleXpress.__class__.__name__}: Found HID device: %s", dev_desc)
-            if dev_desc['vendor_id'] == ShuttleXpress.USB_VID and dev_desc['product_id'] == ShuttleXpress.USB_PID:
+            if dev_desc['vendor_id'] == ShuttleXpress.USB_VID and dev_desc[
+                'product_id'] == ShuttleXpress.USB_PID_XPRESS:
                 shuttle_hid_devices_desc.append(dev_desc)
         logger.debug(f"{ShuttleXpress.__class__.__name__}: Found %data Contour ShuttleXpress HID: %s",
                      len(shuttle_hid_devices_desc),
@@ -491,24 +534,22 @@ class ShuttleXpress(ShuttleXpressSubject):
         self._button5 = Button(5)
 
     def __del__(self) -> None:
+        # TODO: Notify disconnection
         self.hid_device.close()
 
     def connect_first(self) -> None:
-        devices_desc = self.find()
+        devices_desc: List[dict] = self.find()
         if not devices_desc:
-            logger.error("No Shuttle HID device found!")
-            exit(0)
+            raise DeviceNotFoundError("No Shuttle HID device found!")
         if len(devices_desc) > 1:
-            logger.warning("More than one Shuttle HID found. This is not yet supported.")
+            logger.warning("More than one Shuttle HID found. This is not yet supported. Only the first will be used!")
             # TODO: implement multiple Shuttle HIDs support?
-            # raise NotImplementedError
 
         self.connect(devices_desc[0])  # Let’s pick the first
 
     def connect(self, desc: dict) -> None:
         self.usb_descriptor = desc
         try:
-            # h.open(CONTOUR_VID, SHUTTLEXPRESS_PID)  # Only opens first shuttle
             self.hid_device.open_path(self.usb_descriptor['path'])
 
             logger.info("%s found!" % self.hid_device.get_product_string())
@@ -520,6 +561,24 @@ class ShuttleXpress(ShuttleXpressSubject):
 
         self.events.append(ConnectionEvent(self.hid_device))
         self.notify()
+
+    def poll(self) -> None:
+        data: bytearray = self.hid_device.read(self.HID_DATA_SIZE)
+
+        if data:
+            logger.debug(f"{self.__class__.__name__}: Data from HID: %r", data)
+            self.wheel = int.from_bytes(data[0].to_bytes(1, 'big'), 'big', signed=True)
+            self.dial = data[1]
+            self.button1 = bool(data[3] & (1 << 4))
+            self.button2 = bool(data[3] & (1 << 5))
+            self.button3 = bool(data[3] & (1 << 6))
+            self.button4 = bool(data[3] & (1 << 7))
+            self.button5 = bool(data[4] & (1 << 0))
+            self.notify()
+
+    ##
+    # Observers management
+    ##
 
     def attach(self, observer: ShuttleXpressObserver) -> None:
         logger.debug(f"{self.__class__.__name__}: Attached an observer.")
@@ -533,20 +592,6 @@ class ShuttleXpress(ShuttleXpressSubject):
         for observer in self._observers:
             observer.update(self)
         self.events.clear()
-
-    def poll(self) -> None:
-        data = self.hid_device.read(self.DATA_SIZE)
-
-        if data:
-            logger.debug(f"{self.__class__.__name__}: Data from HID: %r", data)
-            self.wheel = int.from_bytes(data[0].to_bytes(1, 'big'), 'big', signed=True)
-            self.dial = data[1]
-            self.button1 = bool(data[3] & (1 << 4))
-            self.button2 = bool(data[3] & (1 << 5))
-            self.button3 = bool(data[3] & (1 << 6))
-            self.button4 = bool(data[3] & (1 << 7))
-            self.button5 = bool(data[4] & (1 << 0))
-            self.notify()
 
 
 class ShuttleXpressObserverSample(ShuttleXpressObserver):
@@ -594,14 +639,14 @@ class ShuttleXpressObserverSample(ShuttleXpressObserver):
 
     @staticmethod
     def _handle_button(button: Button) -> None:
-        state = 'down' if button.push else 'up'
+        state: str = 'down' if button.push else 'up'
         logger.debug(f"Button {button.num} state changed to: {state}!")
 
 
 if __name__ == '__main__':
-    shuttle = ShuttleXpress()
+    shuttle: ShuttleXpress = ShuttleXpress()
 
-    sample_observer = ShuttleXpressObserverSample()
+    sample_observer: ShuttleXpressObserver = ShuttleXpressObserverSample()
     shuttle.attach(sample_observer)
 
     while True:

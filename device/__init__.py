@@ -265,13 +265,19 @@ class Button:
 
 class Event(ABC):
     name: str  # Human-readable event name
-    element: Union[Wheel, Dial, Button]
+    element: Union[hid.device, Wheel, Dial, Button]
 
-    def __init__(self, element: Union[Wheel, Dial, Button]) -> None:
+    def __init__(self, element: Union[hid.device, Wheel, Dial, Button]) -> None:
         self.element = element
 
 
-class RotaryEvent(Event, ABC):
+class ConnectionEvent(Event):
+    def __init__(self, device: hid.device):
+        super().__init__(device)
+        self.name = f"{device.get_manufacturer_string()}"
+
+
+class RotaryEvent(Event):
     element: Union[Wheel, Dial]
 
     _delta: int  # Delta
@@ -288,7 +294,8 @@ class RotaryEvent(Event, ABC):
     @value.setter
     def value(self, val: int) -> None:
         direction = True if val >= 0 else False
-        self.name = f"{type(self.element)} up" if direction else f"{type(self.element)} down"
+        self.name = f"{type(self.element).__name__} up" if direction \
+            else f"{type(self.element).__name__} down"
         self._delta = val
         self._direction = direction
 
@@ -302,7 +309,8 @@ class ButtonEvent(Event):
 
     def __init__(self, element: Button) -> None:
         super().__init__(element)
-        self.name = f"{type(element)} {element.num} down" if element.push else f"{type(element)} {element.num} up"
+        self.name = f"{type(element).__name__} {element.num} down" if element.push \
+            else f"{type(element).__name__} {element.num} up"
 
 
 class ShuttleXpressSubject(ABC):
@@ -377,13 +385,15 @@ class ShuttleXpress(ShuttleXpressSubject):
 
     @wheel.setter
     def wheel(self, new_pos: int) -> None:
+        delta = None
         logger.debug(f"{self.__class__.__name__}: New wheel position: {new_pos}")
         if self._wheel.pos is not None:
             if self._wheel.pos != new_pos:
                 delta = new_pos - self._wheel.pos
-                self.events.append(RotaryEvent(self.wheel, delta))
                 logger.debug(f"{self.__class__.__name__}: Wheel position changed by {delta}")
         self._wheel.pos = new_pos
+        if delta:
+            self.events.append(RotaryEvent(self.wheel, delta))
 
     @property
     def dial(self) -> Dial:
@@ -391,13 +401,15 @@ class ShuttleXpress(ShuttleXpressSubject):
 
     @dial.setter
     def dial(self, new_pos: int) -> None:
+        delta = None
         logger.debug(f"{self.__class__.__name__}: New dial position: {new_pos}")
         if self._dial.pos is not None:
             if self._dial.pos != new_pos:
                 delta = new_pos - self._dial.pos
-                self.events.append(RotaryEvent(self.dial, delta))
                 logger.debug(f"{self.__class__.__name__}: Dial position changed by {delta}")
         self._dial.pos = new_pos
+        if delta:
+            self.events.append(RotaryEvent(self.dial, delta))
 
     @property
     def button1(self) -> Button:
@@ -407,8 +419,8 @@ class ShuttleXpress(ShuttleXpressSubject):
     def button1(self, new_state: bool) -> None:
         if self._button1.push != new_state:
             logger.debug(f"{self.__class__.__name__}: Button 1 state changed!")
-            self.events.append(ButtonEvent(self.button1))
             self._button1.push = new_state
+            self.events.append(ButtonEvent(self.button1))
 
     @property
     def button2(self) -> Button:
@@ -418,8 +430,8 @@ class ShuttleXpress(ShuttleXpressSubject):
     def button2(self, new_state: bool) -> None:
         if self._button2.push != new_state:
             logger.debug(f"{self.__class__.__name__}: Button 2 state changed!")
-            self.events.append(ButtonEvent(self.button2))
             self._button2.push = new_state
+            self.events.append(ButtonEvent(self.button2))
 
     @property
     def button3(self) -> Button:
@@ -429,8 +441,8 @@ class ShuttleXpress(ShuttleXpressSubject):
     def button3(self, new_state: bool) -> None:
         if self._button3.push != new_state:
             logger.debug(f"{self.__class__.__name__}: Button 3 state changed!")
-            self.events.append(ButtonEvent(self.button3))
             self._button3.push = new_state
+            self.events.append(ButtonEvent(self.button3))
 
     @property
     def button4(self) -> Button:
@@ -440,8 +452,8 @@ class ShuttleXpress(ShuttleXpressSubject):
     def button4(self, new_state: bool) -> None:
         if self._button4.push != new_state:
             logger.debug(f"{self.__class__.__name__}: Button 4 state changed!")
-            self.events.append(ButtonEvent(self.button4))
             self._button4.push = new_state
+            self.events.append(ButtonEvent(self.button4))
 
     @property
     def button5(self) -> Button:
@@ -451,8 +463,8 @@ class ShuttleXpress(ShuttleXpressSubject):
     def button5(self, new_state: bool) -> None:
         if self._button5.push != new_state:
             logger.debug(f"{self.__class__.__name__}: Button 5 state changed!")
-            self.events.append(ButtonEvent(self.button5))
             self._button5.push = new_state
+            self.events.append(ButtonEvent(self.button5))
 
     @staticmethod
     def find() -> List[dict]:
@@ -468,14 +480,8 @@ class ShuttleXpress(ShuttleXpressSubject):
                      shuttle_hid_devices_desc)
         return shuttle_hid_devices_desc
 
-    def __init__(self, desc=None) -> None:
+    def __init__(self) -> None:
         self.hid_device = hid.device()
-
-        if desc is None:
-            self.connect_first()
-        else:
-            self.connect(desc)
-
         self._wheel = Wheel()
         self._dial = Dial()
         self._button1 = Button(1)
@@ -483,6 +489,9 @@ class ShuttleXpress(ShuttleXpressSubject):
         self._button3 = Button(3)
         self._button4 = Button(4)
         self._button5 = Button(5)
+
+    def __del__(self) -> None:
+        self.hid_device.close()
 
     def connect_first(self) -> None:
         devices_desc = self.find()
@@ -507,8 +516,10 @@ class ShuttleXpress(ShuttleXpressSubject):
         except IOError:
             logger.error("Connection not found!")
 
-    def __del__(self) -> None:
-        self.hid_device.close()
+        self.hid_device.set_nonblocking(True)
+
+        self.events.append(ConnectionEvent(self.hid_device))
+        self.notify()
 
     def attach(self, observer: ShuttleXpressObserver) -> None:
         logger.debug(f"{self.__class__.__name__}: Attached an observer.")
@@ -521,6 +532,7 @@ class ShuttleXpress(ShuttleXpressSubject):
         logger.debug(f"{self.__class__.__name__}: Notifying observers...")
         for observer in self._observers:
             observer.update(self)
+        self.events.clear()
 
     def poll(self) -> None:
         data = self.hid_device.read(self.DATA_SIZE)
@@ -530,14 +542,11 @@ class ShuttleXpress(ShuttleXpressSubject):
             self.wheel = int.from_bytes(data[0].to_bytes(1, 'big'), 'big', signed=True)
             self.dial = data[1]
             self.button1 = bool(data[3] & (1 << 4))
-            self.button2 = (bool(data[3] & (1 << 5)))
+            self.button2 = bool(data[3] & (1 << 5))
             self.button3 = bool(data[3] & (1 << 6))
             self.button4 = bool(data[3] & (1 << 7))
             self.button5 = bool(data[4] & (1 << 0))
-
-        if self.events:
             self.notify()
-            self.events.clear()
 
 
 class ShuttleXpressObserverSample(ShuttleXpressObserver):
@@ -546,12 +555,18 @@ class ShuttleXpressObserverSample(ShuttleXpressObserver):
         logger.debug(f"{self.__class__.__name__}: State changed!")
         for event in subject.events:
             logger.info(f"{self.__class__.__name__}: {event.name}")
-            if isinstance(event, RotaryEvent):
+            if isinstance(event, ConnectionEvent):
+                self._handle_connection(event.element)
+            elif isinstance(event, RotaryEvent):
                 self._handle_rotary_event(event)
             elif isinstance(event, ButtonEvent):
                 self._handle_button(event.element)
             else:
                 logger.warning(f"Unsupported event type: {type(event)}")
+
+    @staticmethod
+    def _handle_connection(device: hid.device) -> None:
+        logger.info(f"Connected to {device.get_manufacturer_string()} {device.get_product_string()}")
 
     def _handle_rotary_event(self, rotary_event: RotaryEvent) -> None:
         if type(rotary_event.element) is Wheel:

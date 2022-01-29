@@ -46,10 +46,10 @@ Features
         - [x] on_turn_up()
         - [x] on_turn_down()
 
-### Reactors
+### Observers
 
-- [ ] GUI
-    - [ ] Display state/debug
+- [x] GUI
+    - [x] Display state/debug
 
 - [ ] send keyboard strokes and/or modifiers
     - [ ] SendKeys?

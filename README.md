@@ -14,60 +14,80 @@ Features
 --------
 
 - [ ] Platforms support
-    - [ ] [WIP]Microsoft Windows
+    - [ ] **(WIP)** Microsoft Windows
         - [ ] Run as a [windows service](http://thepythoncorner.com/dev/how-to-create-a-windows-service-in-python/) ?
-        - [ ] Configurator in control panel?
-        - [ ] (optional) Tray icon shortcut to configurator
+        - [ ] Add configurator to control panel?
+        - [ ] **(WIP)** Tray icon shortcut to configurator
     - [ ] Mac OS X
     - [ ] GNU/Linux
     - [ ] Android?
     - [ ] iOS/iPadOS?
 
-- [x] Find and open device (USB HID via hidapi)
+- [x] Find and open device
+    - [x] USB HID via hidapi
 
 - [x] Decode raw values
     - [x] State management
     - [x] Observer pattern event hooks
 
-- [ ] parse [official driver configurations](https://contourdesign.fr/support/windows-shuttle-settings/)
-
-- [ ] [WIP] Configurator (GUI)
+- [ ] **(WIP)** Configurator (GUI)
     - [x] Qt
-    - [x] Feedback
-    - [ ] Load existing configurations
-    - [ ] Generate configurations
+    - [X] Main window
+    - [x] Icon
+    - [x] Title
+    - [x] System tray icon
+    - [x] Display state graphically
+    - [x] Status
+        - [x] Connection
+        - [x] Events
+    - [ ] Menu?
+    - [ ] About window
+    - [ ] Debug log
+    - [ ] Configuration UI
+        - [ ] Generate configurations
+        - [ ] Load existing configurations
+        - [ ] Write/Store configurations
+    - [ ] Separate
 
-- [ ] Events generator
+- [ ] Events generator (See Observers below)
+
+- [ ] Configurations format support
+    - [ ] Custom?
+    - [ ] [Official driver configurations](https://contourdesign.fr/support/windows-shuttle-settings/)
+        - [ ] Parse
+        - [ ] Generate
 
 ### Events
 
 - [x] State change events
-    - [x] Buttons [1-5]:
-        - [x] on_press()
-        - [x] on_release()
+    - [x] Buttons 1 to 5:
+        - [x] press
+        - [x] release
     - [x] Wheel:
-        - [x] on_position() [-7, 7]
-        - [x] on_turn_up()
-        - [x] on_turn_down()
+        - [x] centered (position 0)
+        - [x] position change (-7 to 7)
+        - [x] direction: up
+        - [x] direction: down
     - [x] Dial:
-        - [x] on_turn_up()
-        - [x] on_turn_down()
+        - [x] direction: up
+        - [x] direction: down
 
 ### Observers
 
 - [x] GUI
-    - [x] Display state/debug
+    - [x] State
+    - [x] Event names
 
-- [ ] [WIP] Plugins system
+- [ ] **(WIP)** Plugins system
 
-- [ ] [WIP] generate keyboard strokes and/or modifiers
+- [ ] **(WIP)** generate keyboard strokes and/or modifiers
     - [x] ~~SendKeys?~~
     - [x] ~~pywin32 shell.SendKeys?~~
-    - [ ] [WIP] pynput! (Also support mouse)
+    - [ ] **(WIP)** pynput! (Also support mouse)
     - [ ] Frequency (Once/Hold…)
 
-- [ ] [WIP] generate mouse events
-    - [ ] [WIP] pynput! (Also support mouse)
+- [ ] **(WIP)** generate mouse events
+    - [ ] **(WIP)** pynput! (Also support mouse)
     - [ ] click
     - [ ] wheel
 
@@ -76,7 +96,7 @@ Features
     - [ ] MCU compatible
     - [ ] HUI compatible
 
-- [ ] send OSC
+- [ ] generate OSC
 
 - [ ] call APIs?
 
@@ -114,7 +134,7 @@ Using [pyUSB](https://pypi.org/project/pyusb/)
 
 Can’t access device without a kernel driver.
 
-Kernel driver has been generated using [libusb-win32](https://sourceforge.net/projects/libusb-win32/) but you need to 
+Kernel driver has been generated using [libusb-win32](https://sourceforge.net/projects/libusb-win32/), but you need to
 disable driver signature enforcement before installing.
 
 The easier way is to use [Zadig](https://zadig.akeo.ie/).

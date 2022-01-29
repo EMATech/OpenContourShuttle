@@ -1,9 +1,14 @@
 Contour ShuttleXpress
 =====================
 
-An attempt at writing a userland driver in Python.
+A multiplatform userland driver, configuration editor event management & generator for Contour ShuttleXpress.
 
 ![GUI prototype](GUIprototype.png)
+
+Status
+------
+
+Proof of concept
 
 Features
 --------
@@ -26,11 +31,13 @@ Features
 
 - [ ] parse [official driver configurations](https://contourdesign.fr/support/windows-shuttle-settings/)
 
-- [WIP] Configurator (GUI)
+- [ ] [WIP] Configurator (GUI)
     - [x] Qt
     - [x] Feedback
     - [ ] Load existing configurations
     - [ ] Generate configurations
+
+- [ ] Events generator
 
 ### Events
 
@@ -51,19 +58,25 @@ Features
 - [x] GUI
     - [x] Display state/debug
 
-- [ ] Plugins based?
+- [ ] [WIP] Plugins system
 
-- [ ] send keyboard strokes and/or modifiers
-    - [ ] SendKeys?
-    - [ ] pywin32 shell.SendKeys?
-        - [ ] Frequency (Once/Hold…)
-    - [ ] pynput! (Also support mouse)
+- [ ] [WIP] generate keyboard strokes and/or modifiers
+    - [x] ~~SendKeys?~~
+    - [x] ~~pywin32 shell.SendKeys?~~
+    - [ ] [WIP] pynput! (Also support mouse)
+    - [ ] Frequency (Once/Hold…)
 
-- [ ] send mouse events
+- [ ] [WIP] generate mouse events
+    - [ ] [WIP] pynput! (Also support mouse)
     - [ ] click
     - [ ] wheel
 
-- [ ] send MIDI!
+- [ ] generate MIDI
+    - [ ] Arbitrary (User defined)
+    - [ ] MCU compatible
+    - [ ] HUI compatible
+
+- [ ] send OSC
 
 - [ ] call APIs?
 
@@ -78,16 +91,16 @@ Features
         - [ ] GNU/Linux
     - [ ] switch profile using buttons
 
-- [ ] macros
+- [ ] macros (generate multiple events)
 
-- [ ] comments
+- [ ] configuration comments
 
-Similar projects
-----------------
+Similar and/or related projects
+---------------------------
 
 ### [shuttlemidi](https://github.com/dg1psi/shuttlemidi)
 
-Sends MIDI from the Shuttle Contour to SDR Console (Go, hidapi, loopmidi Apache-2.0)
+Sends MIDI from the Shuttle Contour to SDR Console (Go, hidapi, loopmidi, Apache-2.0)
 
 
 Development log
@@ -132,3 +145,30 @@ Hope it’s the same on other platforms.
 #### PySide6 (QT6)
 
 Prototype UI done
+
+Legal notice
+------------
+
+### License
+
+Copyright 2021-2022 Raphaël Doursenaud
+
+This software is released under the terms of the GNU General Public License, version 3.0 or later (GPL-3.0-or-later).
+
+See [LICENSE](LICENSE).
+
+### Dependencies & License Acknowledgment
+
+- libusb [hidapi](https://github.com/libusb/hidapi)  
+  Copyright Alan Ott, Signal 11 Software.  
+  Used under the terms of the GNU General Public License, version 3.0 (GPL-3.0).
+- via Trezor [cython-hidapi](https://github.com/trezor/cython-hidapi)  
+  Copyright Pavol Rusnak, SatoshiLabs. Used under the terms of the GNU General Public License, version 3.0 (GPL-3.0).
+- Qt [PySide6](https://www.pyside.org)  
+  Used under the terms of the GNU Lesser General Public License v3.0 (LGPL-3.0).
+
+### Trademarks
+
+Contour, ShuttleXpress and ShuttlePro are trademarks of Contour Innovations LLC in the United States of America.
+
+These are not registered or active trademarks in the European Union and France where I reside.

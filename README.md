@@ -1,8 +1,9 @@
-Contour ConcreteShuttleXpress
+Contour ShuttleXpress
 =====================
 
 An attempt at writing a userland driver in Python.
 
+![GUI prototype](GUIprototype.png)
 
 Features
 --------
@@ -132,5 +133,3 @@ Hope it’s the same on other platforms.
 #### PySide6 (QT6)
 
 Prototype UI done
-
-![GUI prototype](GUIprototype.png)

@@ -1,7 +1,7 @@
 Contour ShuttleXpress
 =====================
 
-A multiplatform userland driver, configuration editor event management & generator for Contour ShuttleXpress.
+A multiplatform userland driver, configuration editor, event manager & generator for Contour ShuttleXpress.
 
 ![GUI prototype](GUIprototype.png)
 

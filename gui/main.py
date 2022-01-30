@@ -198,11 +198,11 @@ These are not registered or active trademarks in the European Union and France w
         elif type(rotary_event.element) is Dial:
             self.handle_dial(rotary_event.element, rotary_event.direction, rotary_event.value)
 
-    def handle_wheel(self, wheel: Wheel, direction: bool, value: int) -> None:
+    def handle_wheel(self, wheel: Wheel, direction: bool, change: int) -> None:
         self.WHEEL_MAP[wheel.pos].setChecked(True)
 
-    def handle_dial(self, dial: Dial, direction: bool, value: int) -> None:
-        self.dial.setValue(dial.pos % 10)
+    def handle_dial(self, dial: Dial, direction: bool, change: int) -> None:
+        self.dial.setValue(self.dial.value() + change)
 
     def handle_button(self, button: Button) -> None:
         self.BUTTON_MAP[button.num].setChecked(button.push)

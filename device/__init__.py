@@ -187,6 +187,8 @@ Dial
 Counts positive when rotated clockwise and negative the other way around on xx [0-255].
 The value wraps around.
 
+There’s a strange quirk in the hardware that makes it ignore the first tick when changing directions.
+
 Buttons
 ~~~~~~~
 
@@ -237,8 +239,8 @@ class DeviceNotFoundError(IOError):
 
 
 class Wheel:
-    _pos: Union[None, int]
-    centered: bool = True
+    _pos: int
+    centered: bool
 
     @property
     def pos(self) -> int:
@@ -260,7 +262,9 @@ class Wheel:
         self._pos = pos
 
     def __init__(self) -> None:
-        self._pos = None
+        # Assumes initial state is centered
+        self._pos = 0
+        self.centered = True
 
 
 class Dial:
@@ -324,21 +328,23 @@ class RotaryEvent(Event):
     def direction(self) -> bool:
         return self._direction
 
+    @direction.setter
+    def direction(self, direction: bool) -> None:
+        self.name = f"{type(self.element).__name__} up" if direction \
+            else f"{type(self.element).__name__} down"
+
     @property
     def value(self) -> int:
         return self._delta
 
     @value.setter
     def value(self, val: int) -> None:
-        direction: bool = True if val >= 0 else False
-        self.name = f"{type(self.element).__name__} up" if direction \
-            else f"{type(self.element).__name__} down"
         self._delta = val
-        self._direction = direction
 
-    def __init__(self, element: Union[Wheel, Dial], value: int) -> None:
+    def __init__(self, element: Union[Wheel, Dial], value: int, direction: bool) -> None:
         super().__init__(element)
         self.value = value
+        self.direction = direction
 
 
 class ButtonEvent(Event):
@@ -405,6 +411,7 @@ class ShuttleXpress(ShuttleXpressSubject):
     # State
     _wheel: Wheel
     _dial: Dial
+    _prev_dial_dir: Union[None, bool] = None  # Needed to implement hardware quirk
     # TODO: Replace by list?
     _button1: Button
     _button2: Button
@@ -424,13 +431,13 @@ class ShuttleXpress(ShuttleXpressSubject):
     def wheel(self, new_pos: int) -> None:
         delta: Union[None, int] = None
         logger.debug(f"{self.__class__.__name__}: Wheel position: {new_pos}")
-        if self._wheel.pos is not None:
-            if self._wheel.pos != new_pos:
-                delta = new_pos - self._wheel.pos
-                logger.debug(f"{self.__class__.__name__}: Wheel position changed by {delta}")
+        if self._wheel.pos != new_pos:
+            delta = new_pos - self._wheel.pos
+            logger.debug(f"{self.__class__.__name__}: Wheel position changed by {delta}")
         self._wheel.pos = new_pos
         if delta:
-            self.events.append(RotaryEvent(self.wheel, delta))
+            direction: bool = True if delta == 1 else False
+            self.events.append(RotaryEvent(self.wheel, delta, direction))
 
     @property
     def dial(self) -> Dial:
@@ -451,7 +458,12 @@ class ShuttleXpress(ShuttleXpressSubject):
                 logger.debug(f"{self.__class__.__name__}: Dial position changed by {delta}")
         self._dial.pos = new_pos
         if delta:
-            self.events.append(RotaryEvent(self.dial, delta))
+            direction: bool = True if delta == 1 else False
+            dir_changed: bool = False if self._prev_dial_dir == direction else True
+            self._prev_dial_dir = direction
+            if dir_changed:
+                delta = delta * 2  # Hardware quirk: misses one tick when changing directions
+            self.events.append(RotaryEvent(self.dial, delta, direction))
 
     @property
     def button1(self) -> Button:

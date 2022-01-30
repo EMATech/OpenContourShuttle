@@ -8,18 +8,14 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
-    QCursor, QFont, QFontDatabase, QGradient,
-    QIcon, QImage, QKeySequence, QLinearGradient,
-    QPainter, QPalette, QPixmap, QRadialGradient,
-    QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QDial, QDockWidget,
-    QFrame, QMainWindow, QPushButton, QRadioButton,
-    QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
-    QWidget)
+from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
+                            QSize, Qt)
+from PySide6.QtGui import (QAction, QCursor, QFont)
+from PySide6.QtWidgets import (QCheckBox, QDial, QDockWidget,
+                               QFrame, QMainWindow, QPushButton, QRadioButton,
+                               QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
+                               QWidget)
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -52,16 +48,18 @@ class Ui_MainWindow(object):
         self.main_widget.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.main_widget.setAutoFillBackground(False)
         self.main_widget.setStyleSheet(u"QWidget#main_widget {background: url(images/ShuttleXpress_Black.png);\n"
-"     background-repeat:no-repeat;}\n"
-"    ")
+                                       "     background-repeat:no-repeat;}\n"
+                                       "    ")
         self.dial = QDial(self.main_widget)
         self.dial.setObjectName(u"dial")
         self.dial.setGeometry(QRect(197, 178, 216, 216))
         self.dial.setAutoFillBackground(False)
         self.dial.setStyleSheet(u"background-color: black;")
-        self.dial.setMaximum(9)
-        self.dial.setPageStep(9)
-        self.dial.setSliderPosition(2)
+        self.dial.setMinimum(0)
+        self.dial.setMaximum(10)
+        self.dial.setPageStep(1)
+        self.dial.setValue(0)
+        self.dial.setSliderPosition(0)
         self.dial.setInvertedAppearance(False)
         self.dial.setInvertedControls(False)
         self.dial.setWrapping(True)
@@ -116,12 +114,10 @@ class Ui_MainWindow(object):
         self.button_1 = QCheckBox(self.main_widget)
         self.button_1.setObjectName(u"button_1")
         self.button_1.setGeometry(QRect(80, 266, 24, 24))
-        font1 = QFont()
-        font1.setPointSize(12)
-        self.button_1.setFont(font1)
+        self.button_1.setFont(font)
         self.button_1.setStyleSheet(u"background: #000000ff;\n"
-"      color: white;\n"
-"     ")
+                                    "      color: white;\n"
+                                    "     ")
         self.wheel_pos4 = QRadioButton(self.main_widget)
         self.wheel_pos4.setObjectName(u"wheel_pos4")
         self.wheel_pos4.setGeometry(QRect(420, 253, 24, 24))
@@ -160,14 +156,14 @@ class Ui_MainWindow(object):
         self.button_2 = QCheckBox(self.main_widget)
         self.button_2.setObjectName(u"button_2")
         self.button_2.setGeometry(QRect(156, 122, 24, 24))
-        self.button_2.setFont(font1)
+        self.button_2.setFont(font)
         self.button_2.setStyleSheet(u"background: #000000ff;\n"
-"      color: white;\n"
-"     ")
+                                    "      color: white;\n"
+                                    "     ")
         self.button_4 = QCheckBox(self.main_widget)
         self.button_4.setObjectName(u"button_4")
         self.button_4.setGeometry(QRect(430, 122, 24, 24))
-        self.button_4.setFont(font1)
+        self.button_4.setFont(font)
         self.button_4.setLayoutDirection(Qt.RightToLeft)
         self.button_4.setAutoFillBackground(False)
         self.button_4.setStyleSheet(u"background: #000000ff;\n"
@@ -176,7 +172,7 @@ class Ui_MainWindow(object):
         self.button_5 = QCheckBox(self.main_widget)
         self.button_5.setObjectName(u"button_5")
         self.button_5.setGeometry(QRect(498, 266, 24, 24))
-        self.button_5.setFont(font1)
+        self.button_5.setFont(font)
         self.button_5.setLayoutDirection(Qt.RightToLeft)
         self.button_5.setStyleSheet(u"background: #000000ff;\n"
 "      color: white;\n"
@@ -184,18 +180,19 @@ class Ui_MainWindow(object):
         self.button_3 = QCheckBox(self.main_widget)
         self.button_3.setObjectName(u"button_3")
         self.button_3.setGeometry(QRect(290, 72, 24, 24))
-        self.button_3.setFont(font1)
+        self.button_3.setFont(font)
         self.button_3.setStyleSheet(u"background: #000000ff;\n"
-"      color: white;\n"
-"     ")
+                                    "      color: white;\n"
+                                    "     ")
         self.button_3.setTristate(True)
         self.about_button = QPushButton(self.main_widget)
         self.about_button.setObjectName(u"about_button")
         self.about_button.setGeometry(QRect(576, 0, 24, 24))
-        font2 = QFont()
-        font2.setPointSize(9)
-        font2.setBold(True)
-        self.about_button.setFont(font2)
+        font1 = QFont()
+        font1.setPointSize(9)
+        font1.setBold(True)
+        font1.setKerning(True)
+        self.about_button.setFont(font1)
         self.about_button.setCursor(QCursor(Qt.WhatsThisCursor))
         self.about_button.setCheckable(False)
         self.about_button.setFlat(True)

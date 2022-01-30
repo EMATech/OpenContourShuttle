@@ -40,14 +40,19 @@ Features
     - [x] Status
         - [x] Connection
         - [x] Events
-    - [ ] Menu?
-    - [ ] About window
+    - [x] ~~Menu?~~
+    - [x] About window
     - [ ] Debug log
     - [ ] Configuration UI
         - [ ] Generate configurations
         - [ ] Load existing configurations
         - [ ] Write/Store configurations
+    - [ ] Emulation when no hardware is connected
     - [ ] Separate
+    - [ ] Custom graphical widgets?
+        - [ ] Wheel (Rotating image with color tick)
+        - [ ] Dial (Rotating image)
+        - [ ] Button (Depict depressed state)
 
 - [ ] Events generator (See Observers below)
 

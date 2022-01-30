@@ -91,14 +91,20 @@
     <property name="styleSheet">
      <string notr="true">background-color: black;</string>
     </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
     <property name="maximum">
-     <number>9</number>
+     <number>10</number>
     </property>
     <property name="pageStep">
-     <number>9</number>
+     <number>1</number>
+    </property>
+    <property name="value">
+     <number>0</number>
     </property>
     <property name="sliderPosition">
-     <number>2</number>
+     <number>0</number>
     </property>
     <property name="invertedAppearance">
      <bool>false</bool>
@@ -282,6 +288,7 @@
     <property name="font">
      <font>
       <pointsize>12</pointsize>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="styleSheet">
@@ -414,6 +421,7 @@
     <property name="font">
      <font>
       <pointsize>12</pointsize>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="styleSheet">
@@ -437,6 +445,7 @@
     <property name="font">
      <font>
       <pointsize>12</pointsize>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="layoutDirection">
@@ -466,6 +475,7 @@
     <property name="font">
      <font>
       <pointsize>12</pointsize>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="layoutDirection">
@@ -492,6 +502,7 @@
     <property name="font">
      <font>
       <pointsize>12</pointsize>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="styleSheet">
@@ -519,6 +530,7 @@
      <font>
       <pointsize>9</pointsize>
       <bold>true</bold>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="cursor">

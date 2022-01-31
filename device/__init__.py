@@ -240,6 +240,7 @@ class DeviceNotFoundError(IOError):
 
 class Wheel:
     _pos: int
+
     centered: bool
 
     @property
@@ -288,6 +289,7 @@ class Dial:
 
 class Button:
     _num: int
+
     push: bool = False
 
     @property
@@ -305,8 +307,8 @@ class Button:
 
 
 class Event(ABC):
-    name: str  # Human-readable event name
     element: Union[hid.device, Wheel, Dial, Button]
+    name: str  # Human-readable event name
 
     def __init__(self, element: Union[hid.device, Wheel, Dial, Button]) -> None:
         self.element = element
@@ -332,6 +334,7 @@ class RotaryEvent(Event):
     def direction(self, direction: bool) -> None:
         self.name = f"{type(self.element).__name__} up" if direction \
             else f"{type(self.element).__name__} down"
+        self._direction = direction
 
     @property
     def value(self) -> int:
@@ -360,7 +363,6 @@ class ShuttleXpressSubject(ABC):
     """
     The Subject interface declares a set of methods for managing subscribers.
     """
-
     events: List[Event]
 
     @abstractmethod
@@ -421,6 +423,7 @@ class ShuttleXpress(ShuttleXpressSubject):
 
     # Event observation
     _observers: List[ShuttleXpressObserver] = []
+
     events: List[Event] = []
 
     @property
@@ -526,13 +529,12 @@ class ShuttleXpress(ShuttleXpressSubject):
         devices_desc: List[dict] = hid.enumerate()
         shuttle_hid_devices_desc: List[dict] = []
         for dev_desc in devices_desc:
-            logger.debug(f"{ShuttleXpress.__class__.__name__}: Found HID device: %s", dev_desc)
-            if dev_desc['vendor_id'] == ShuttleXpress.USB_VID and dev_desc[
-                'product_id'] == ShuttleXpress.USB_PID_XPRESS:
+            logger.debug(f"{ShuttleXpress.__class__.__name__}: Found HID device: {dev_desc}")
+            if dev_desc['vendor_id'] == ShuttleXpress.USB_VID and \
+                    dev_desc['product_id'] == ShuttleXpress.USB_PID_XPRESS:
                 shuttle_hid_devices_desc.append(dev_desc)
-        logger.debug(f"{ShuttleXpress.__class__.__name__}: Found %data Contour ShuttleXpress HID: %s",
-                     len(shuttle_hid_devices_desc),
-                     shuttle_hid_devices_desc)
+        logger.debug(f"{ShuttleXpress.__class__.__name__}: Found {len(shuttle_hid_devices_desc)},"
+                     f"Contour ShuttleXpress HID: {shuttle_hid_devices_desc}")
         return shuttle_hid_devices_desc
 
     def __init__(self) -> None:
@@ -564,7 +566,7 @@ class ShuttleXpress(ShuttleXpressSubject):
         try:
             self.hid_device.open_path(self.usb_descriptor['path'])
 
-            logger.info("%s found!" % self.hid_device.get_product_string())
+            logger.info(f"{self.hid_device.get_product_string()} found!")
 
         except IOError:
             logger.error("Connection not found!")
@@ -578,7 +580,7 @@ class ShuttleXpress(ShuttleXpressSubject):
         data: bytearray = self.hid_device.read(self.HID_DATA_SIZE)
 
         if data:
-            logger.debug(f"{self.__class__.__name__}: Data from HID: %r", data)
+            logger.debug(f"{self.__class__.__name__}: Data from HID: {data!r}")
             self.wheel = int.from_bytes(data[0].to_bytes(1, 'big'), 'big', signed=True)
             self.dial = data[1]
             self.button1 = bool(data[3] & (1 << 4))
@@ -591,7 +593,6 @@ class ShuttleXpress(ShuttleXpressSubject):
     ##
     # Observers management
     ##
-
     def attach(self, observer: ShuttleXpressObserver) -> None:
         logger.debug(f"{self.__class__.__name__}: Attached an observer.")
         self._observers.append(observer)
@@ -607,7 +608,6 @@ class ShuttleXpress(ShuttleXpressSubject):
 
 
 class ShuttleXpressObserverSample(ShuttleXpressObserver):
-
     def update(self, subject: ShuttleXpressSubject) -> None:
         logger.debug(f"{self.__class__.__name__}: State changed!")
         for event in subject.events:

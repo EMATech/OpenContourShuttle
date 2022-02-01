@@ -8,14 +8,18 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
-                            QSize, Qt)
-from PySide6.QtGui import (QAction, QCursor, QFont)
-from PySide6.QtWidgets import (QCheckBox, QDial, QDockWidget,
-                               QFrame, QMainWindow, QPushButton, QRadioButton,
-                               QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
-                               QWidget)
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QDial, QDockWidget,
+    QFrame, QMainWindow, QPushButton, QRadioButton,
+    QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -48,8 +52,8 @@ class Ui_MainWindow(object):
         self.main_widget.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.main_widget.setAutoFillBackground(False)
         self.main_widget.setStyleSheet(u"QWidget#main_widget {background: url(images/ShuttleXpress_Black.png);\n"
-                                       "     background-repeat:no-repeat;}\n"
-                                       "    ")
+"     background-repeat:no-repeat;}\n"
+"    ")
         self.dial = QDial(self.main_widget)
         self.dial.setObjectName(u"dial")
         self.dial.setGeometry(QRect(197, 178, 216, 216))
@@ -116,8 +120,8 @@ class Ui_MainWindow(object):
         self.button_1.setGeometry(QRect(80, 266, 24, 24))
         self.button_1.setFont(font)
         self.button_1.setStyleSheet(u"background: #000000ff;\n"
-                                    "      color: white;\n"
-                                    "     ")
+"      color: white;\n"
+"     ")
         self.wheel_pos4 = QRadioButton(self.main_widget)
         self.wheel_pos4.setObjectName(u"wheel_pos4")
         self.wheel_pos4.setGeometry(QRect(420, 253, 24, 24))
@@ -158,8 +162,8 @@ class Ui_MainWindow(object):
         self.button_2.setGeometry(QRect(156, 122, 24, 24))
         self.button_2.setFont(font)
         self.button_2.setStyleSheet(u"background: #000000ff;\n"
-                                    "      color: white;\n"
-                                    "     ")
+"      color: white;\n"
+"     ")
         self.button_4 = QCheckBox(self.main_widget)
         self.button_4.setObjectName(u"button_4")
         self.button_4.setGeometry(QRect(430, 122, 24, 24))
@@ -182,8 +186,8 @@ class Ui_MainWindow(object):
         self.button_3.setGeometry(QRect(290, 72, 24, 24))
         self.button_3.setFont(font)
         self.button_3.setStyleSheet(u"background: #000000ff;\n"
-                                    "      color: white;\n"
-                                    "     ")
+"      color: white;\n"
+"     ")
         self.button_3.setTristate(True)
         self.about_button = QPushButton(self.main_widget)
         self.about_button.setObjectName(u"about_button")
@@ -196,6 +200,22 @@ class Ui_MainWindow(object):
         self.about_button.setCursor(QCursor(Qt.WhatsThisCursor))
         self.about_button.setCheckable(False)
         self.about_button.setFlat(True)
+        self.usb_status = QPushButton(self.main_widget)
+        self.usb_status.setObjectName(u"usb_status")
+        self.usb_status.setEnabled(False)
+        self.usb_status.setGeometry(QRect(288, 10, 24, 24))
+        self.usb_status.setFont(font1)
+        self.usb_status.setCursor(QCursor(Qt.ArrowCursor))
+        self.usb_status.setAutoFillBackground(False)
+        self.usb_status.setText(u"")
+        icon = QIcon()
+        icon.addFile(u"images/usb_black_24.png", QSize(), QIcon.Disabled, QIcon.Off)
+        icon.addFile(u"images/usb_white_24.png", QSize(), QIcon.Disabled, QIcon.On)
+        self.usb_status.setIcon(icon)
+        self.usb_status.setIconSize(QSize(24, 24))
+        self.usb_status.setCheckable(True)
+        self.usb_status.setChecked(False)
+        self.usb_status.setFlat(True)
         MainWindow.setCentralWidget(self.main_widget)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -257,6 +277,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
+        self.usb_status.setDefault(False)
+
+
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
@@ -284,5 +307,8 @@ class Ui_MainWindow(object):
         self.button_5.setText("")
         self.button_3.setText("")
         self.about_button.setText(QCoreApplication.translate("MainWindow", u"?", None))
+#if QT_CONFIG(whatsthis)
+        self.usb_status.setWhatsThis(QCoreApplication.translate("MainWindow", u"USB Status", None))
+#endif // QT_CONFIG(whatsthis)
     # retranslateUi
 

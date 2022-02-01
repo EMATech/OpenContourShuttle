@@ -184,13 +184,20 @@ See [LICENSE](LICENSE).
 
 ### Dependencies & License Acknowledgment
 
+- [Python](https://python.org) v3.10  
+  Used under the terms of the PSF License Agreement.
 - libusb [hidapi](https://github.com/libusb/hidapi)  
   Copyright Alan Ott, Signal 11 Software.  
   Used under the terms of the GNU General Public License, version 3.0 (GPL-3.0).
 - via Trezor [cython-hidapi](https://github.com/trezor/cython-hidapi)  
-  Copyright Pavol Rusnak, SatoshiLabs. Used under the terms of the GNU General Public License, version 3.0 (GPL-3.0).
+  Copyright Pavol Rusnak, SatoshiLabs.  
+  Used under the terms of the GNU General Public License, version 3.0 (GPL-3.0).
 - Qt [PySide6](https://www.pyside.org)  
   Used under the terms of the GNU Lesser General Public License v3.0 (LGPL-3.0).
+- UN-GCPDS [Qt-Material](https://github.com/UN-GCPDS/qt-material)  
+  Used under the BSD-2-Clause License.
+- [Material Design Icons](https://materialdesignicons.com)  
+  Used under the Pictogrammers Free License.
 
 ### Trademarks
 

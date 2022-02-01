@@ -1,14 +1,41 @@
 # This Python file uses the following encoding: utf-8
+#
+# SPDX-FileCopyrightText: 2021-2022 Raphaël Doursenaud <rdoursenaud@free.fr>
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+"""
+`Contour ShuttleXpress GUI`
+================================================================================
+
+A multiplatform configuration editor, event management & generator GUI for Contour ShuttleXpress.
+
+Contour, ShuttleXpress and ShuttlePro are trademarks of
+Contour Innovations LLC in the United States.
+
+These are not active trademarks in the European Union and France where I reside.
+
+* Author(s): Raphaël Doursenaud <rdoursenaud@free.fr>
+
+Implementation Notes
+--------------------
+
+"""
+
+__version__ = "0.0.0-auto.0"
+__repo__ = "https://github.com/EMATech/ContourShuttleXpress.git"
+
+from platform import python_version
+from typing import Dict, List, Optional
 
 import PySide6
-import hid
 from PySide6.QtCore import QThread, Signal, QObject
 from PySide6.QtGui import QIcon, QAction, Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu
 from qt_material import QtStyleTools
 
 from device import ShuttleXpress, ShuttleXpressObserver, ShuttleXpressSubject, Event, ButtonEvent, Button, \
-    RotaryEvent, Wheel, Dial, ConnectionEvent
+    RotaryEvent, Wheel, Dial, ConnectionEvent, DisconnectionEvent
 from mainwindow_ui import Ui_MainWindow
 
 
@@ -26,26 +53,32 @@ class GUIobserver(ShuttleXpressObserver):
 
 
 class ShuttleWorker(QThread):
-    active = True
-    finished = False
+    active: bool = True
+    finished: bool = False
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QObject] = None) -> None:
         super().__init__(parent)
         self.shuttle = ShuttleXpress()
         self.shuttle.attach(GUIobserver())
-        self.shuttle.connect_first()
+        self.shuttle.connect()
 
-    def run(self):
+    def run(self) -> None:
         while self.active:
             self.shuttle.poll()
         self.finished = True
 
-    def stop(self):
+    def stop(self) -> None:
+        del self.shuttle
         self.active = False
 
 
 class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
-    def __init__(self):
+    ICON: QIcon
+    TITLE: str
+    WHEEL_MAP: Dict[int, QObject]
+    BUTTON_MAP: List[QObject]
+
+    def __init__(self) -> None:
         super().__init__()
 
         # self.load_ui()  # Broken
@@ -107,18 +140,22 @@ class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
             self.systray.setVisible(True)
             self.systray.activated.connect(self.handle_systay_activation)
 
-        shuttle_signals.data.connect(self.change)
+        shuttle_signals.data.connect(self.handle_events)
         self.shuttle_worker = ShuttleWorker()
         self.shuttle_worker.start()
         self.shuttle_worker.finished.connect(self.shuttle_worker.quit)
 
-        self.about_text.setMarkdown("""
+        self.about_text.setMarkdown(f"""
 Contour ShuttleXpress
 =====================
 
 A multiplatform userland driver, configuration editor, event manager & generator for Contour ShuttleXpress.
 
-Version: `pre-alpha`
+Version: `{__version__}`
+
+Source: `{__repo__}`
+
+Running on Python v{python_version()}
 
 Legal notice
 ------------
@@ -130,6 +167,10 @@ Copyright 2021-2022 Raphaël Doursenaud
 This software is released under the terms of the GNU General Public License, version 3.0 or later (GPL-3.0-or-later).
 
 ### Dependencies & License Acknowledgment
+
+**Python**
+
+Used under the terms of the PSF License Agreement.
 
 **libusb hidapi**
 
@@ -145,9 +186,13 @@ Used under the terms of the GNU General Public License, version 3.0 (GPL-3.0).
 
 Used under the terms of the GNU Lesser General Public License v3.0 (LGPL-3.0).
 
-**UN-GCPDS qt-material**
+**UN-GCPDS Qt-Material**
 
 Used under the BSD-2-Clause License.
+
+**Material Design Icons**
+
+Used under the Pictogrammers Free License.
 
 ### Trademarks
 
@@ -166,31 +211,30 @@ These are not registered or active trademarks in the European Union and France w
     #    loader.load(ui_file, self)
     #    ui_file.close()
 
-    def handle_systay_activation(self, reason):
+    def handle_systay_activation(self, reason: QSystemTrayIcon.ActivationReason) -> None:
         if reason is QSystemTrayIcon.ActivationReason.Trigger:
             self.toggle_main_window_visibility()
 
-    def toggle_main_window_visibility(self):
+    def toggle_main_window_visibility(self) -> None:
         self.hide() if self.isVisible() else self.show()
 
-    def update_status_bar(self, message):
+    def update_status_bar(self, message: str) -> None:
         self.statusbar.showMessage(message)
 
-    def open_about(self):
+    def open_about(self) -> None:
         self.about_widget.setVisible(True)
 
-    def change(self, event: Event):
+    def handle_events(self, event: Event) -> None:
+        self.update_status_bar(event.desc)
         if isinstance(event, ConnectionEvent):
-            self.handle_connection(event.element)
-        else:
-            self.update_status_bar(event.name)
-            if isinstance(event, RotaryEvent):
-                self.handle_rotary_event(event)
-            if isinstance(event, ButtonEvent):
-                self.handle_button(event.element)
-
-    def handle_connection(self, device: hid.device):
-        self.update_status_bar(f"Connected to {device.get_manufacturer_string()} {device.get_product_string()}")
+            self.usb_status.setChecked(True)
+        elif isinstance(event, DisconnectionEvent):
+            self.usb_status.setChecked(False)
+        #       self.shuttle_worker.stop()
+        elif isinstance(event, RotaryEvent):
+            self.handle_rotary_event(event)
+        elif isinstance(event, ButtonEvent):
+            self.handle_button(event.element)
 
     def handle_rotary_event(self, rotary_event: RotaryEvent) -> None:
         if type(rotary_event.element) is Wheel:
@@ -211,7 +255,7 @@ These are not registered or active trademarks in the European Union and France w
         self.shuttle_worker.stop()
 
     @staticmethod
-    def set_ms_windows_icon():
+    def set_ms_windows_icon() -> None:
         """
         Force Microsoft Windows to properly display the application icon in the task bar
 

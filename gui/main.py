@@ -25,11 +25,12 @@ Implementation Notes
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/EMATech/ContourShuttleXpress.git"
 
+import logging
 from platform import python_version
 from typing import Dict, List, Optional
 
 import PySide6
-from PySide6.QtCore import QThread, Signal, QObject
+from PySide6.QtCore import QThread, Signal, QObject, Slot
 from PySide6.QtGui import QIcon, QAction, Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu
 from qt_material import QtStyleTools
@@ -39,6 +40,30 @@ from device import ShuttleXpress, ShuttleXpressObserver, ShuttleXpressSubject, E
 from mainwindow_ui import Ui_MainWindow
 
 
+##
+# Logging system
+##
+
+
+class LogSignal(QObject):
+    signal = Signal(str, logging.LogRecord)
+
+
+class LogHandler(logging.Handler):
+    def __init__(self, slotfunc, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.signaller = LogSignal()
+        self.signaller.signal.connect(slotfunc)
+
+    def emit(self, record):
+        s = self.format(record)
+        self.signaller.signal.emit(s, record)
+
+
+##
+# Device communication
+##
+
 class ShuttleSignals(QObject):
     data = Signal(object)
 
@@ -46,7 +71,7 @@ class ShuttleSignals(QObject):
 shuttle_signals = ShuttleSignals()
 
 
-class GUIobserver(ShuttleXpressObserver):
+class GuiObserver(ShuttleXpressObserver):
     def update(self, subject: ShuttleXpressSubject) -> None:
         for event in subject.events:
             shuttle_signals.data.emit(event)
@@ -59,7 +84,7 @@ class ShuttleWorker(QThread):
     def __init__(self, parent: Optional[QObject] = None) -> None:
         super().__init__(parent)
         self.shuttle = ShuttleXpress()
-        self.shuttle.attach(GUIobserver())
+        self.shuttle.attach(GuiObserver())
         self.shuttle.connect()
 
     def run(self) -> None:
@@ -72,11 +97,23 @@ class ShuttleWorker(QThread):
         self.active = False
 
 
+##
+# GUI
+##
+
+
 class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
     ICON: QIcon
     TITLE: str
     WHEEL_MAP: Dict[int, QObject]
     BUTTON_MAP: List[QObject]
+    LOG_COLORS = {
+        logging.DEBUG: 'lightgray',
+        logging.INFO: 'white',
+        logging.WARNING: 'orange',
+        logging.ERROR: 'red',
+        logging.CRITICAL: 'purple',
+    }
 
     def __init__(self) -> None:
         super().__init__()
@@ -84,6 +121,16 @@ class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
         # self.load_ui()  # Broken
         # Use pyside-uic form.ui > gui.py to generate the UI instead
         self.setupUi(self)
+
+        # Hide ASAP to avoid window flash
+        self.about_widget.setHidden(True)
+        self.log_widget.setHidden(True)
+
+        h = LogHandler(self.append_log)
+        fs = '%(levelname)-8s %(message)s'
+        formatter = logging.Formatter(fs)
+        h.setFormatter(formatter)
+        logging.getLogger().addHandler(h)
 
         self.ICON = QIcon('images/icon.png')
         self.TITLE = "Contour ShuttleXpress"
@@ -120,7 +167,6 @@ class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
             'font_family': 'Roboto',
         }
         self.apply_stylesheet(self, theme='dark_red.xml', extra=extra)
-        self.about_widget.setVisible(False)
 
         self.setWindowFlags(self.windowFlags() | Qt.Dialog | Qt.MSWindowsFixedSizeDialogHint)
         self.statusbar.setSizeGripEnabled(False)
@@ -138,7 +184,7 @@ class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
             quit_action.triggered.connect(self.close)
             self.systray.setContextMenu(systray_menu)
             self.systray.setVisible(True)
-            self.systray.activated.connect(self.handle_systay_activation)
+            self.systray.activated.connect(self.handle_systray_activation)
 
         shuttle_signals.data.connect(self.handle_events)
         self.shuttle_worker = ShuttleWorker()
@@ -201,6 +247,8 @@ Contour, ShuttleXpress and ShuttlePro are trademarks of Contour Innovations LLC 
 These are not registered or active trademarks in the European Union and France where I reside.
 """)
         self.about_button.clicked.connect(self.open_about)
+        self.log_button.clicked.connect(self.open_log)
+        self.log_clear_button.clicked.connect(self.clear_log)
 
     # def load_ui(self):
     #    loader = QUiLoader()
@@ -211,7 +259,7 @@ These are not registered or active trademarks in the European Union and France w
     #    loader.load(ui_file, self)
     #    ui_file.close()
 
-    def handle_systay_activation(self, reason: QSystemTrayIcon.ActivationReason) -> None:
+    def handle_systray_activation(self, reason: QSystemTrayIcon.ActivationReason) -> None:
         if reason is QSystemTrayIcon.ActivationReason.Trigger:
             self.toggle_main_window_visibility()
 
@@ -223,6 +271,18 @@ These are not registered or active trademarks in the European Union and France w
 
     def open_about(self) -> None:
         self.about_widget.setVisible(True)
+
+    def open_log(self) -> None:
+        self.log_widget.setVisible(True)
+
+    @Slot(str, logging.LogRecord)
+    def append_log(self, message, record):
+        color = self.LOG_COLORS.get(record.levelno, 'black')
+        s = f'<pre><font color="{color}">{message}</font></pre>'
+        self.log_text.appendHtml(s)
+
+    def clear_log(self) -> None:
+        self.log_text.clear()
 
     def handle_events(self, event: Event) -> None:
         self.update_status_bar(event.desc)
@@ -262,7 +322,7 @@ These are not registered or active trademarks in the European Union and France w
         Workaround from: https://stackoverflow.com/a/27872625
         """
         import ctypes
-        myappid = u'ematech.Contour.shuttleXpress'  # arbitrary string
+        myappid = u'eu.ematech.contour.shuttlexpress'  # arbitrary string
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 

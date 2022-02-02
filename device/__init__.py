@@ -647,7 +647,7 @@ class ShuttleXpressObserverSample(ShuttleXpressObserver):
 
     @classmethod
     def _handle_disconnection(cls, event: DisconnectionEvent) -> None:
-        logger.info(f"{cls.__name__}: Disconnected.")
+        logger.warning(f"{cls.__name__}: Disconnected.")
 
     def _handle_rotary_event(self, event: RotaryEvent) -> None:
         if type(event.element) is Wheel:

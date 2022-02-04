@@ -5,33 +5,44 @@ A multiplatform userland driver, configuration editor, event manager & generator
 
 ![GUI prototype](GUIprototype.png)
 
+
 Status
 ------
 
-Proof of concept
+Proof of concept!
 
-Features
---------
+Welcoming any contributions, especially:
+
+- comments
+- tests: particularly on platforms other than Microsoft Windows or versions earlier than 11
+- providing access to currently unsupported hardware:
+    - ShuttlePRO v2
+
+Features / TODO list
+--------------------
 
 - [ ] Platforms support
     - [ ] **(WIP)** Microsoft Windows
-        - [ ] Run as a [windows service](http://thepythoncorner.com/dev/how-to-create-a-windows-service-in-python/) ?
+        - [x] GUI
+        - [x] Tray icon shortcut to GUI
+        - [ ] Run as a [windows service](http://thepythoncorner.com/dev/how-to-create-a-windows-service-in-python/)?
         - [ ] Add configurator to control panel?
-        - [ ] **(WIP)** Tray icon shortcut to configurator
-    - [ ] Mac OS X
+    - [ ] Apple Mac OS X
     - [ ] GNU/Linux
     - [ ] Android?
-    - [ ] iOS/iPadOS?
+    - [ ] Apple iOS/iPadOS?
 
-- [x] Find and open device
-    - [x] USB HID via hidapi
+- [x] State management engine
+    - [x] Find and open device
+        - [x] USB HID via hidapi
+    - [x] Decode raw values
+        - [x] Observer pattern Events
+    - [ ] **(WIP)** Central broker
+    - [ ] Responders plugin system
 
-- [x] Decode raw values
-    - [x] State management
-    - [x] Observer pattern event hooks
 
-- [ ] **(WIP)** Configurator (GUI)
-    - [x] Qt
+- [ ] **(WIP)** GUI
+    - [x] Qt6 via PySide6
     - [X] Main window
     - [x] Icon
     - [x] Title
@@ -42,57 +53,96 @@ Features
         - [x] Events
     - [x] ~~Menu?~~
     - [x] About window
-    - [ ] Debug log
+    - [x] Log window
+        - [x] Aggregate & display logs
+        - [x] Clear logs
+        - [ ] Write logs to file
     - [ ] Configuration UI
         - [ ] Generate configurations
         - [ ] Load existing configurations
         - [ ] Write/Store configurations
-    - [ ] Emulation when no hardware is connected
-    - [ ] Separate
+    - [ ] Emulation mode when no hardware is connected
+    - [ ] Separate from the engine
     - [ ] Custom graphical widgets?
         - [ ] Wheel (Rotating image with color tick)
         - [ ] Dial (Rotating image)
         - [ ] Button (Depict depressed state)
 
-- [ ] Events generator (See Observers below)
-
-- [ ] Configurations format support
-    - [ ] Custom?
-    - [ ] [Official driver configurations](https://contourdesign.fr/support/windows-shuttle-settings/)
-        - [ ] Parse
-        - [ ] Generate
-
 ### Events
 
-- [x] State change events
-    - [x] Buttons 1 to 5:
-        - [x] press
-        - [x] release
-    - [x] Wheel:
-        - [x] centered (position 0)
-        - [x] position change (-7 to 7)
-        - [x] direction: up
-        - [x] direction: down
-    - [x] Dial:
-        - [x] direction: up
-        - [x] direction: down
+State changes.
+
+- [x] USB:
+    - [x] connected
+    - [x] disconnected
+- [x] Buttons 1 to 5:
+    - [x] press
+    - [x] release
+- [x] Wheel:
+    - [x] centered (position 0)
+    - [x] position change (-7 to 7)
+    - [x] direction: up
+    - [x] direction: down
+- [x] Dial:
+    - [x] direction: up
+    - [x] direction: down
+    - [x] absolute position (0 to 255)
 
 ### Observers
 
+Gets notified upon events
+
 - [x] GUI
-    - [x] State
-    - [x] Event names
+- [ ] **(WIP)** Responder plugins Broker
 
-- [ ] **(WIP)** Plugins system
+### Broker
 
-- [ ] **(WIP)** generate keyboard strokes and/or modifiers
+Maps events observation to responses depending on the current configuration and available responder plugins.
+
+- [ ] Configuration system
+    - [ ] Formats support
+        - [ ] Custom?
+            - [ ] Comments
+        - [ ] [Official driver configurations](https://contourdesign.fr/support/windows-shuttle-settings/)
+            - [ ] Parse
+            - [ ] Generate
+    - [ ] macros (generate multiple events)
+
+- [ ] Responder plugins
+    - [ ] API specification
+    - [ ] Sample implementation
+
+- [ ] runtime profiles support
+    - [ ] configure multiple profiles
+        - [ ] default global
+        - [ ] named
+            - [ ] (optional) linked to one or more specific external states:
+                - [ ] application in focus
+                - [ ] current desktop/monitor?
+                - [ ] session/user?
+                - [ ] external trigger event?
+    - [ ] (auto?) switch profiles dynamically
+        - [ ] using buttons
+        - [ ] detect running application
+            - [ ] Microsoft Windows
+                - [ ] win32ui
+            - [ ] Mac OS X
+            - [ ] GNU/Linux
+
+### Responders
+
+Plugin based system.
+
+Generates external events triggered by the broker.
+
+- [ ] **(POC)** generate keyboard strokes and/or modifiers
     - [x] ~~SendKeys?~~
     - [x] ~~pywin32 shell.SendKeys?~~
-    - [ ] **(WIP)** pynput! (Also support mouse)
+    - [ ] **(POC)** pynput! (Also support mouse)
     - [ ] Frequency (Once/Hold…)
 
-- [ ] **(WIP)** generate mouse events
-    - [ ] **(WIP)** pynput! (Also support mouse)
+- [ ] **(POC)** generate mouse events
+    - [ ] **(POC)** pynput! (Also support mouse)
     - [ ] click
     - [ ] wheel
 
@@ -108,20 +158,10 @@ Features
 - [ ] launch applications
     - ?
 
-- [ ] per application profile
-    - [ ] detect running application
-        - [ ] Microsoft Windows
-            - [ ] win32ui
-        - [ ] Mac OS X
-        - [ ] GNU/Linux
-    - [ ] switch profile using buttons
-
-- [ ] macros (generate multiple events)
-
-- [ ] configuration comments
 
 Similar and/or related projects
 ---------------------------
+
 
 ### [shuttlemidi](https://github.com/dg1psi/shuttlemidi)
 
@@ -130,6 +170,7 @@ Sends MIDI from the Shuttle Contour to SDR Console (Go, hidapi, loopmidi, Apache
 
 Development log
 ---------------
+
 
 ### Finding the right library for Microsoft Windows
 
@@ -171,6 +212,11 @@ Hope it’s the same on other platforms.
 
 Prototype UI done
 
+### Exploring patterns
+
+Settled for an observer pattern with a central broker and separate plugin based responders.
+
+
 Legal notice
 ------------
 
@@ -204,3 +250,7 @@ See [LICENSE](LICENSE).
 Contour, ShuttleXpress and ShuttlePro are trademarks of Contour Innovations LLC in the United States of America.
 
 These are not registered or active trademarks in the European Union and France where I reside.
+
+#### Other
+
+Other trademarks are property of their respective owners and used fairly for descriptive and nominative purposes only.

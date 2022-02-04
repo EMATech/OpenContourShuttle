@@ -65,6 +65,12 @@
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="minimumSize">
+    <size>
+     <width>600</width>
+     <height>600</height>
+    </size>
+   </property>
    <property name="contextMenuPolicy">
     <enum>Qt::DefaultContextMenu</enum>
    </property>
@@ -104,10 +110,10 @@
      <number>1</number>
     </property>
     <property name="value">
-     <number>0</number>
+     <number>5</number>
     </property>
     <property name="sliderPosition">
-     <number>0</number>
+     <number>5</number>
     </property>
     <property name="invertedAppearance">
      <bool>false</bool>

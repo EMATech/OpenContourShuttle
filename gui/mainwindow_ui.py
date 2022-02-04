@@ -8,19 +8,15 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
-    QCursor, QFont, QFontDatabase, QGradient,
-    QIcon, QImage, QKeySequence, QLinearGradient,
-    QPainter, QPalette, QPixmap, QRadialGradient,
-    QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QDial, QDockWidget,
-    QFrame, QGridLayout, QHBoxLayout, QLayout,
-    QMainWindow, QPlainTextEdit, QPushButton, QRadioButton,
-    QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
-    QToolButton, QVBoxLayout, QWidget)
+from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
+                            QSize, Qt)
+from PySide6.QtGui import (QAction, QCursor, QFont, QIcon)
+from PySide6.QtWidgets import (QCheckBox, QDial, QDockWidget,
+                               QFrame, QGridLayout, QHBoxLayout, QLayout,
+                               QMainWindow, QPlainTextEdit, QPushButton, QRadioButton,
+                               QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
+                               QToolButton, QVBoxLayout, QWidget)
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -50,11 +46,12 @@ class Ui_MainWindow(object):
         self.main_widget = QWidget(MainWindow)
         self.main_widget.setObjectName(u"main_widget")
         self.main_widget.setEnabled(True)
+        self.main_widget.setMinimumSize(QSize(600, 600))
         self.main_widget.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.main_widget.setAutoFillBackground(False)
         self.main_widget.setStyleSheet(u"QWidget#main_widget {background: url(images/ShuttleXpress_Black.png);\n"
-"     background-repeat:no-repeat;}\n"
-"    ")
+                                       "     background-repeat:no-repeat;}\n"
+                                       "    ")
         self.dial = QDial(self.main_widget)
         self.dial.setObjectName(u"dial")
         self.dial.setGeometry(QRect(197, 178, 216, 216))
@@ -63,8 +60,8 @@ class Ui_MainWindow(object):
         self.dial.setMinimum(0)
         self.dial.setMaximum(10)
         self.dial.setPageStep(1)
-        self.dial.setValue(0)
-        self.dial.setSliderPosition(0)
+        self.dial.setValue(5)
+        self.dial.setSliderPosition(5)
         self.dial.setInvertedAppearance(False)
         self.dial.setInvertedControls(False)
         self.dial.setWrapping(True)

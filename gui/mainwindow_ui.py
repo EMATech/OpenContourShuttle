@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.setWindowModality(Qt.ApplicationModal)
-        MainWindow.resize(700, 700)
+        MainWindow.resize(1492, 1852)
         sizePolicy = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -87,8 +87,8 @@ class Ui_MainWindow(object):
         self.shuttle_widget.setMaximumSize(QSize(600, 600))
         self.shuttle_widget.setAutoFillBackground(False)
         self.shuttle_widget.setStyleSheet(u"QWidget#shuttle_widget {background: url(images/ShuttleXpress_Black.png);\n"
-"                          background-repeat:no-repeat;}\n"
-"                      ")
+"        background-repeat:no-repeat;}\n"
+"       ")
         self.button_1 = QCheckBox(self.shuttle_widget)
         self.button_1.setObjectName(u"button_1")
         self.button_1.setGeometry(QRect(80, 266, 24, 24))
@@ -97,8 +97,8 @@ class Ui_MainWindow(object):
         self.button_1.setMinimumSize(QSize(24, 24))
         self.button_1.setFont(font)
         self.button_1.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.usb_status = QPushButton(self.shuttle_widget)
         self.usb_status.setObjectName(u"usb_status")
         self.usb_status.setEnabled(False)
@@ -127,43 +127,43 @@ class Ui_MainWindow(object):
         self.button_5.setFont(font)
         self.button_5.setLayoutDirection(Qt.RightToLeft)
         self.button_5.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.wheel_pos4 = QRadioButton(self.shuttle_widget)
         self.wheel_pos4.setObjectName(u"wheel_pos4")
-        self.wheel_pos4.setGeometry(QRect(420, 253, 24, 24))
+        self.wheel_pos4.setGeometry(QRect(382, 164, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_pos4.sizePolicy().hasHeightForWidth())
         self.wheel_pos4.setSizePolicy(sizePolicy1)
         self.wheel_pos4.setMinimumSize(QSize(24, 24))
         self.wheel_pos4.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.wheel_cent0 = QRadioButton(self.shuttle_widget)
         self.wheel_cent0.setObjectName(u"wheel_cent0")
-        self.wheel_cent0.setGeometry(QRect(289, 143, 24, 24))
+        self.wheel_cent0.setGeometry(QRect(289, 130, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_cent0.sizePolicy().hasHeightForWidth())
         self.wheel_cent0.setSizePolicy(sizePolicy1)
         self.wheel_cent0.setMinimumSize(QSize(24, 24))
         self.wheel_cent0.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.wheel_cent0.setChecked(True)
         self.wheel_pos1 = QRadioButton(self.shuttle_widget)
         self.wheel_pos1.setObjectName(u"wheel_pos1")
-        self.wheel_pos1.setGeometry(QRect(332, 151, 24, 24))
+        self.wheel_pos1.setGeometry(QRect(314, 133, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_pos1.sizePolicy().hasHeightForWidth())
         self.wheel_pos1.setSizePolicy(sizePolicy1)
         self.wheel_pos1.setMinimumSize(QSize(24, 24))
         self.wheel_pos1.setStyleSheet(u"color: white;")
         self.wheel_pos2 = QRadioButton(self.shuttle_widget)
         self.wheel_pos2.setObjectName(u"wheel_pos2")
-        self.wheel_pos2.setGeometry(QRect(372, 174, 24, 24))
+        self.wheel_pos2.setGeometry(QRect(338, 139, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_pos2.sizePolicy().hasHeightForWidth())
         self.wheel_pos2.setSizePolicy(sizePolicy1)
         self.wheel_pos2.setMinimumSize(QSize(24, 24))
         self.wheel_pos2.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.dial = QDial(self.shuttle_widget)
         self.dial.setObjectName(u"dial")
         self.dial.setGeometry(QRect(197, 178, 216, 216))
@@ -187,20 +187,20 @@ class Ui_MainWindow(object):
         self.dial.setNotchesVisible(False)
         self.wheel_neg6 = QRadioButton(self.shuttle_widget)
         self.wheel_neg6.setObjectName(u"wheel_neg6")
-        self.wheel_neg6.setGeometry(QRect(173, 341, 24, 24))
+        self.wheel_neg6.setGeometry(QRect(162, 204, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_neg6.sizePolicy().hasHeightForWidth())
         self.wheel_neg6.setSizePolicy(sizePolicy1)
         self.wheel_neg6.setMinimumSize(QSize(24, 24))
         self.wheel_neg6.setStyleSheet(u"color: white;")
         self.wheel_pos5 = QRadioButton(self.shuttle_widget)
         self.wheel_pos5.setObjectName(u"wheel_pos5")
-        self.wheel_pos5.setGeometry(QRect(419, 296, 24, 24))
+        self.wheel_pos5.setGeometry(QRect(400, 182, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_pos5.sizePolicy().hasHeightForWidth())
         self.wheel_pos5.setSizePolicy(sizePolicy1)
         self.wheel_pos5.setMinimumSize(QSize(24, 24))
         self.wheel_pos5.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.button_2 = QCheckBox(self.shuttle_widget)
         self.button_2.setObjectName(u"button_2")
         self.button_2.setGeometry(QRect(156, 122, 24, 24))
@@ -209,33 +209,33 @@ class Ui_MainWindow(object):
         self.button_2.setMinimumSize(QSize(24, 24))
         self.button_2.setFont(font)
         self.button_2.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.wheel_neg5 = QRadioButton(self.shuttle_widget)
         self.wheel_neg5.setObjectName(u"wheel_neg5")
-        self.wheel_neg5.setGeometry(QRect(158, 296, 24, 24))
+        self.wheel_neg5.setGeometry(QRect(178, 182, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_neg5.sizePolicy().hasHeightForWidth())
         self.wheel_neg5.setSizePolicy(sizePolicy1)
         self.wheel_neg5.setMinimumSize(QSize(24, 24))
         self.wheel_neg5.setStyleSheet(u"color: white;")
         self.wheel_pos6 = QRadioButton(self.shuttle_widget)
         self.wheel_pos6.setObjectName(u"wheel_pos6")
-        self.wheel_pos6.setGeometry(QRect(405, 341, 24, 24))
+        self.wheel_pos6.setGeometry(QRect(416, 204, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_pos6.sizePolicy().hasHeightForWidth())
         self.wheel_pos6.setSizePolicy(sizePolicy1)
         self.wheel_pos6.setMinimumSize(QSize(24, 24))
         self.wheel_pos6.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.wheel_neg1 = QRadioButton(self.shuttle_widget)
         self.wheel_neg1.setObjectName(u"wheel_neg1")
-        self.wheel_neg1.setGeometry(QRect(243, 151, 24, 24))
+        self.wheel_neg1.setGeometry(QRect(264, 133, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_neg1.sizePolicy().hasHeightForWidth())
         self.wheel_neg1.setSizePolicy(sizePolicy1)
         self.wheel_neg1.setMinimumSize(QSize(24, 24))
         self.wheel_neg1.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.button_4 = QCheckBox(self.shuttle_widget)
         self.button_4.setObjectName(u"button_4")
         self.button_4.setGeometry(QRect(430, 122, 24, 24))
@@ -246,17 +246,17 @@ class Ui_MainWindow(object):
         self.button_4.setLayoutDirection(Qt.RightToLeft)
         self.button_4.setAutoFillBackground(False)
         self.button_4.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.wheel_pos7 = QRadioButton(self.shuttle_widget)
         self.wheel_pos7.setObjectName(u"wheel_pos7")
-        self.wheel_pos7.setGeometry(QRect(376, 378, 24, 24))
+        self.wheel_pos7.setGeometry(QRect(427, 229, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_pos7.sizePolicy().hasHeightForWidth())
         self.wheel_pos7.setSizePolicy(sizePolicy1)
         self.wheel_pos7.setMinimumSize(QSize(24, 24))
         self.wheel_pos7.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.button_3 = QCheckBox(self.shuttle_widget)
         self.button_3.setObjectName(u"button_3")
         self.button_3.setGeometry(QRect(290, 72, 24, 24))
@@ -265,50 +265,72 @@ class Ui_MainWindow(object):
         self.button_3.setMinimumSize(QSize(24, 24))
         self.button_3.setFont(font)
         self.button_3.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.button_3.setTristate(False)
         self.wheel_neg2 = QRadioButton(self.shuttle_widget)
         self.wheel_neg2.setObjectName(u"wheel_neg2")
-        self.wheel_neg2.setGeometry(QRect(202, 174, 24, 24))
+        self.wheel_neg2.setGeometry(QRect(240, 139, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_neg2.sizePolicy().hasHeightForWidth())
         self.wheel_neg2.setSizePolicy(sizePolicy1)
         self.wheel_neg2.setMinimumSize(QSize(24, 24))
         self.wheel_neg2.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.wheel_pos3 = QRadioButton(self.shuttle_widget)
         self.wheel_pos3.setObjectName(u"wheel_pos3")
-        self.wheel_pos3.setGeometry(QRect(405, 211, 24, 24))
+        self.wheel_pos3.setGeometry(QRect(361, 149, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_pos3.sizePolicy().hasHeightForWidth())
         self.wheel_pos3.setSizePolicy(sizePolicy1)
         self.wheel_pos3.setMinimumSize(QSize(24, 24))
         self.wheel_pos3.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.wheel_neg3 = QRadioButton(self.shuttle_widget)
         self.wheel_neg3.setObjectName(u"wheel_neg3")
-        self.wheel_neg3.setGeometry(QRect(174, 211, 24, 24))
+        self.wheel_neg3.setGeometry(QRect(217, 149, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_neg3.sizePolicy().hasHeightForWidth())
         self.wheel_neg3.setSizePolicy(sizePolicy1)
         self.wheel_neg3.setMinimumSize(QSize(24, 24))
         self.wheel_neg3.setStyleSheet(u"color: white;")
         self.wheel_neg4 = QRadioButton(self.shuttle_widget)
         self.wheel_neg4.setObjectName(u"wheel_neg4")
-        self.wheel_neg4.setGeometry(QRect(158, 253, 24, 24))
+        self.wheel_neg4.setGeometry(QRect(196, 164, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_neg4.sizePolicy().hasHeightForWidth())
         self.wheel_neg4.setSizePolicy(sizePolicy1)
         self.wheel_neg4.setMinimumSize(QSize(24, 24))
         self.wheel_neg4.setStyleSheet(u"background: #000000ff;\n"
-"                              color: white;\n"
-"                          ")
+"         color: white;\n"
+"        ")
         self.wheel_neg7 = QRadioButton(self.shuttle_widget)
         self.wheel_neg7.setObjectName(u"wheel_neg7")
-        self.wheel_neg7.setGeometry(QRect(202, 378, 24, 24))
+        self.wheel_neg7.setGeometry(QRect(151, 229, 24, 24))
         sizePolicy1.setHeightForWidth(self.wheel_neg7.sizePolicy().hasHeightForWidth())
         self.wheel_neg7.setSizePolicy(sizePolicy1)
         self.wheel_neg7.setMinimumSize(QSize(24, 24))
         self.wheel_neg7.setStyleSheet(u"color: white;")
+        self.dial.raise_()
+        self.button_1.raise_()
+        self.usb_status.raise_()
+        self.button_5.raise_()
+        self.wheel_pos4.raise_()
+        self.wheel_cent0.raise_()
+        self.wheel_pos1.raise_()
+        self.wheel_pos2.raise_()
+        self.wheel_neg6.raise_()
+        self.wheel_pos5.raise_()
+        self.button_2.raise_()
+        self.wheel_neg5.raise_()
+        self.wheel_pos6.raise_()
+        self.wheel_neg1.raise_()
+        self.button_4.raise_()
+        self.wheel_pos7.raise_()
+        self.button_3.raise_()
+        self.wheel_neg2.raise_()
+        self.wheel_pos3.raise_()
+        self.wheel_neg3.raise_()
+        self.wheel_neg4.raise_()
+        self.wheel_neg7.raise_()
 
         self.main_layout.addWidget(self.shuttle_widget, 3, 2, 1, 1)
 

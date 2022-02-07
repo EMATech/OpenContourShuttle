@@ -104,7 +104,7 @@ class ShuttleWorker(QThread):
 
 class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
     ICON: QIcon
-    TITLE: str
+    TITLE: str = "Contour ShuttleXpress"
     WHEEL_MAP: Dict[int, QObject]
     BUTTON_MAP: List[QObject]
     LOG_COLORS = {
@@ -135,7 +135,6 @@ class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
         logging.getLogger().addHandler(h)
 
         self.ICON = QIcon('images/icon.png')
-        self.TITLE = "Contour ShuttleXpress"
 
         self.WHEEL_MAP = {
             -7: self.wheel_neg7,
@@ -158,7 +157,7 @@ class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
 
         self.setWindowIcon(self.ICON)
         self.setWindowTitle(self.TITLE)
-        self.set_ms_windows_icon()
+        #self.set_ms_windows_icon()
         extra = {
             # Button colors
             'danger': '#dc3545',
@@ -331,13 +330,46 @@ These are not registered or active trademarks in the European Union and France w
 
         Workaround from: https://stackoverflow.com/a/27872625
         """
-        import ctypes
-        myappid = u'eu.ematech.contour.shuttlexpress'  # arbitrary string
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+        try:
+            import ctypes
+            myappid = u'eu.ematech.contour.shuttlexpress'  # arbitrary string
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+        except AttributeError as e:
+            logging.warning(f"{e}")
+            pass
+
+    @staticmethod
+    def set_mac_os_title() -> None:
+        """
+        Force Mac OS X to properly display the app name in the title bar using PyObjC
+
+        Workaround from: https://stackoverflow.com/a/54755290
+        """
+        try:
+            from Foundation import NSBundle
+            bundle = NSBundle.mainBundle()
+            if bundle:
+                app_name = GUI.TITLE
+                app_info = bundle.localizedInfoDictionary() or bundle.infoDictionary()
+                if app_info:
+                    app_info['CFBundleName'] = app_name
+        except ImportError as e:
+            logging.warning(f"{e}")
+            pass
 
 
 if __name__ == "__main__":
+    import platform
     import sys
+
+    ###
+    # Platform idiosyncrasies
+    ###
+    currentplatform = platform.system()
+    if currentplatform == 'Windows':
+        GUI.set_ms_windows_icon()
+    elif currentplatform == 'Darwin':
+        GUI.set_mac_os_title()
     app = QApplication(sys.argv)
     window = GUI()
     sys.exit(app.exec())

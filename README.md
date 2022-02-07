@@ -21,13 +21,13 @@ Welcoming any contributions, especially:
 Features / TODO list
 --------------------
 
-- [ ] Platforms support
-    - [ ] **(WIP)** Microsoft Windows
+- [ ] Platform support
+    - [x] Microsoft Windows
         - [x] GUI
         - [x] Tray icon shortcut to GUI
         - [ ] Run as a [windows service](http://thepythoncorner.com/dev/how-to-create-a-windows-service-in-python/)?
         - [ ] Add configurator to control panel?
-    - [ ] Apple Mac OS X
+    - [x] Apple Mac OS X
     - [ ] GNU/Linux
     - [ ] Android?
     - [ ] Apple iOS/iPadOS?

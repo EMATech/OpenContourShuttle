@@ -7,29 +7,29 @@
   </property>
   <property name="geometry">
    <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>600</width>
-    <height>600</height>
+       <x>0</x>
+       <y>0</y>
+       <width>700</width>
+       <height>700</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+      </sizepolicy>
   </property>
   <property name="minimumSize">
-   <size>
-    <width>600</width>
-    <height>600</height>
-   </size>
+      <size>
+          <width>700</width>
+          <height>700</height>
+      </size>
   </property>
   <property name="maximumSize">
-   <size>
-    <width>600</width>
-    <height>600</height>
-   </size>
+      <size>
+          <width>16777215</width>
+          <height>16777215</height>
+      </size>
   </property>
   <property name="baseSize">
    <size>
@@ -37,24 +37,27 @@
     <height>600</height>
    </size>
   </property>
-  <property name="font">
-   <font>
-    <pointsize>12</pointsize>
-    <kerning>true</kerning>
-   </font>
-  </property>
-  <property name="windowTitle">
-   <string>Contour ShuttleXpress</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
-  <property name="documentMode">
-   <bool>false</bool>
-  </property>
-  <property name="tabShape">
-   <enum>QTabWidget::Rounded</enum>
-  </property>
+     <property name="font">
+         <font>
+             <pointsize>12</pointsize>
+             <kerning>true</kerning>
+         </font>
+     </property>
+     <property name="windowTitle">
+         <string>Contour ShuttleXpress</string>
+     </property>
+     <property name="autoFillBackground">
+         <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+         <string notr="true"/>
+     </property>
+     <property name="documentMode">
+         <bool>false</bool>
+     </property>
+     <property name="tabShape">
+         <enum>QTabWidget::Rounded</enum>
+     </property>
   <property name="dockOptions">
    <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
   </property>
@@ -66,670 +69,1075 @@
     <bool>true</bool>
    </property>
    <property name="minimumSize">
-    <size>
-     <width>600</width>
-     <height>600</height>
-    </size>
+       <size>
+           <width>650</width>
+           <height>650</height>
+       </size>
    </property>
-   <property name="contextMenuPolicy">
-    <enum>Qt::DefaultContextMenu</enum>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QWidget#main_widget {background: url(images/ShuttleXpress_Black.png);
-     background-repeat:no-repeat;}
-    </string>
-   </property>
-   <widget class="QDial" name="dial">
-    <property name="geometry">
-     <rect>
-      <x>197</x>
-      <y>178</y>
-      <width>216</width>
-      <height>216</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Dial</string>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: black;</string>
-    </property>
-    <property name="minimum">
-     <number>0</number>
-    </property>
-    <property name="maximum">
-     <number>10</number>
-    </property>
-    <property name="pageStep">
-     <number>1</number>
-    </property>
-    <property name="value">
-     <number>5</number>
-    </property>
-    <property name="sliderPosition">
-     <number>5</number>
-    </property>
-    <property name="invertedAppearance">
-     <bool>false</bool>
-    </property>
-    <property name="invertedControls">
-     <bool>false</bool>
-    </property>
-    <property name="wrapping">
-     <bool>true</bool>
-    </property>
-    <property name="notchTarget">
-     <double>3.700000000000000</double>
-    </property>
-    <property name="notchesVisible">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_pos1">
-    <property name="geometry">
-     <rect>
-      <x>332</x>
-      <y>151</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: right 1</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_neg3">
-    <property name="geometry">
-     <rect>
-      <x>174</x>
-      <y>211</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: left 3</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_pos7">
-    <property name="geometry">
-     <rect>
-      <x>376</x>
-      <y>378</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: right 7</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_neg4">
-    <property name="geometry">
-     <rect>
-      <x>158</x>
-      <y>253</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: left 4</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string>-</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_neg6">
-    <property name="geometry">
-     <rect>
-      <x>173</x>
-      <y>341</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: left 6</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_neg5">
-    <property name="geometry">
-     <rect>
-      <x>158</x>
-      <y>296</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: left 5</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_neg1">
-    <property name="geometry">
-     <rect>
-      <x>243</x>
-      <y>151</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: left 1</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_pos2">
-    <property name="geometry">
-     <rect>
-      <x>372</x>
-      <y>174</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: right 2</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_pos6">
-    <property name="geometry">
-     <rect>
-      <x>405</x>
-      <y>341</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: right 6</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="button_1">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>266</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="statusTip">
-     <string>Button 1</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_pos4">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>253</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: right 4</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_pos5">
-    <property name="geometry">
-     <rect>
-      <x>419</x>
-      <y>296</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: right 5</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_neg2">
-    <property name="geometry">
-     <rect>
-      <x>202</x>
-      <y>174</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: left 2</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_cent0">
-    <property name="geometry">
-     <rect>
-      <x>289</x>
-      <y>143</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: center</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_pos3">
-    <property name="geometry">
-     <rect>
-      <x>405</x>
-      <y>211</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: right 3</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="wheel_neg7">
-    <property name="geometry">
-     <rect>
-      <x>202</x>
-      <y>378</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="statusTip">
-     <string>Wheel position: left 7</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: white;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="button_2">
-    <property name="geometry">
-     <rect>
-      <x>156</x>
-      <y>122</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="statusTip">
-     <string>Button 2</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="button_4">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>122</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="statusTip">
-     <string>Button 4</string>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="button_5">
-    <property name="geometry">
-     <rect>
-      <x>498</x>
-      <y>266</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="statusTip">
-     <string>Button 5</string>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="button_3">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>72</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="statusTip">
-     <string>Button 3</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: #000000ff;
-      color: white;
-     </string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="tristate">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="about_button">
-    <property name="geometry">
-     <rect>
-      <x>576</x>
-      <y>0</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>9</pointsize>
-      <bold>true</bold>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>WhatsThisCursor</cursorShape>
-    </property>
-    <property name="toolTip">
-     <string/>
-    </property>
-    <property name="statusTip">
-     <string>About</string>
-    </property>
-    <property name="text">
-     <string>?</string>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="usb_status">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>288</x>
-      <y>10</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>9</pointsize>
-      <bold>true</bold>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="toolTip">
-     <string/>
-    </property>
-    <property name="statusTip">
-     <string>USB connection status</string>
-    </property>
-    <property name="whatsThis">
-     <string>USB Status</string>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="text">
-     <string notr="true" extracomment="Icon only"/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <disabledoff>images/usb_black_24.png</disabledoff>
-      <disabledon>images/usb_white_24.png</disabledon>
-     </iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>24</width>
-      <height>24</height>
-     </size>
-    </property>
-    <property name="checkable">
-     <bool>true</bool>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="log_button">
-    <property name="geometry">
-     <rect>
-      <x>576</x>
-      <y>550</y>
-      <width>24</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>9</pointsize>
-      <bold>true</bold>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="toolTip">
-     <string/>
-    </property>
-    <property name="statusTip">
-     <string>Log</string>
-    </property>
-    <property name="text">
-     <string>//</string>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
+      <property name="contextMenuPolicy">
+          <enum>Qt::DefaultContextMenu</enum>
+      </property>
+      <property name="autoFillBackground">
+          <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+          <string notr="true"/>
+      </property>
+      <layout class="QGridLayout" name="main_layout">
+          <item row="5" column="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+                  <item>
+                      <widget class="QPushButton" name="log_button">
+                          <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                              </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                              <size>
+                                  <width>24</width>
+                                  <height>24</height>
+                              </size>
+                          </property>
+                          <property name="font">
+                              <font>
+                                  <pointsize>9</pointsize>
+                                  <bold>true</bold>
+                                  <kerning>true</kerning>
+                              </font>
+                          </property>
+                          <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="toolTip">
+                              <string/>
+                          </property>
+                          <property name="statusTip">
+                              <string>Log</string>
+                          </property>
+                          <property name="text">
+                              <string>//</string>
+                          </property>
+                          <property name="checkable">
+                              <bool>false</bool>
+                          </property>
+                          <property name="flat">
+                              <bool>true</bool>
+                          </property>
+                      </widget>
+                  </item>
+              </layout>
+          </item>
+          <item row="3" column="2">
+              <widget class="QWidget" name="shuttle_widget" native="true">
+                  <property name="minimumSize">
+                      <size>
+                          <width>600</width>
+                          <height>600</height>
+                      </size>
+                  </property>
+                  <property name="maximumSize">
+                      <size>
+                          <width>600</width>
+                          <height>600</height>
+                      </size>
+                  </property>
+                  <property name="autoFillBackground">
+                      <bool>false</bool>
+                  </property>
+                  <property name="styleSheet">
+                      <string notr="true">QWidget#shuttle_widget {background: url(images/ShuttleXpress_Black.png);
+                          background-repeat:no-repeat;}
+                      </string>
+                  </property>
+                  <widget class="QCheckBox" name="button_1">
+                      <property name="geometry">
+                          <rect>
+                              <x>80</x>
+                              <y>266</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="font">
+                          <font>
+                              <pointsize>12</pointsize>
+                              <kerning>true</kerning>
+                          </font>
+                      </property>
+                      <property name="statusTip">
+                          <string>Button 1</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QPushButton" name="usb_status">
+                      <property name="enabled">
+                          <bool>false</bool>
+                      </property>
+                      <property name="geometry">
+                          <rect>
+                              <x>288</x>
+                              <y>10</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="font">
+                          <font>
+                              <pointsize>9</pointsize>
+                              <bold>true</bold>
+                              <kerning>true</kerning>
+                          </font>
+                      </property>
+                      <property name="cursor">
+                          <cursorShape>ArrowCursor</cursorShape>
+                      </property>
+                      <property name="toolTip">
+                          <string/>
+                      </property>
+                      <property name="statusTip">
+                          <string>USB connection status</string>
+                      </property>
+                      <property name="whatsThis">
+                          <string>USB Status</string>
+                      </property>
+                      <property name="autoFillBackground">
+                          <bool>false</bool>
+                      </property>
+                      <property name="text">
+                          <string notr="true" extracomment="Icon only"/>
+                      </property>
+                      <property name="icon">
+                          <iconset>
+                              <disabledoff>images/usb_black_24.png</disabledoff>
+                              <disabledon>images/usb_white_24.png</disabledon>
+                          </iconset>
+                      </property>
+                      <property name="iconSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="checkable">
+                          <bool>true</bool>
+                      </property>
+                      <property name="checked">
+                          <bool>false</bool>
+                      </property>
+                      <property name="default">
+                          <bool>false</bool>
+                      </property>
+                      <property name="flat">
+                          <bool>true</bool>
+                      </property>
+                  </widget>
+                  <widget class="QCheckBox" name="button_5">
+                      <property name="geometry">
+                          <rect>
+                              <x>498</x>
+                              <y>266</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="font">
+                          <font>
+                              <pointsize>12</pointsize>
+                              <kerning>true</kerning>
+                          </font>
+                      </property>
+                      <property name="statusTip">
+                          <string>Button 5</string>
+                      </property>
+                      <property name="layoutDirection">
+                          <enum>Qt::RightToLeft</enum>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_pos4">
+                      <property name="geometry">
+                          <rect>
+                              <x>420</x>
+                              <y>253</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: right 4</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_cent0">
+                      <property name="geometry">
+                          <rect>
+                              <x>289</x>
+                              <y>143</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: center</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                      <property name="checked">
+                          <bool>true</bool>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_pos1">
+                      <property name="geometry">
+                          <rect>
+                              <x>332</x>
+                              <y>151</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: right 1</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">color: white;</string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_pos2">
+                      <property name="geometry">
+                          <rect>
+                              <x>372</x>
+                              <y>174</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: right 2</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QDial" name="dial">
+                      <property name="geometry">
+                          <rect>
+                              <x>197</x>
+                              <y>178</y>
+                              <width>216</width>
+                              <height>216</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Dial</string>
+                      </property>
+                      <property name="autoFillBackground">
+                          <bool>false</bool>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background-color: black;</string>
+                      </property>
+                      <property name="minimum">
+                          <number>0</number>
+                      </property>
+                      <property name="maximum">
+                          <number>10</number>
+                      </property>
+                      <property name="pageStep">
+                          <number>1</number>
+                      </property>
+                      <property name="value">
+                          <number>5</number>
+                      </property>
+                      <property name="sliderPosition">
+                          <number>5</number>
+                      </property>
+                      <property name="invertedAppearance">
+                          <bool>false</bool>
+                      </property>
+                      <property name="invertedControls">
+                          <bool>false</bool>
+                      </property>
+                      <property name="wrapping">
+                          <bool>true</bool>
+                      </property>
+                      <property name="notchTarget">
+                          <double>3.700000000000000</double>
+                      </property>
+                      <property name="notchesVisible">
+                          <bool>false</bool>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_neg6">
+                      <property name="geometry">
+                          <rect>
+                              <x>173</x>
+                              <y>341</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: left 6</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">color: white;</string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_pos5">
+                      <property name="geometry">
+                          <rect>
+                              <x>419</x>
+                              <y>296</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: right 5</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QCheckBox" name="button_2">
+                      <property name="geometry">
+                          <rect>
+                              <x>156</x>
+                              <y>122</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="font">
+                          <font>
+                              <pointsize>12</pointsize>
+                              <kerning>true</kerning>
+                          </font>
+                      </property>
+                      <property name="statusTip">
+                          <string>Button 2</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_neg5">
+                      <property name="geometry">
+                          <rect>
+                              <x>158</x>
+                              <y>296</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: left 5</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">color: white;</string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_pos6">
+                      <property name="geometry">
+                          <rect>
+                              <x>405</x>
+                              <y>341</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: right 6</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_neg1">
+                      <property name="geometry">
+                          <rect>
+                              <x>243</x>
+                              <y>151</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: left 1</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QCheckBox" name="button_4">
+                      <property name="geometry">
+                          <rect>
+                              <x>430</x>
+                              <y>122</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="font">
+                          <font>
+                              <pointsize>12</pointsize>
+                              <kerning>true</kerning>
+                          </font>
+                      </property>
+                      <property name="statusTip">
+                          <string>Button 4</string>
+                      </property>
+                      <property name="layoutDirection">
+                          <enum>Qt::RightToLeft</enum>
+                      </property>
+                      <property name="autoFillBackground">
+                          <bool>false</bool>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_pos7">
+                      <property name="geometry">
+                          <rect>
+                              <x>376</x>
+                              <y>378</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: right 7</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QCheckBox" name="button_3">
+                      <property name="geometry">
+                          <rect>
+                              <x>290</x>
+                              <y>72</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="font">
+                          <font>
+                              <pointsize>12</pointsize>
+                              <kerning>true</kerning>
+                          </font>
+                      </property>
+                      <property name="statusTip">
+                          <string>Button 3</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                      <property name="tristate">
+                          <bool>false</bool>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_neg2">
+                      <property name="geometry">
+                          <rect>
+                              <x>202</x>
+                              <y>174</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: left 2</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_pos3">
+                      <property name="geometry">
+                          <rect>
+                              <x>405</x>
+                              <y>211</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: right 3</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_neg3">
+                      <property name="geometry">
+                          <rect>
+                              <x>174</x>
+                              <y>211</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: left 3</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">color: white;</string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_neg4">
+                      <property name="geometry">
+                          <rect>
+                              <x>158</x>
+                              <y>253</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: left 4</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">background: #000000ff;
+                              color: white;
+                          </string>
+                      </property>
+                      <property name="text">
+                          <string>-</string>
+                      </property>
+                  </widget>
+                  <widget class="QRadioButton" name="wheel_neg7">
+                      <property name="geometry">
+                          <rect>
+                              <x>202</x>
+                              <y>378</y>
+                              <width>24</width>
+                              <height>24</height>
+                          </rect>
+                      </property>
+                      <property name="sizePolicy">
+                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                          </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                          <size>
+                              <width>24</width>
+                              <height>24</height>
+                          </size>
+                      </property>
+                      <property name="statusTip">
+                          <string>Wheel position: left 7</string>
+                      </property>
+                      <property name="styleSheet">
+                          <string notr="true">color: white;</string>
+                      </property>
+                      <property name="text">
+                          <string/>
+                      </property>
+                  </widget>
+              </widget>
+          </item>
+          <item row="1" column="2">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+                  <item>
+                      <widget class="QPushButton" name="about_button">
+                          <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                              </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                              <size>
+                                  <width>24</width>
+                                  <height>24</height>
+                              </size>
+                          </property>
+                          <property name="font">
+                              <font>
+                                  <pointsize>9</pointsize>
+                                  <bold>true</bold>
+                                  <kerning>true</kerning>
+                              </font>
+                          </property>
+                          <property name="cursor">
+                              <cursorShape>WhatsThisCursor</cursorShape>
+                          </property>
+                          <property name="toolTip">
+                              <string/>
+                          </property>
+                          <property name="statusTip">
+                              <string>About</string>
+                          </property>
+                          <property name="text">
+                              <string>?</string>
+                          </property>
+                          <property name="checkable">
+                              <bool>false</bool>
+                          </property>
+                          <property name="flat">
+                              <bool>true</bool>
+                          </property>
+                      </widget>
+                  </item>
+              </layout>
+          </item>
+          <item row="3" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+                  <item>
+                      <widget class="QPushButton" name="plug_button">
+                          <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                              </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                              <size>
+                                  <width>24</width>
+                                  <height>24</height>
+                              </size>
+                          </property>
+                          <property name="font">
+                              <font>
+                                  <pointsize>9</pointsize>
+                                  <bold>true</bold>
+                                  <kerning>true</kerning>
+                              </font>
+                          </property>
+                          <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="toolTip">
+                              <string/>
+                          </property>
+                          <property name="statusTip">
+                              <string>Configuration</string>
+                          </property>
+                          <property name="text">
+                              <string>#</string>
+                          </property>
+                          <property name="checkable">
+                              <bool>false</bool>
+                          </property>
+                          <property name="flat">
+                              <bool>true</bool>
+                          </property>
+                      </widget>
+                  </item>
+              </layout>
+          </item>
+          <item row="3" column="4">
+              <layout class="QVBoxLayout" name="verticalLayout">
+                  <item>
+                      <widget class="QPushButton" name="conf_button">
+                          <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                              </sizepolicy>
+                          </property>
+                          <property name="minimumSize">
+                              <size>
+                                  <width>24</width>
+                                  <height>24</height>
+                              </size>
+                          </property>
+                          <property name="font">
+                              <font>
+                                  <pointsize>9</pointsize>
+                                  <bold>true</bold>
+                                  <kerning>true</kerning>
+                              </font>
+                          </property>
+                          <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="toolTip">
+                              <string/>
+                          </property>
+                          <property name="statusTip">
+                              <string>Configuration</string>
+                          </property>
+                          <property name="text">
+                              <string>=</string>
+                          </property>
+                          <property name="checkable">
+                              <bool>false</bool>
+                          </property>
+                          <property name="flat">
+                              <bool>true</bool>
+                          </property>
+                      </widget>
+                  </item>
+              </layout>
+          </item>
+      </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QDockWidget" name="about_widget">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
+     <widget class="QStatusBar" name="statusbar">
+         <property name="minimumSize">
+             <size>
+                 <width>600</width>
+                 <height>0</height>
+             </size>
+         </property>
+     </widget>
+     <widget class="QDockWidget" name="about_widget">
+         <property name="enabled">
+             <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+             </sizepolicy>
+         </property>
    <property name="minimumSize">
     <size>
      <width>600</width>
@@ -740,19 +1148,19 @@
     <bool>true</bool>
    </property>
    <property name="floating">
-    <bool>true</bool>
+       <bool>false</bool>
    </property>
    <property name="features">
-    <set>QDockWidget::DockWidgetClosable</set>
+       <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable</set>
    </property>
    <property name="allowedAreas">
-    <set>Qt::NoDockWidgetArea</set>
+       <set>Qt::TopDockWidgetArea</set>
    </property>
    <property name="windowTitle">
     <string>About</string>
    </property>
    <attribute name="dockWidgetArea">
-    <number>2</number>
+       <number>4</number>
    </attribute>
    <widget class="QWidget" name="about_layout">
     <property name="sizePolicy">
@@ -799,52 +1207,64 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="log_widget">
-   <property name="minimumSize">
-    <size>
-     <width>620</width>
-     <height>600</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="visible">
-    <bool>true</bool>
-   </property>
-   <property name="floating">
-    <bool>true</bool>
-   </property>
-   <property name="allowedAreas">
-    <set>Qt::NoDockWidgetArea</set>
-   </property>
-   <property name="windowTitle">
-    <string>Log</string>
-   </property>
-   <attribute name="dockWidgetArea">
-    <number>8</number>
-   </attribute>
-   <widget class="QWidget" name="log_layout">
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="sizeConstraint">
-        <enum>QLayout::SetDefaultConstraint</enum>
-       </property>
-       <item>
-        <widget class="QPlainTextEdit" name="log_text">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+     <widget class="QDockWidget" name="log_widget">
+         <property name="enabled">
+             <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+             <size>
+                 <width>550</width>
+                 <height>158</height>
+             </size>
+         </property>
+         <property name="font">
+             <font>
+                 <pointsize>12</pointsize>
+                 <kerning>true</kerning>
+             </font>
+         </property>
+         <property name="visible">
+             <bool>true</bool>
+         </property>
+         <property name="floating">
+             <bool>false</bool>
+         </property>
+         <property name="features">
+             <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+         </property>
+         <property name="allowedAreas">
+             <set>Qt::BottomDockWidgetArea</set>
+         </property>
+         <property name="windowTitle">
+             <string>Log</string>
+         </property>
+         <attribute name="dockWidgetArea">
+             <number>8</number>
+         </attribute>
+         <widget class="QWidget" name="log_layout">
+             <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                 </sizepolicy>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+                 <item row="0" column="0">
+                     <layout class="QVBoxLayout" name="log_content_layout">
+                         <property name="sizeConstraint">
+                             <enum>QLayout::SetDefaultConstraint</enum>
+                         </property>
+                         <item>
+                             <widget class="QPlainTextEdit" name="log_text">
+                                 <property name="sizePolicy">
+                                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                                         <horstretch>0</horstretch>
+                                         <verstretch>0</verstretch>
+                                     </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>600</width>
+              <width>0</width>
            <height>0</height>
           </size>
          </property>
@@ -866,19 +1286,19 @@
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="sizeConstraint">
-          <enum>QLayout::SetDefaultConstraint</enum>
-         </property>
-         <item>
-          <widget class="QToolButton" name="log_clear_button">
-           <property name="text">
-            <string>Clear</string>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>images/delete-sweep_24.png</normaloff>images/delete-sweep_24.png
-            </iconset>
+           <layout class="QHBoxLayout" name="buttons_layout">
+               <property name="sizeConstraint">
+                   <enum>QLayout::SetDefaultConstraint</enum>
+               </property>
+               <item>
+                   <widget class="QToolButton" name="log_clear_button">
+                       <property name="text">
+                           <string>Clear</string>
+                       </property>
+                       <property name="icon">
+                           <iconset>
+                               <normaloff>images/delete-sweep_24.png</normaloff>images/delete-sweep_24.png
+                           </iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -886,46 +1306,74 @@
              <height>24</height>
             </size>
            </property>
-          </widget>
-         </item>
-        </layout>
+                   </widget>
+               </item>
+           </layout>
        </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <action name="action_Quit">
-   <property name="text">
-    <string>&amp;Quit</string>
-   </property>
-  </action>
-  <zorder>about_widget</zorder>
-  <zorder>log_widget</zorder>
+                     </layout>
+                 </item>
+             </layout>
+         </widget>
+     </widget>
+     <widget class="QDockWidget" name="config_widget">
+         <property name="enabled">
+             <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+             <size>
+                 <width>250</width>
+                 <height>600</height>
+             </size>
+         </property>
+         <property name="floating">
+             <bool>false</bool>
+         </property>
+         <property name="features">
+             <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+         </property>
+         <property name="allowedAreas">
+             <set>Qt::RightDockWidgetArea</set>
+         </property>
+         <property name="windowTitle">
+             <string>Configuration</string>
+         </property>
+         <attribute name="dockWidgetArea">
+             <number>2</number>
+         </attribute>
+         <widget class="QWidget" name="config_layout">
+             <layout class="QGridLayout" name="gridLayout">
+                 <item row="0" column="0">
+                     <layout class="QFormLayout" name="config_content_layout"/>
+                 </item>
+             </layout>
+         </widget>
+     </widget>
+     <widget class="QDockWidget" name="plugins_widget">
+         <property name="minimumSize">
+             <size>
+                 <width>250</width>
+                 <height>600</height>
+             </size>
+         </property>
+         <property name="allowedAreas">
+             <set>Qt::LeftDockWidgetArea</set>
+         </property>
+         <property name="windowTitle">
+             <string>Plugins</string>
+         </property>
+         <attribute name="dockWidgetArea">
+             <number>1</number>
+         </attribute>
+         <widget class="QWidget" name="dockWidgetContents"/>
+     </widget>
+     <action name="action_Quit">
+         <property name="text">
+             <string>&amp;Quit</string>
+         </property>
+     </action>
+     <zorder>about_widget</zorder>
+     <zorder>log_widget</zorder>
  </widget>
- <tabstops>
-  <tabstop>button_1</tabstop>
-  <tabstop>button_2</tabstop>
-  <tabstop>button_3</tabstop>
-  <tabstop>button_4</tabstop>
-  <tabstop>button_5</tabstop>
-  <tabstop>wheel_neg7</tabstop>
-  <tabstop>wheel_neg6</tabstop>
-  <tabstop>wheel_neg5</tabstop>
-  <tabstop>wheel_neg4</tabstop>
-  <tabstop>wheel_neg3</tabstop>
-  <tabstop>wheel_neg2</tabstop>
-  <tabstop>wheel_neg1</tabstop>
-  <tabstop>wheel_cent0</tabstop>
-  <tabstop>wheel_pos1</tabstop>
-  <tabstop>wheel_pos2</tabstop>
-  <tabstop>wheel_pos3</tabstop>
-  <tabstop>wheel_pos4</tabstop>
-  <tabstop>wheel_pos5</tabstop>
-  <tabstop>wheel_pos6</tabstop>
-  <tabstop>wheel_pos7</tabstop>
-  <tabstop>dial</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -31,7 +31,7 @@ from typing import Dict, List, Optional
 
 import PySide6
 from PySide6.QtCore import QThread, Signal, QObject, Slot
-from PySide6.QtGui import QIcon, QAction, Qt
+from PySide6.QtGui import QIcon, QAction
 from PySide6.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu
 from qt_material import QtStyleTools
 
@@ -124,6 +124,8 @@ class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
 
         # Hide ASAP to avoid window flash
         self.about_widget.setHidden(True)
+        self.plugins_widget.setHidden(True)
+        self.config_widget.setHidden(True)
         self.log_widget.setHidden(True)
 
         h = LogHandler(self.append_log)
@@ -168,8 +170,8 @@ class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
         }
         self.apply_stylesheet(self, theme='dark_red.xml', extra=extra)
 
-        self.setWindowFlags(self.windowFlags() | Qt.Dialog | Qt.MSWindowsFixedSizeDialogHint)
-        self.statusbar.setSizeGripEnabled(False)
+        # self.setWindowFlags(self.windowFlags() | Qt.Dialog | Qt.MSWindowsFixedSizeDialogHint)
+        # self.statusbar.setSizeGripEnabled(False)
 
         self.update_status_bar("Connecting...")
 
@@ -246,8 +248,10 @@ Contour, ShuttleXpress and ShuttlePro are trademarks of Contour Innovations LLC 
 
 These are not registered or active trademarks in the European Union and France where I reside.
 """)
-        self.about_button.clicked.connect(self.open_about)
-        self.log_button.clicked.connect(self.open_log)
+        self.about_button.clicked.connect(self.toggle_about_vis)
+        self.plug_button.clicked.connect(self.toggle_plugins_vis)
+        self.conf_button.clicked.connect(self.toggle_config_vis)
+        self.log_button.clicked.connect(self.toggle_log_vis)
         self.log_clear_button.clicked.connect(self.clear_log)
 
     # def load_ui(self):
@@ -269,11 +273,17 @@ These are not registered or active trademarks in the European Union and France w
     def update_status_bar(self, message: str) -> None:
         self.statusbar.showMessage(message)
 
-    def open_about(self) -> None:
-        self.about_widget.setVisible(True)
+    def toggle_about_vis(self) -> None:
+        self.about_widget.setVisible(self.about_widget.isHidden())
 
-    def open_log(self) -> None:
-        self.log_widget.setVisible(True)
+    def toggle_config_vis(self) -> None:
+        self.config_widget.setVisible(self.config_widget.isHidden())
+
+    def toggle_plugins_vis(self) -> None:
+        self.plugins_widget.setVisible(self.plugins_widget.isHidden())
+
+    def toggle_log_vis(self) -> None:
+        self.log_widget.setVisible(self.log_widget.isHidden())
 
     @Slot(str, logging.LogRecord)
     def append_log(self, message, record):

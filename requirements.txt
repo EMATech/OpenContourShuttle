@@ -2,3 +2,4 @@ hidapi
 PySide6
 qt-material
 pyobjc-framework-Cocoa; sys_platform == 'darwin'
+pynput

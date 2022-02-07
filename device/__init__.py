@@ -625,6 +625,7 @@ class ShuttleXpress(ShuttleXpressSubject):
     def notify(self) -> None:
         logger.debug(f"{self.__class__.__name__}: Notifying observers...")
         for observer in self._observers:
+            logger.debug(f"{observer.__class__.__name__}")
             observer.update(self)
         self.events.clear()
 

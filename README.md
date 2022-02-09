@@ -158,6 +158,23 @@ Generates external events triggered by the broker.
 - [ ] launch applications
     - ?
 
+Contour format settings
+-----------------------
+
+May be used as samples for interoperability.
+
+### Contour
+
+- [Microsoft Windows](https://www.contourdesign.com/windows-shuttle-settings/)
+- [Mac OS X](https://www.contourdesign.com/mac-shuttle-settings/)
+
+### GitHub
+
+- [ShuttleProSettings](https://github.com/Rolias/ShuttleProSettings)
+    - Camtasia Studio 8 *Microsoft Windows*
+    - Reaper *Apple Mac OS X*
+- [camtasia-shuttlepro-settings](https://github.com/digitaldrummerj/camtasia-shuttlepro-settings/blob/master/Camtasia%20Studio%209.pref)
+    - Camtasia Studio 9 *Microsoft Windows*
 
 Similar and/or related projects
 ---------------------------
@@ -307,7 +324,6 @@ Event handler for Contour Design ShuttleXpress.
 - OS: GNU/Linux
 - Dependencies: udev
 
-
 ### [shuttlemidi](https://github.com/dg1psi/shuttlemidi)
 
 Sends MIDI from the Shuttle Contour to SDR Console.
@@ -422,10 +438,8 @@ toggle the buttons on the device.
 - OS: ChiliPeppr
 - Dependencies: ChiliPeppr
 
-
 Development log
 ---------------
-
 
 ### Finding the right library for Microsoft Windows
 

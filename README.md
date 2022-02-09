@@ -163,9 +163,264 @@ Similar and/or related projects
 ---------------------------
 
 
+<!-- BEGIN Template
+
+### []()
+
+
+
+- Language: 
+- License: 
+- OS: 
+- Dependencies: 
+
+END Template -->
+
+### [Contour-ShuttlePRO-V1-Linux-Custom-Implementation](https://github.com/c0deous/Contour-ShuttlePRO-V1-Linux-Custom-Implementation)
+
+A simple barebones driver written in Python for the Contour ShuttlePRO V1 Control Surface.
+
+- Language: Python
+- License: Unspecified/Proprietary (Copyright 2016 c0deous?)
+- OS: GNU/Linux
+- Dependencies: python-evdev
+
+### [cncjs-pendant-shuttle](https://github.com/bensuffolk/cncjs-pendant-shuttle)
+
+A cncjs pendant to connect a Contour Design ShuttleXpress to the raspberry pi that is running cncjs.
+
+- Language: Javascript/NodeJS
+- License: MIT (Copyright (c) 2021 Ben Suffolk)
+- OS: GNU/Linux
+- Dependencies: udev, cnjs, shuttle-control-usb
+
+### [kh750remote](https://github.com/floxch/kh750remote)
+
+Neumann KH 750 DSP remote control with Contour ShuttleXpress.
+
+- Language: Javascript/NodeJS
+- License: MIT (Copyright (c) 2021 floxch)
+- OS: Multiplatform?
+- Dependencies: multicast-dns, node-hid, node-notifier, node-osc
+
+### [LightroomShuttlePro](https://github.com/abrilevskiy/LightroomShuttlePro)
+
+Lightroom plugin for support contourdesign ShuttlePro v2.
+
+- Language: C++/Lua
+- License: GPL-3.0  (Copyright 2018 abrilevskiy?) + Proprietary (Copyright (c) 2003 Contour Design, Inc. & Copyright
+  2016 Adobe Systems Incorporated)
+- OS: Microsoft Windows
+- Dependencies: ShuttleSDK.dll
+
+### [node-red-contrib-shuttlexpress](https://github.com/legacymachine/node-red-contrib-shuttlexpress)
+
+Node-RED nodes for USB ShuttleXpress device.
+
+- Language: Javascript/NodeJS
+- License: MIT (Copyright (c) 2019 legacymachine aka Legacy Machine Works, LLC aka Josh Dudley)
+- OS: Multiplatform
+- Dependencies: node-hid
+
+### [node-shuttlexpress](https://github.com/legacymachine/node-shuttlexpress)
+
+NodeJS API for USB ShuttleXpress Device.
+
+- Language: Javascript/NodeJS
+- License: MIT (Copyright (c) 2019 legacymachine aka Legacy Machine Works, LLC aka Josh Dudley)
+- OS: Multiplatform
+- Dependencies: node-hid
+
+### [shuttle](https://github.com/jeamland/shuttle)
+
+A little Swift program to make a ShuttleXpress do what I want.
+
+- Language: Swift
+- License: BSD-2-Clause (Copyright (c) 2016, Benno Rice)
+- OS: Apple Mac OS X
+- Dependencies: Mac OS X 10.12 SDK
+
+### [Shuttle](https://github.com/1div0/Shuttle)
+
+Controlling Ardour with Open Sound Control from Contour Design ShuttlePRO & ShuttlePRO v2.
+
+- Language: C
+- License: GPL-2.0 (Copyright (C) 2001-2007 Dan Dennedy)
+- OS: GNU/Linux
+- Dependencies: liblo
+
+### [shuttle-go](https://github.com/abourget/shuttle-go)
+
+Contour Design Shuttle Pro V2 drivers for Linux, in Go, with modifiers and just more slick.
+
+- Language: Go
+- License: MIT (Copyright (c) 2017 Alexandre Bourget)
+- OS: GNU/Linux
+- Dependencies: udev
+
+### [ShuttleControlUSB](https://github.com/hopejr/ShuttleControlUSB)
+
+A Library to use Contour Design ShuttleXpress and ShuttlePro v2 in Node.js projects without the driver.
+
+- Language: Javascript/NodeJS
+- License: MIT (Copyright (c) 2020 James Hope)
+- OS: Multiplatform?
+- Dependencies: node-hid, usb-detection, udev
+
+### [shuttled](https://github.com/Shamanon/shuttled)
+
+ShuttlePro fork.
+
+Daemon for Contour Shuttle devices to translate button/jogwheel events to keystrokes sent to uinput.
+
+- Language: C
+- License: GPL-3.0 (Copyright 2013 Eric Messick, Copyleft 2015 Joshua Besneatte)
+- OS: GNU/Linux
+- Dependencies: libx11, libxtst, udev, uinput
+
+### [shuttleevent](https://github.com/pmjdebruijn/shuttleevent)
+
+ShuttlePRO fork.
+
+User program for interpreting key, shuttle, and jog events from a Contour Design ShuttlePRO v2
+
+- Language: C
+- License: GPL-3.0 (Copyright 2013 Eric Messick, Copyright 2018 Albert Graef, Copyright 2019 Pascal de Bruijn)
+- OS: GNU/Linux
+- Dependencies: libx11, libxtst, udev
+
+### [ShuttleGRBL](https://github.com/Duffmann/ShuttleGRBL)
+
+Contour's ShuttleExpress for jogging a GRBL CNC machine under cncjs and Linux using USB/hidraw.
+
+- Language: Javascript/NodeJS
+- License: MIT (Copyright (c) 2020 Duffmann aka Nelio Santos)
+- OS: GNU/Linux
+- Dependencies: commander, inquirer, jsonwebtoken, lodash.get, node-hid, serialport, socket.io-client, udev, vorpal
+
+### [shuttleit](https://github.com/irontoby/shuttleit)
+
+Event handler for Contour Design ShuttleXpress.
+
+- Language: Perl
+- License: Apache-2.0 (Copyright 2015 Tobias Johnson)
+- OS: GNU/Linux
+- Dependencies: udev
+
+
 ### [shuttlemidi](https://github.com/dg1psi/shuttlemidi)
 
-Sends MIDI from the Shuttle Contour to SDR Console (Go, hidapi, loopmidi, Apache-2.0)
+Sends MIDI from the Shuttle Contour to SDR Console.
+
+- Language: Go
+- License: Apache-2.0 (Copyright 2021 dg1psi)
+- OS: Multiplatform?
+- Dependencies: hidapi, loopmidi
+
+### [ShuttleNET](https://github.com/EddieMac74/ShuttleNET)
+
+A simple .NET wrapper for the Contour Shuttle SDK. Written in C#.
+
+- Language: C#
+- License: Unspecified/Proprietary (Copyright © Edward MacDonald 2018)
+- OS: Microsoft Windows?
+- Dependencies: ShuttleSDK.dll
+
+### [shuttlepro](https://github.com/russells-crockpot/shuttlepro)
+
+A python app to allow usage of the Contour ShuttlePro V2 in Linux.
+
+- Language: Python
+- License: Unspecified/Proprietary (Copyright 2020 Brendan McGloin?)
+- OS: GNU/Linux
+- Dependencies: click, evdev, Xlib
+
+### [ShuttlePRO](https://github.com/nanosyzygy/ShuttlePRO)
+
+User program for interpreting key, shuttle, and jog events from a Contour Design ShuttlePRO v2.
+
+- Language: C
+- License: GPL-3.0 (Copyright 2013 Eric Messick)
+- OS: GNU/Linux
+- Dependencies: libx11, libxtst, udev
+
+### [ShuttlePRO](https://github.com/SERVCUBED/ShuttlePRO)
+
+ShuttlePRO fork.
+
+User program for interpreting key, shuttle, and jog events from a Contour Design ShuttlePRO v2
+
+- Language: C
+- License: GPL-3.0 (Copyright 2013 Eric Messick, Copyright 2018 Albert Graef, Copyright 2020 Ben Blain)
+- OS: GNU/Linux
+- Dependencies: libjack, libx11, libxtst, udev
+
+### [ShuttlePro-M](https://github.com/w5pny/ShuttlePRO-M)
+
+ShuttlePro fork.
+
+User program for interpreting key, shuttle, and jog events from a Contour Design ShuttlePRO v2.
+
+- Language: C
+- License: GPL-3.0 (Copyright 2013 Eric Messick, Copyright 2020 Harry G McGavran Jr)
+- OS: GNU/Linux
+- Dependencies: udev
+
+### [shuttleprov2_linux_driver](https://github.com/rmt/shuttleprov2_linux_driver)
+
+A Linux userspace "driver" for the ShuttlePro V2 device, and some tools to read events from a wacom tablet.
+
+- Language: D
+- License: LGPL-3.0 (Copyright 2013 Robert Thomson)
+- OS: GNU/Linux
+- Dependencies: None
+
+### [shuttleroom](https://github.com/7Pass/shuttleroom)
+
+Lightroom plugin to use ShuttleXpress controller for Develop.
+
+- Language: C#
+- License: Unspecified/Proprietary (Copyright 2020 Ngoc Van Tran?)
+- OS: Microsoft Windows, Ubuntu?
+- Dependencies: .NET Core 3.1.100, ShuttleSDK64.dll
+
+### [shuttle-xpress-android](https://github.com/freshollie/shuttle-xpress-android)
+
+Android Library for interfacing with a Contour Design Shuttle Xpress 🕹️.
+
+- Language: Java
+- License: Apache-2.0 (Copyright 2017 Oliver Bell)
+- OS: Android
+- Dependencies: API 17
+
+### [ShuttleXpress](https://github.com/threedaymonk/shuttlexpress)
+
+Use a Contour ShuttleXpress in Linux.
+
+- Language: Scheme
+- License: Unspecified/Proprietary (Copyright 2012 Paul Battley?)
+- OS: GNU/Linux
+- Dependencies: Xlib, udev
+
+### [Shuttlexpress-MPD](https://github.com/matthew-wolf-n4mtt/shuttlexpress-mpd)
+
+Shuttlexpress-MPD is a Music Player Daemon (MPD) client that uses a Contour ShuttleXpress to control the status of the
+playback of an MPD instance.
+
+- Language: C
+- License: GPL-2.0 (Copyright 2019 Matthew J. Wolf)
+- OS: GNU/Linux
+- Dependencies: mpd, udev, systemd
+
+### [widget-shuttlexpress](https://github.com/chilipeppr/widget-shuttlexpress)
+
+The ShuttleXpress widget helps you setup your own ShuttleXpress jog dial USB device and enables audio feedback as you
+toggle the buttons on the device.
+
+- Language: Javascript/HTML/CSS
+- License: Unspecified/Proprietary (Copyright 2016 John Lauer?)
+- OS: ChiliPeppr
+- Dependencies: ChiliPeppr
 
 
 Development log

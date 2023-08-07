@@ -1,11 +1,12 @@
-# SPDX-FileCopyrightText: 2021-2022 Raphaël Doursenaud <rdoursenaud@free.fr>
+# SPDX-FileCopyrightText: 2021 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 """
-`Contour ShuttleXpress`
+`Open Contour Shuttle`
 ================================================================================
 
-A multiplatform userland driver, configuration editor, event management & generator for Contour ShuttleXpress.
+A multiplatform userland driver, configuration editor, event management &
+generator for Contour ShuttleXpress & ShuttlePro v2.
 
 Contour, ShuttleXpress and ShuttlePro are trademarks of
 Contour Innovations LLC in the United States.
@@ -16,6 +17,8 @@ These are not active trademarks in the European Union and France where I reside.
 
 Implementation Notes
 --------------------
+
+Using a Contour ShuttleXpress device.
 
     HID report
     ----------
@@ -222,7 +225,7 @@ from __future__ import annotations
 
 import logging
 from abc import ABC, abstractmethod
-from typing import Union, Optional
+from typing import Optional, Union
 
 import hid
 

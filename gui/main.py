@@ -1,11 +1,11 @@
 # This Python file uses the following encoding: utf-8
 #
-# SPDX-FileCopyrightText: 2021-2022 Raphaël Doursenaud <rdoursenaud@free.fr>
+# SPDX-FileCopyrightText: 2021 Raphaël Doursenaud <rdoursenaud@free.fr>
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 """
-`Contour ShuttleXpress GUI`
+`Open Contour Shuttle GUI`
 ================================================================================
 
 A multiplatform configuration editor, event management & generator GUI for Contour ShuttleXpress.
@@ -30,13 +30,14 @@ from platform import python_version
 from typing import Dict, List, Optional
 
 import PySide6
-from PySide6.QtCore import QThread, Signal, QObject, Slot
-from PySide6.QtGui import QIcon, QAction
-from PySide6.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu
+from PySide6.QtCore import QObject, QThread, Signal, Slot
+from PySide6.QtGui import QAction, QIcon
+from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QSystemTrayIcon
 from qt_material import QtStyleTools
 
-from device import ShuttleXpress, ShuttleXpressObserver, ShuttleXpressSubject, Event, ButtonEvent, Button, \
-    RotaryEvent, Wheel, Dial, ConnectionEvent, DisconnectionEvent
+from device import Button, ButtonEvent, ConnectionEvent, Dial, \
+    DisconnectionEvent, Event, RotaryEvent, ShuttleXpress, \
+    ShuttleXpressObserver, ShuttleXpressSubject, Wheel
 from mainwindow_ui import Ui_MainWindow
 
 
@@ -104,7 +105,7 @@ class ShuttleWorker(QThread):
 
 class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
     ICON: QIcon
-    TITLE: str = "Contour ShuttleXpress"
+    TITLE: str = "Open Contour Shuttle"
     WHEEL_MAP: Dict[int, QObject]
     BUTTON_MAP: List[QObject]
     LOG_COLORS = {
@@ -193,10 +194,11 @@ class GUI(QMainWindow, Ui_MainWindow, QtStyleTools):
         self.shuttle_worker.finished.connect(self.shuttle_worker.quit)
 
         self.about_text.setMarkdown(f"""
-Contour ShuttleXpress
-=====================
+Open Contour Shuttle
+====================
 
-A multiplatform userland driver, configuration editor, event manager & generator for Contour ShuttleXpress.
+A multiplatform userland driver, configuration editor, event manager & generator
+for Contour ShuttleXpress & ShuttlePRO v2.
 
 Version: `{__version__}`
 
@@ -209,9 +211,10 @@ Legal notice
 
 ### License
 
-Copyright 2021-2022 Raphaël Doursenaud
+Copyright 2021 Raphaël Doursenaud
 
-This software is released under the terms of the GNU General Public License, version 3.0 or later (GPL-3.0-or-later).
+This software is released under the terms of the GNU General Public License,
+version 3.0 or later (GPL-3.0-or-later).
 
 ### Dependencies & License Acknowledgment
 
@@ -243,9 +246,11 @@ Used under the Pictogrammers Free License.
 
 ### Trademarks
 
-Contour, ShuttleXpress and ShuttlePro are trademarks of Contour Innovations LLC in the United States of America.
+Contour, ShuttleXpress and ShuttlePro are trademarks of
+Contour Innovations LLC in the United States of America.
 
-These are not registered or active trademarks in the European Union and France where I reside.
+These are not registered or active trademarks in the European Union and
+France where I reside.
 """)
         self.about_button.clicked.connect(self.toggle_about_vis)
         self.plug_button.clicked.connect(self.toggle_plugins_vis)

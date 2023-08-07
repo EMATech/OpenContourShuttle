@@ -44,7 +44,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Contour ShuttleXpress</string>
+   <string>Open Contour Shuttle</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>

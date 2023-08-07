@@ -3,20 +3,16 @@
 ################################################################################
 ## Form generated from reading UI file 'mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.2
+## Created by: Qt User Interface Compiler version 6.4.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
-    QCursor, QFont, QFontDatabase, QGradient,
-    QIcon, QImage, QKeySequence, QLinearGradient,
-    QPainter, QPalette, QPixmap, QRadialGradient,
-    QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QDial, QDockWidget,
+from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
+                            QSize, Qt)
+from PySide6.QtGui import (QAction, QCursor, QFont, QIcon)
+from PySide6.QtWidgets import (
+    QCheckBox, QDial, QDockWidget,
     QFormLayout, QFrame, QGridLayout, QHBoxLayout,
     QLayout, QMainWindow, QPlainTextEdit, QPushButton,
     QRadioButton, QSizePolicy, QStatusBar, QTabWidget,
@@ -517,7 +513,11 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Contour ShuttleXpress", None))
+        MainWindow.setWindowTitle(
+            QCoreApplication.translate(
+                "MainWindow", u"Open Contour Shuttle", None
+                )
+            )
         self.action_Quit.setText(QCoreApplication.translate("MainWindow", u"&Quit", None))
 #if QT_CONFIG(tooltip)
         self.log_button.setToolTip("")

@@ -35,9 +35,10 @@ from PySide6.QtGui import QAction, QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QSystemTrayIcon
 from qt_material import QtStyleTools
 
-from device import Button, ButtonEvent, ConnectionEvent, Dial, \
-    DisconnectionEvent, Event, RotaryEvent, ShuttleXpress, \
-    ShuttleXpressObserver, ShuttleXpressSubject, Wheel
+from device import (
+    Button, ButtonEvent, ConnectionEvent, Dial, DisconnectionEvent, Event,
+    RotaryEvent, ShuttleObserver, ShuttlePro, ShuttleSubject, Wheel
+)
 from mainwindow_ui import Ui_MainWindow
 
 
@@ -72,8 +73,8 @@ class ShuttleSignals(QObject):
 shuttle_signals = ShuttleSignals()
 
 
-class GuiObserver(ShuttleXpressObserver):
-    def update(self, subject: ShuttleXpressSubject) -> None:
+class GuiObserver(ShuttleObserver):
+    def update(self, subject: ShuttleSubject) -> None:
         for event in subject.events:
             shuttle_signals.data.emit(event)
 
@@ -84,7 +85,7 @@ class ShuttleWorker(QThread):
 
     def __init__(self, parent: Optional[QObject] = None) -> None:
         super().__init__(parent)
-        self.shuttle = ShuttleXpress()
+        self.shuttle = ShuttlePro()
         self.shuttle.attach(GuiObserver())
         self.shuttle.connect()
 

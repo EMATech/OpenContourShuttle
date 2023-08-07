@@ -219,6 +219,8 @@ Unused bytes
 Byte 0 and 3 appear unused.
 
 My guess is the 3rd byte is used on the Pro model.
+
+*Update*: I was wrong! Third byte is also unused on the Pro model.
 """
 
 from __future__ import annotations
@@ -298,7 +300,7 @@ class Button:
 
     @num.setter
     def num(self, num: int) -> None:
-        if not 1 <= num <= 5:  # Filter only valid values. TODO: change for Pro?
+        if not 1 <= num <= 15:  # Filter only valid values.
             raise ValueError
 
     def __init__(self, num: int) -> None:
@@ -365,21 +367,21 @@ class ButtonEvent(Event):
             else f"{type(element).__name__} {element.num} up"
 
 
-class ShuttleXpressSubject(ABC):
+class ShuttleSubject(ABC):
     """
     The Subject interface declares a set of methods for managing subscribers.
     """
     events: list[Event]
 
     @abstractmethod
-    def attach(self, observer: ShuttleXpressObserver) -> None:
+    def attach(self, observer: ShuttleObserver) -> None:
         """
         Attach an observer to the subject.
         """
         pass
 
     @abstractmethod
-    def detach(self, observer: ShuttleXpressObserver) -> None:
+    def detach(self, observer: ShuttleObserver) -> None:
         """
         Detach an observer from the subject.
         """
@@ -393,24 +395,23 @@ class ShuttleXpressSubject(ABC):
         pass
 
 
-class ShuttleXpressObserver(ABC):
+class ShuttleObserver(ABC):
     """
     The Observer interface declares the update method, used by subjects.
     """
 
     @abstractmethod
-    def update(self, subject: ShuttleXpressSubject) -> None:
+    def update(self, subject: ShuttleSubject) -> None:
         """
         Receive update from subject.
         """
         pass
 
 
-class ShuttleXpress(ShuttleXpressSubject):
+class Shuttle(ShuttleSubject, ABC):
     USB_VID: int = 0x0b33  # Contour Design, Inc.
-    USB_PID_XPRESS: int = 0x0020  # ShuttleXpress
-    USB_PID_PROV2: int = 0x0030  # ShuttlePRo v2 TODO: add support?
-    HID_DATA_SIZE: int = 48
+    USB_PID: int
+    HID_DATA_SIZE: int = 5
 
     # USB HID Device
     hid_device: hid.device
@@ -428,7 +429,7 @@ class ShuttleXpress(ShuttleXpressSubject):
     _button5: Button
 
     # Event observation
-    _observers: list[ShuttleXpressObserver] = []
+    _observers: list[ShuttleObserver] = []
 
     events: list[Event] = []
 
@@ -445,7 +446,9 @@ class ShuttleXpress(ShuttleXpressSubject):
         self._wheel.pos = new_pos
         if delta:
             direction: bool = True if delta == 1 else False
-            logger.info(f"{self.__class__.__name__}: Wheel position changed by {delta}")
+            logger.info(
+                f"{self.__class__.__name__}: Wheel position changed by {delta}"
+            )
             self.events.append(RotaryEvent(self.wheel, delta, direction))
 
     @property
@@ -471,7 +474,9 @@ class ShuttleXpress(ShuttleXpressSubject):
             self._prev_dial_dir = direction
             if dir_changed:
                 delta = delta * 2  # Hardware quirk: misses one tick when changing directions
-            logger.info(f"{self.__class__.__name__}: Dial position changed by {delta}")
+            logger.info(
+                f"{self.__class__.__name__}: Dial position changed by {delta}"
+            )
             self.events.append(RotaryEvent(self.dial, delta, direction))
 
     @property
@@ -531,16 +536,19 @@ class ShuttleXpress(ShuttleXpressSubject):
 
     @classmethod
     def find(cls) -> list[dict]:
+        # FIXME: support multiple devices
         logger.debug(f"{cls.__name__}: Listing all HID devices...")
         devices: list[dict] = hid.enumerate()
         shuttle_devices: list[dict] = []
         for dev in devices:
             logger.debug(f"{cls.__name__}: Found HID device: {dev}")
-            if dev['vendor_id'] == ShuttleXpress.USB_VID and \
-                    dev['product_id'] == ShuttleXpress.USB_PID_XPRESS:
+            if dev['vendor_id'] == cls.USB_VID and \
+                    dev['product_id'] == cls.USB_PID:
                 shuttle_devices.append(dev)
-        logger.info(f"{cls.__name__}: Found {len(shuttle_devices)} "
-                    f"Contour ShuttleXpress HID: {shuttle_devices}")
+        logger.info(
+            f"{cls.__name__}: Found {len(shuttle_devices)} "
+            f"Contour Shuttle HID: {shuttle_devices}"
+        )
         return shuttle_devices
 
     def __init__(self) -> None:
@@ -575,7 +583,7 @@ class ShuttleXpress(ShuttleXpressSubject):
                 return
         else:
             try:
-                self.hid_device.open(self.USB_VID, self.USB_PID_XPRESS)
+                self.hid_device.open(self.USB_VID, self.USB_PID)
 
                 logger.info(f"{self.__class__.__name__}: Connected to {self.hid_device.get_product_string()}!")
 
@@ -602,24 +610,20 @@ class ShuttleXpress(ShuttleXpressSubject):
                 return
 
         if data:
-            logger.debug(f"{self.__class__.__name__}: Data red from HID: {data!r}")
-            self.wheel = int.from_bytes(data[0].to_bytes(1, 'big'), 'big', signed=True)
-            self.dial = data[1]
-            self.button1 = bool(data[3] & (1 << 4))
-            self.button2 = bool(data[3] & (1 << 5))
-            self.button3 = bool(data[3] & (1 << 6))
-            self.button4 = bool(data[3] & (1 << 7))
-            self.button5 = bool(data[4] & (1 << 0))
-            self.notify()
+            self._decode(data)
+
+    @abstractmethod
+    def _decode(self, data):
+        raise NotImplementedError
 
     ##
     # Observers management
     ##
-    def attach(self, observer: ShuttleXpressObserver) -> None:
+    def attach(self, observer: ShuttleObserver) -> None:
         logger.debug(f"{self.__class__.__name__}: Attached an observer.")
         self._observers.append(observer)
 
-    def detach(self, observer: ShuttleXpressObserver) -> None:
+    def detach(self, observer: ShuttleObserver) -> None:
         self._observers.remove(observer)
 
     def notify(self) -> None:
@@ -629,8 +633,191 @@ class ShuttleXpress(ShuttleXpressSubject):
         self.events.clear()
 
 
-class ShuttleXpressObserverSample(ShuttleXpressObserver):
-    def update(self, subject: ShuttleXpressSubject) -> None:
+class ShuttleXpress(Shuttle):
+    USB_PID: int = 0x0020  # ShuttleXpress
+
+    def _decode(self, data):
+        logger.debug(f"{self.__class__.__name__}: Data red from HID: {data!r}")
+        self.wheel = int.from_bytes(
+            data[0].to_bytes(1, 'big'), 'big', signed=True
+        )
+        self.dial = data[1]
+        self.button1 = bool(data[3] & (1 << 4))
+        self.button2 = bool(data[3] & (1 << 5))
+        self.button3 = bool(data[3] & (1 << 6))
+        self.button4 = bool(data[3] & (1 << 7))
+        self.button5 = bool(data[4] & (1 << 0))
+        self.notify()
+
+
+class ShuttlePro(Shuttle):
+    USB_PID: int = 0x0030  # ShuttlePRo v2
+
+    _button6: Button
+    _button7: Button
+    _button8: Button
+    _button9: Button
+    _button10: Button
+    _button11: Button
+    _button12: Button
+    _button13: Button
+    _button14: Button
+    _button15: Button
+
+    @property
+    def button6(self) -> Button:
+        return self._button6
+
+    @button6.setter
+    def button6(self, new_state: bool) -> None:
+        if self._button6.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 1 state changed!")
+            self._button6.push = new_state
+            self.events.append(ButtonEvent(self.button6))
+
+    @property
+    def button7(self) -> Button:
+        return self._button7
+
+    @button7.setter
+    def button7(self, new_state: bool) -> None:
+        if self._button7.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 2 state changed!")
+            self._button7.push = new_state
+            self.events.append(ButtonEvent(self.button7))
+
+    @property
+    def button8(self) -> Button:
+        return self._button8
+
+    @button8.setter
+    def button8(self, new_state: bool) -> None:
+        if self._button8.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 3 state changed!")
+            self._button8.push = new_state
+            self.events.append(ButtonEvent(self.button8))
+
+    @property
+    def button9(self) -> Button:
+        return self._button9
+
+    @button9.setter
+    def button9(self, new_state: bool) -> None:
+        if self._button9.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 4 state changed!")
+            self._button9.push = new_state
+            self.events.append(ButtonEvent(self.button9))
+
+    @property
+    def button10(self) -> Button:
+        return self._button10
+
+    @button10.setter
+    def button10(self, new_state: bool) -> None:
+        if self._button10.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 5 state changed!")
+            self._button10.push = new_state
+            self.events.append(ButtonEvent(self.button10))
+
+    @property
+    def button11(self) -> Button:
+        return self._button11
+
+    @button11.setter
+    def button11(self, new_state: bool) -> None:
+        if self._button11.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 1 state changed!")
+            self._button11.push = new_state
+            self.events.append(ButtonEvent(self.button11))
+
+    @property
+    def button12(self) -> Button:
+        return self._button12
+
+    @button12.setter
+    def button12(self, new_state: bool) -> None:
+        if self._button12.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 2 state changed!")
+            self._button12.push = new_state
+            self.events.append(ButtonEvent(self.button12))
+
+    @property
+    def button13(self) -> Button:
+        return self._button13
+
+    @button13.setter
+    def button13(self, new_state: bool) -> None:
+        if self._button13.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 3 state changed!")
+            self._button13.push = new_state
+            self.events.append(ButtonEvent(self.button13))
+
+    @property
+    def button14(self) -> Button:
+        return self._button14
+
+    @button14.setter
+    def button14(self, new_state: bool) -> None:
+        if self._button14.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 4 state changed!")
+            self._button14.push = new_state
+            self.events.append(ButtonEvent(self.button14))
+
+    @property
+    def button15(self) -> Button:
+        return self._button15
+
+    @button15.setter
+    def button15(self, new_state: bool) -> None:
+        if self._button15.push != new_state:
+            logger.info(f"{self.__class__.__name__}: Button 5 state changed!")
+            self._button15.push = new_state
+            self.events.append(ButtonEvent(self.button15))
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._button6 = Button(6)
+        self._button7 = Button(7)
+        self._button8 = Button(8)
+        self._button9 = Button(9)
+        self._button10 = Button(10)
+        self._button11 = Button(11)
+        self._button12 = Button(12)
+        self._button13 = Button(13)
+        self._button14 = Button(14)
+        self._button15 = Button(15)
+
+    def _decode(self, data):
+        logger.debug(f"{self.__class__.__name__}: Data red from HID: {data!r}")
+        self.wheel = int.from_bytes(
+            data[0].to_bytes(1, 'big'), 'big', signed=True
+        )
+        self.dial = data[1]
+        # First line
+        self.button1 = bool(data[3] & (1 << 0))
+        self.button2 = bool(data[3] & (1 << 1))
+        self.button3 = bool(data[3] & (1 << 2))
+        self.button4 = bool(data[3] & (1 << 3))
+        # Second line
+        self.button5 = bool(data[3] & (1 << 4))
+        self.button6 = bool(data[3] & (1 << 5))
+        self.button7 = bool(data[3] & (1 << 6))
+        self.button8 = bool(data[3] & (1 << 7))
+        self.button9 = bool(data[4] & (1 << 0))
+        # Bottom left
+        self.button10 = bool(data[4] & (1 << 1))
+        self.button11 = bool(data[4] & (1 << 2))
+        # Bottom right
+        self.button12 = bool(data[4] & (1 << 3))
+        self.button13 = bool(data[4] & (1 << 4))
+        # Side left & right
+        self.button14 = bool(data[4] & (1 << 5))
+        self.button15 = bool(data[4] & (1 << 6))
+        self.notify()
+
+
+class ShuttleObserverSample(ShuttleObserver):
+    def update(self, subject: ShuttleSubject) -> None:
         logger.debug(f"{self.__class__.__name__}: State changed!")
         for event in subject.events:
             logger.info(f"{self.__class__.__name__}: {event.desc}")
@@ -686,7 +873,7 @@ class ShuttleXpressObserverSample(ShuttleXpressObserver):
 if __name__ == '__main__':
     shuttle: ShuttleXpress = ShuttleXpress()
 
-    sample_observer: ShuttleXpressObserver = ShuttleXpressObserverSample()
+    sample_observer: ShuttleObserver = ShuttleObserverSample()
     shuttle.attach(sample_observer)
 
     shuttle.connect()

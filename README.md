@@ -1,7 +1,7 @@
-Contour ShuttleXpress
-=====================
+Open Contour Shuttle
+====================
 
-A multiplatform userland driver, configuration editor, event manager & generator for Contour ShuttleXpress.
+A multiplatform userland driver, configuration editor, event manager & generator for Contour ShuttleXpress & ShuttlePRO v2.
 
 ![GUI prototype](GUIprototype.png)
 
@@ -15,11 +15,15 @@ Welcoming any contributions, especially:
 
 - comments
 - tests: particularly on platforms other than Microsoft Windows or versions earlier than 11
-- providing access to currently unsupported hardware:
+- implement currently unsupported hardware:
     - ShuttlePRO v2
 
 Features / TODO list
 --------------------
+
+- [ ] Device support
+    - [x] ShuttleXpress
+    - [ ] **(WIP)** ShuttlePRO v2
 
 - [ ] Platform support
     - [x] Microsoft Windows
@@ -491,7 +495,7 @@ Legal notice
 
 ### License
 
-Copyright 2021-2022 Raphaël Doursenaud
+Copyright 2021 Raphaël Doursenaud
 
 This software is released under the terms of the GNU General Public License, version 3.0 or later (GPL-3.0-or-later).
 

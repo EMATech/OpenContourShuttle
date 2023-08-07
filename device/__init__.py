@@ -230,7 +230,7 @@ from typing import Optional, Union
 import hid
 
 __version__ = "0.0.0-auto.0"
-__repo__ = "https://github.com/EMATech/ContourShuttleXpress.git"
+__repo__ = ("https://github.com/EMATech/OpenContourShuttle.git")
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -252,7 +252,8 @@ class Wheel:
         if pos not in range(-7, 8):  # Filter only valid positions
             raise ValueError(f"Value {pos} was not expected. "
                              f"Please file a bug report: "
-                             f"https://github.com/EMATech/ContourShuttleXpress/issues")
+                             f"https://github.com/EMATech/OpenContourShuttle/issues"
+                             )
 
         # 0 is central position.
         self.centered = False

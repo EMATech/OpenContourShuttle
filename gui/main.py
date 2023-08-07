@@ -23,7 +23,7 @@ Implementation Notes
 """
 
 __version__ = "0.0.0-auto.0"
-__repo__ = "https://github.com/EMATech/ContourShuttleXpress.git"
+__repo__ = "https://github.com/EMATech/OpenContourShuttle.git"
 
 import logging
 from platform import python_version

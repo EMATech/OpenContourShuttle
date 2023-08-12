@@ -30,6 +30,7 @@ from platform import python_version
 from typing import Dict, List, Optional
 
 import PySide6
+import hid as hidapi
 from PySide6.QtCore import QObject, QThread, Signal, Slot
 from PySide6.QtGui import QAction, QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QMenu, QSystemTrayIcon
@@ -205,7 +206,10 @@ Version: `{__version__}`
 
 Source: `{__repo__}`
 
-Running on Python v{python_version()}
+Running on Python v{python_version()} with:
+
+- PySide v{PySide6.__version__} (QT v{PySide6.QtCore.qVersion()}) 
+- hidapi v{hidapi.__version__}
 
 Legal notice
 ------------

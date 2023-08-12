@@ -312,9 +312,9 @@ France where I reside.
             self.handle_button(event.element)
 
     def handle_rotary_event(self, rotary_event: RotaryEvent) -> None:
-        if type(rotary_event.element) is Wheel:
+        if isinstance(rotary_event.element, Wheel):
             self.handle_wheel(rotary_event.element, rotary_event.direction, rotary_event.value)
-        elif type(rotary_event.element) is Dial:
+        elif isinstance(rotary_event.element, Dial):
             self.handle_dial(rotary_event.element, rotary_event.direction, rotary_event.value)
 
     def handle_wheel(self, wheel: Wheel, direction: bool, change: int) -> None:

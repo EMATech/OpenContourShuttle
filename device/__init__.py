@@ -445,7 +445,7 @@ class Shuttle(ShuttleSubject, ABC):
             delta = new_pos - self._wheel.pos
         self._wheel.pos = new_pos
         if delta:
-            direction: bool = True if delta == 1 else False
+            direction: bool = delta == 1
             logger.info(
                 f"{self.__class__.__name__}: Wheel position changed by {delta}"
             )
@@ -469,8 +469,8 @@ class Shuttle(ShuttleSubject, ABC):
                     delta = -1
         self._dial.pos = new_pos
         if delta:
-            direction: bool = True if delta == 1 else False
-            dir_changed: bool = False if self._prev_dial_dir == direction else True
+            direction: bool = delta == 1
+            dir_changed: bool = not self._prev_dial_dir == direction
             self._prev_dial_dir = direction
             if dir_changed:
                 delta = delta * 2  # Hardware quirk: misses one tick when changing directions
@@ -601,13 +601,15 @@ class Shuttle(ShuttleSubject, ABC):
         if not self.connected:
             self.connect()
             return
-        else:
-            try:
-                data: list[int] = self.hid_device.read(self.HID_DATA_SIZE)
-            except (OSError, ValueError) as e:
-                logger.error(f"{self.__class__.__name__}: Could not read from device {e}")
-                self.__del__()
-                return
+
+        try:
+            data: list[int] = self.hid_device.read(self.HID_DATA_SIZE)
+        except (OSError, ValueError) as e:
+            logger.error(
+                f"{self.__class__.__name__}: Could not read from device {e}"
+                )
+            self.__del__()
+            return
 
         if data:
             self._decode(data)
@@ -837,13 +839,13 @@ class ShuttleObserverSample(ShuttleObserver):
         logger.info(f"{cls.__name__}: Connected to {device.get_manufacturer_string()} {device.get_product_string()}")
 
     @classmethod
-    def _handle_disconnection(cls, event: DisconnectionEvent) -> None:
+    def _handle_disconnection(cls, _event: DisconnectionEvent) -> None:
         logger.warning(f"{cls.__name__}: Disconnected.")
 
     def _handle_rotary_event(self, event: RotaryEvent) -> None:
-        if type(event.element) is Wheel:
+        if isinstance(event.element, Wheel):
             self._handle_wheel(event.element, event.direction, event.value)
-        elif type(event.element) is Dial:
+        elif isinstance(event.element, Dial):
             self._handle_dial(event.element, event.direction, event.value)
 
     @classmethod

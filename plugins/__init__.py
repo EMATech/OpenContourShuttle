@@ -33,7 +33,7 @@ class ShuttleBroker(ShuttleMediator):
             self._component2.do_c()
 
 
-class ShuttlePlugin:
+class ShuttlePlugin(ABC):
     """
     The Base Component provides the basic functionality of storing a mediator's
     instance inside component objects.

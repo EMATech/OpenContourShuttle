@@ -38,7 +38,7 @@ from qt_material import QtStyleTools
 
 from device import (
     Button, ButtonEvent, ConnectionEvent, Dial, DisconnectionEvent, Event,
-    RotaryEvent, ShuttleObserver, ShuttlePro, ShuttleSubject, Wheel
+    RotaryEvent, ShuttleObserver, ShuttleProV2, ShuttleSubject, Wheel
 )
 from mainwindow_ui import Ui_MainWindow
 
@@ -86,7 +86,7 @@ class ShuttleWorker(QThread):
 
     def __init__(self, parent: Optional[QObject] = None) -> None:
         super().__init__(parent)
-        self.shuttle = ShuttlePro()
+        self.shuttle = ShuttleProV2()
         self.shuttle.attach(GuiObserver())
         self.shuttle.connect()
 
@@ -200,7 +200,7 @@ Open Contour Shuttle
 ====================
 
 A multiplatform userland driver, configuration editor, event manager & generator
-for Contour ShuttleXpress & ShuttlePRO v2.
+for Contour ShuttleXpress, ShuttlePRO & ShuttlePRO v2.
 
 Version: `{__version__}`
 

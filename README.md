@@ -1,7 +1,8 @@
 Open Contour Shuttle
 ====================
 
-A multiplatform userland driver, configuration editor, event manager & generator for Contour ShuttleXpress & ShuttlePRO v2.
+A multiplatform userland driver, configuration editor, event manager &
+generator for Contour ShuttleXpress, ShuttlePRO & ShuttlePRO v2.
 
 ![GUI prototype](GUIprototype.png)
 
@@ -23,6 +24,7 @@ Features / TODO list
 
 - [ ] Device support
     - [x] ShuttleXpress
+    - [ ] **(WIP)** ShuttlePRO (v1)
     - [ ] **(WIP)** ShuttlePRO v2
 
 - [ ] Platform support

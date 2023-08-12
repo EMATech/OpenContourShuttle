@@ -638,6 +638,12 @@ class Shuttle(ShuttleSubject, ABC):
 class ShuttleXpress(Shuttle):
     USB_PID: int = 0x0020  # ShuttleXpress
 
+    # The buttons have the following layout:
+    #
+    #        01  02  03  04  05
+    #
+    #               Jog
+
     def _decode(self, data):
         logger.debug(f"{self.__class__.__name__}: Data red from HID: {data!r}")
         self.wheel = int.from_bytes(
@@ -653,7 +659,18 @@ class ShuttleXpress(Shuttle):
 
 
 class ShuttlePro(Shuttle):
-    USB_PID: int = 0x0030  # ShuttlePRo v2
+    USB_PID: int = 0x0010  # ShuttlePRO
+
+    # The buttons have the following layout:
+    #
+    #          01  02  03  04
+    #        05  06  07  08  09
+    #
+    #               Jog
+    #
+    #            10     11
+    #            12     13
+    #
 
     _button6: Button
     _button7: Button
@@ -663,8 +680,6 @@ class ShuttlePro(Shuttle):
     _button11: Button
     _button12: Button
     _button13: Button
-    _button14: Button
-    _button15: Button
 
     @property
     def button6(self) -> Button:
@@ -754,6 +769,61 @@ class ShuttlePro(Shuttle):
             self._button13.push = new_state
             self.events.append(ButtonEvent(self.button13))
 
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._button6 = Button(6)
+        self._button7 = Button(7)
+        self._button8 = Button(8)
+        self._button9 = Button(9)
+        self._button10 = Button(10)
+        self._button11 = Button(11)
+        self._button12 = Button(12)
+        self._button13 = Button(13)
+
+    def _decode(self, data):
+        logger.debug(f"{self.__class__.__name__}: Data red from HID: {data!r}")
+        self.wheel = int.from_bytes(
+            data[0].to_bytes(1, 'big'), 'big', signed=True
+        )
+        self.dial = data[1]
+        # First line
+        self.button1 = bool(data[3] & (1 << 0))
+        self.button2 = bool(data[3] & (1 << 1))
+        self.button3 = bool(data[3] & (1 << 2))
+        self.button4 = bool(data[3] & (1 << 3))
+        # Second line
+        self.button5 = bool(data[3] & (1 << 4))
+        self.button6 = bool(data[3] & (1 << 5))
+        self.button7 = bool(data[3] & (1 << 6))
+        self.button8 = bool(data[3] & (1 << 7))
+        self.button9 = bool(data[4] & (1 << 0))
+        # Bottom left
+        self.button10 = bool(data[4] & (1 << 1))
+        self.button11 = bool(data[4] & (1 << 2))
+        # Bottom right
+        self.button12 = bool(data[4] & (1 << 3))
+        self.button13 = bool(data[4] & (1 << 4))
+        self.notify()
+
+
+class ShuttleProV2(ShuttlePro):
+    USB_PID: int = 0x0030  # ShuttlePRO v2
+
+    # The buttons have the following layout
+    #
+    #          00  01  02  03
+    #        04  05  06  07  08
+    #
+    #          13   Jog   14
+    #
+    #            09     10
+    #            11     12
+    #
+
+    _button14: Button
+    _button15: Button
+
     @property
     def button14(self) -> Button:
         return self._button14
@@ -778,14 +848,6 @@ class ShuttlePro(Shuttle):
 
     def __init__(self) -> None:
         super().__init__()
-        self._button6 = Button(6)
-        self._button7 = Button(7)
-        self._button8 = Button(8)
-        self._button9 = Button(9)
-        self._button10 = Button(10)
-        self._button11 = Button(11)
-        self._button12 = Button(12)
-        self._button13 = Button(13)
         self._button14 = Button(14)
         self._button15 = Button(15)
 
